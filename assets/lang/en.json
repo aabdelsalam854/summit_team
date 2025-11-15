@@ -1,0 +1,33 @@
+{
+  "app_name": "SummitTeam",
+  "app_description": "app description",
+  "app_language": "en",
+
+  "view_all": "View all",
+  "rights_reserved": "© 2024 SummitTeam - All rights reserved",
+
+  "menu_home": "Home",
+  "menu_featured": "Featured properties",
+  "menu_advanced_search": "Advanced search",
+  "menu_add_property": "List your property",
+  "menu_news": "News & articles",
+  "menu_support": "Support",
+  "menu_about": "About",
+  "menu_settings": "Settings",
+
+  "hero_title": "Summit Team",
+  "hero_subtitle": "Find your dream home with us",
+  "hero_action_request": "Request a property",
+  "hero_action_list": "List a property",
+
+  "section_featured": "Featured properties",
+  "section_featured_subtitle": "Discover the best available properties",
+  "section_latest": "Latest offers",
+  "section_latest_subtitle": "Newest additions to our database",
+
+  "quick_stats_title": "Quick stats",
+  "stats_properties": "properties",
+  "stats_clients": "clients",
+  "stats_areas": "areas",
+  "stats_experience": "years of experience"
+}

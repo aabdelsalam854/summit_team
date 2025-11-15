@@ -1,4 +1,8 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:summit_team/config/routes/routes.dart';
+import 'package:summit_team/core/services/server_locator.dart';
+import 'package:summit_team/features/Employees/presentation/cubit/employees_cubit.dart';
+import 'package:summit_team/features/Employees/presentation/pages/employees_screen.dart';
 import 'package:summit_team/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:summit_team/features/dashboard/presentation/screens/property_form_screen.dart';
 import 'package:summit_team/features/home/presentation/screens/details.dart';
@@ -53,6 +57,16 @@ abstract class AppRouts {
           final property = state.extra as PropertyModel;
 
           return PropertyDetailsScreen(property: property); // مؤقت
+        },
+      ),
+      GoRoute(
+        path: Routes.kEEmployees,
+        name: Routes.kEEmployees,
+        builder: (context, state) {
+          return BlocProvider(
+            create: (context) => EmployeesCubit(),
+            child: const ProfessionalEmployeesDashboard(),
+          );
         },
       ),
     ],

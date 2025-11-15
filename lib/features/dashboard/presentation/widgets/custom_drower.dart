@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:summit_team/config/routes/routes.dart';
 
 import 'package:summit_team/core/utils/alessamy_colors.dart';
 
@@ -56,7 +58,9 @@ class CustomDrower extends StatelessWidget {
               icon: Icons.person,
               title: 'الموظفين',
               isSelected: false,
-              onTap: () {},
+              onTap: () {
+               context.push(Routes.kEEmployees);
+              },
             ),
           ),
           SliverToBoxAdapter(

@@ -27,6 +27,8 @@ class DashboardScreen extends StatelessWidget {
     return const TabletDashboardLayout();
   }
 
+/// / Desktop Layout for the DashboardScreen
+///
   static Widget _buildDesktopLayout(BuildContext context) {
     return const DesktopDashboardLayout();
   }

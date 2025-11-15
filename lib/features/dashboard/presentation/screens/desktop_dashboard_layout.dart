@@ -73,6 +73,7 @@ class _DesktopDashboardLayoutState extends State<DesktopDashboardLayout> {
                         horizontal: 24,
                         vertical: 12,
                       ),
+                      
                       title: Row(
                         children: [
                           Expanded(
@@ -130,28 +131,31 @@ class _DesktopDashboardLayoutState extends State<DesktopDashboardLayout> {
                                 ),
                                 const SizedBox(width: 8),
                                 Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: const [
-                                      Text(
-                                        'اسم المستخدم',
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          color: Colors.white,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: const [
+                                        Text(
+                                          'اسم المستخدم',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: Colors.white,
+                                          ),
+                                          overflow: TextOverflow.ellipsis,
                                         ),
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      Text(
-                                        'دور المستخدم',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          color: Colors.white70,
+                                        Text(
+                                          'دور المستخدم',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.white70,
+                                          ),
+                                          overflow: TextOverflow.ellipsis,
                                         ),
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ],

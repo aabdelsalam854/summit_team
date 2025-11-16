@@ -506,7 +506,7 @@ class _PropertyFormScreenState extends State<PropertyFormScreen> {
     return SafeArea(
       child: Row(
         children: [
-          Expanded(flex: 1, child: CustomDrower()),
+          // Expanded(flex: 1, child: CustomDrower()),
 
           Expanded(
             flex: 5,

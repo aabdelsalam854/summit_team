@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:summit_team/config/routes/routes.dart';
-
 import 'package:summit_team/core/utils/alessamy_colors.dart';
 
-class CustomDrower extends StatelessWidget {
-  const CustomDrower({super.key});
+class CustomDrawer extends StatelessWidget {
+  final int selectedIndex;
+  final Function(int) onPageSelected;
+
+  const CustomDrawer({
+    super.key,
+    required this.selectedIndex,
+    required this.onPageSelected,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +21,18 @@ class CustomDrower extends StatelessWidget {
       decoration: BoxDecoration(
         color: AlessamyColors.cardBackground,
         border: Border(
-          right: BorderSide(
+          left: BorderSide(
             color: AlessamyColors.primaryGold.withOpacity(0.1),
             width: 1,
           ),
         ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 10,
+            offset: const Offset(2, 0),
+          ),
+        ],
       ),
       child: CustomScrollView(
         slivers: [
@@ -36,59 +49,126 @@ class CustomDrower extends StatelessWidget {
             ),
           ),
 
+          // Divider بعد اللوجو
+          SliverToBoxAdapter(
+            child: Divider(
+              color: AlessamyColors.primaryGold.withOpacity(0.1),
+              thickness: 1,
+              indent: 16,
+              endIndent: 16,
+            ),
+          ),
+
+          const SliverToBoxAdapter(child: SizedBox(height: 8)),
+
           // Menu Items
           SliverToBoxAdapter(
             child: MenuItem(
               icon: Icons.home,
               title: 'الرئيسية',
-              isSelected: false,
-              onTap: () {},
+              isSelected: selectedIndex == 0,
+              onTap: () => onPageSelected(0),
             ),
           ),
           SliverToBoxAdapter(
             child: MenuItem(
               icon: Icons.dashboard_customize,
               title: 'الداشبورد',
-              isSelected: true,
-              onTap: () {},
+              isSelected: selectedIndex == 1,
+              onTap: () => onPageSelected(1),
             ),
           ),
           SliverToBoxAdapter(
             child: MenuItem(
-              icon: Icons.person,
+              icon: Icons.people,
               title: 'الموظفين',
-              isSelected: false,
-              onTap: () {
-               context.push(Routes.kEEmployees);
-              },
+              isSelected: selectedIndex == 2,
+              onTap: () => onPageSelected(2),
             ),
           ),
           SliverToBoxAdapter(
             child: MenuItem(
               icon: Icons.settings,
               title: 'الإعدادات',
-              isSelected: false,
-              onTap: () {},
+              isSelected: selectedIndex == 3,
+              onTap: () => onPageSelected(3),
             ),
           ),
 
-          // الجزء السفلي: Logout
+          // الجزء السفلي: User Info + Logout
           SliverFillRemaining(
             hasScrollBody: false,
             child: Column(
               children: [
-                Expanded(child: SizedBox()),
+                const Spacer(),
+                
+            
+                
+                const SizedBox(height: 12),
+                
+                // Logout
                 MenuItem(
                   icon: Icons.logout,
                   title: 'تسجيل الخروج',
                   isSelected: false,
-                  onTap: () {},
+                  onTap: () {
+                    _showLogoutDialog(context);
+                  },
                 ),
                 const SizedBox(height: 24),
               ],
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => Directionality(
+        textDirection: TextDirection.rtl,
+        child: AlertDialog(
+          backgroundColor: AlessamyColors.cardBackground,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          title: Text(
+            'تأكيد تسجيل الخروج',
+            style: TextStyle(
+              color: AlessamyColors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          content: Text(
+            'هل أنت متأكد من تسجيل الخروج؟',
+            style: TextStyle(color: AlessamyColors.textLight),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(
+                'إلغاء',
+                style: TextStyle(color: AlessamyColors.textLight),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+                // TODO: تسجيل الخروج
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AlessamyColors.primaryGold,
+                // foregroundColor: AlessamyColors.,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              child: const Text('تسجيل الخروج'),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -102,6 +182,7 @@ class MenuItem extends StatelessWidget {
     required this.isSelected,
     required this.onTap,
   });
+
   final IconData icon;
   final String title;
   final bool isSelected;
@@ -109,37 +190,61 @@ class MenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-        decoration: BoxDecoration(
-          gradient: isSelected ? AlessamyColors.goldToBlackGradient : null,
-          color: isSelected ? null : Colors.transparent,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
           borderRadius: BorderRadius.circular(12.r),
-        ),
-        child: Row(
-          children: [
-            Icon(
-              icon,
-              size: 22,
-              color: isSelected
-                  ? AlessamyColors.white
-                  : AlessamyColors.textLight,
-            ),
-            SizedBox(width: 14),
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            decoration: BoxDecoration(
+              gradient: isSelected ? AlessamyColors.goldToBlackGradient : null,
+              color: isSelected ? null : Colors.transparent,
+              borderRadius: BorderRadius.circular(12.r),
+              border: Border.all(
                 color: isSelected
-                    ? AlessamyColors.white
-                    : AlessamyColors.textLight,
+                    ? AlessamyColors.primaryGold.withOpacity(0.3)
+                    : Colors.transparent,
+                width: 1,
               ),
             ),
-          ],
+            child: Row(
+              children: [
+                Icon(
+                  icon,
+                  size: 22,
+                  color: isSelected
+                      ? AlessamyColors.white
+                      : AlessamyColors.textLight,
+                ),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+                      color: isSelected
+                          ? AlessamyColors.white
+                          : AlessamyColors.textLight,
+                    ),
+                  ),
+                ),
+                if (isSelected)
+                  Container(
+                    width: 4,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      color: AlessamyColors.white,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+              ],
+            ),
+          ),
         ),
       ),
     );

@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:summit_team/core/utils/alessamy_colors.dart';
 import 'package:summit_team/features/dashboard/presentation/screens/desktop_dashboard_layout.dart';
-import 'package:summit_team/features/home/presentation/screens/search_view.dart';
 import 'package:summit_team/features/home/presentation/widgets/custom_app_bar_widget.dart';
+import 'package:summit_team/features/home/presentation/widgets/search.dart';
 import 'package:summit_team/features/home/presentation/widgets/search_filter_widget.dart';
 import 'package:summit_team/features/properties/data/models/property_model.dart';
 import 'package:summit_team/features/properties/presentation/widgets/property_card_widget.dart';
@@ -11,9 +11,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:summit_team/config/locale/app_localizations.dart';
 import 'package:summit_team/config/locale/keys_translate.dart';
 
-/// Desktop Layout للصفحة الرئيسية
-class DesktopHomeLayout extends StatelessWidget {
-  const DesktopHomeLayout({super.key});
+
+class DesktopHomes extends StatelessWidget {
+  const DesktopHomes({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,80 +21,82 @@ class DesktopHomeLayout extends StatelessWidget {
     return Scaffold(
       backgroundColor: AlessamyColors.backgroundColor,
 
-      endDrawer: const CustomDrawerWidget(),
+      // endDrawer: const CustomDrawerWidget(),
       body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            CustomAppBarSliever(),
-            SliverToBoxAdapter(child: SizedBox(height: 40)),
+        child: Row(
+          children: [
+                 Expanded(
+                  flex: 1,
+                   child: ModernSearchFilterWidget(
+                     onSearch: (filter) {
+                       debugPrint('Desktop Search: $filter');
+                     },
+                   ),
+                 ),
 
-            // Search Filter + Quick Stats
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: SearchFilterWidget(
-                  onSearch: (filter) {
-                    debugPrint('Desktop Search: $filter');
-                  },
-                ),
-              ),
-            ),
-
-            SliverToBoxAdapter(child: SizedBox(height: 48)),
-
-            // العقارات المميزة - Header
-            SliverToBoxAdapter(
-              child: SectionHeaderWidget(
-                title: l10n.translate(KeysTranslate.sectionFeatured),
-                subtitle: l10n.translate(KeysTranslate.sectionFeaturedSubtitle),
-                onViewAll: () {},
-              ),
-            ),
-
-            SliverToBoxAdapter(child: SizedBox(height: 24)),
-
-            // العقارات المميزة - القائمة
-            SliverToBoxAdapter(
-              child: FeaturedPropertiesWidget(
-                properties: _getDemoProperties()
-                    .where((p) => p.isFeatured)
-                    .toList(),
-              ),
-            ),
-
-            SliverToBoxAdapter(child: SizedBox(height: 48)),
-
-            // أحدث العروض - Header
-            SliverToBoxAdapter(
-              child: SectionHeaderWidget(
-                title: l10n.translate(KeysTranslate.sectionLatest),
-                subtitle: l10n.translate(KeysTranslate.sectionLatestSubtitle),
-                onViewAll: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const DesktopHomes(),
+            Expanded(
+              flex: 5,
+              child: CustomScrollView(
+                slivers: [
+                  CustomAppBarSliever(),
+                  SliverToBoxAdapter(child: SizedBox(height: 40)),
+              
+                  // Search Filter + Quick Stats
+                  // SliverToBoxAdapter(
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.symmetric(horizontal: 20),
+                  //     child: SearchFilterWidget(
+                  //       onSearch: (filter) {
+                  //         debugPrint('Desktop Search: $filter');
+                  //       },
+                  //     ),
+                  //   ),
+                  // ),
+              
+                  SliverToBoxAdapter(child: SizedBox(height: 48)),
+              
+                  // // العقارات المميزة - Header
+                 
+                  // SliverToBoxAdapter(child: SizedBox(height: 24)),
+              
+                  // // العقارات المميزة - القائمة
+                  // SliverToBoxAdapter(
+                  //   child: FeaturedPropertiesWidget(
+                  //     properties: _getDemoProperties()
+                  //         .where((p) => p.isFeatured)
+                  //         .toList(),
+                  //   ),
+                  // ),
+              
+                  // SliverToBoxAdapter(child: SizedBox(height: 48)),
+              
+                  // أحدث العروض - Header
+                  SliverToBoxAdapter(
+                    child: SectionHeaderWidget(
+                      title: l10n.translate(KeysTranslate.sectionLatest),
+                      subtitle: l10n.translate(KeysTranslate.sectionLatestSubtitle),
+                      onViewAll: () {},
                     ),
-                  );
-                },
+                  ),
+              
+                  SliverToBoxAdapter(child: SizedBox(height: 24)),
+              
+                  // أحدث العروض - Grid
+                  SliverToBoxAdapter(
+                    child: LatestPropertiesGrid(properties: _getDemoProperties()),
+                  ),
+              
+                  SliverToBoxAdapter(child: SizedBox(height: 48)),
+              
+                  // Stats Section
+                  // SliverToBoxAdapter(child: _buildStatsSection(context)),
+                  SliverToBoxAdapter(child: SizedBox(height: 48)),
+              
+                  // Footer
+                  SliverToBoxAdapter(child: FooterWidget()),
+                ],
               ),
             ),
-
-            SliverToBoxAdapter(child: SizedBox(height: 24)),
-
-            // أحدث العروض - Grid
-            SliverToBoxAdapter(
-              child: LatestPropertiesGrid(properties: _getDemoProperties()),
-            ),
-
-            SliverToBoxAdapter(child: SizedBox(height: 48)),
-
-            // Stats Section
-            // SliverToBoxAdapter(child: _buildStatsSection(context)),
-            SliverToBoxAdapter(child: SizedBox(height: 48)),
-
-            // Footer
-            SliverToBoxAdapter(child: FooterWidget()),
           ],
         ),
       ),

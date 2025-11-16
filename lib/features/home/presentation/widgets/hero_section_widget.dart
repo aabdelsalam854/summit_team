@@ -14,7 +14,7 @@ class HeroSectionWidget extends StatelessWidget {
     final width = MediaQuery.sizeOf(context).width;
     final bool isDesktop = width >= 1200;
     final bool isTablet = width >= 800 && width < 1200;
-    final double targetHeight = isDesktop ? 480.h : (isTablet ? 380.h : 320.h);
+    final double targetHeight = isDesktop ? 480 : (isTablet ? 380 : 32);
 
     return Container(
       height: targetHeight,
@@ -36,7 +36,7 @@ class HeroSectionWidget extends StatelessWidget {
         decoration: const BoxDecoration(
           gradient: AlessamyColors.overlayGradient,
         ),
-        padding: EdgeInsets.symmetric(horizontal: isDesktop ? 48.w : 20.w),
+        padding: EdgeInsets.symmetric(horizontal: isDesktop ? 48 : 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,22 +44,22 @@ class HeroSectionWidget extends StatelessWidget {
             Text(
               l10n.translate(KeysTranslate.heroTitle),
               style: TextStyle(
-                fontSize: isDesktop ? 56.sp : (isTablet ? 48.sp : 34.sp),
+                fontSize: isDesktop ? 56 : (isTablet ? 48 : 34),
                 fontWeight: FontWeight.bold,
                 color: AlessamyColors.white,
                 height: 1.2,
               ),
             ),
-            SizedBox(height: 12.h),
+            SizedBox(height: 1),
             Text(
               l10n.translate(KeysTranslate.heroSubtitle),
               style: TextStyle(
-                fontSize: isDesktop ? 22.sp : 18.sp,
+                fontSize: isDesktop ? 22 : 18,
                 color: AlessamyColors.white.withValues(alpha: 0.9),
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: 24.h),
+            SizedBox(height: 2),
             Wrap(
               spacing: 12.w,
               runSpacing: 8.h,
@@ -94,13 +94,13 @@ class HeroSectionWidget extends StatelessWidget {
       onPressed: onTap,
       icon: Icon(
         icon,
-        size: 20.sp,
+        size: 20,
         color: isPrimary ? AlessamyColors.black : AlessamyColors.primaryGold,
       ),
       label: Text(
         text,
         style: TextStyle(
-          fontSize: 14.sp,
+          fontSize: 14,
           fontWeight: FontWeight.bold,
           color: isPrimary ? AlessamyColors.black : AlessamyColors.primaryGold,
         ),
@@ -109,7 +109,7 @@ class HeroSectionWidget extends StatelessWidget {
         backgroundColor: isPrimary
             ? AlessamyColors.primaryGold
             : AlessamyColors.white,
-        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 14.h),
+        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 1),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
       ),
     );

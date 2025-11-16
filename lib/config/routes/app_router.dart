@@ -4,6 +4,7 @@ import 'package:summit_team/core/services/server_locator.dart';
 import 'package:summit_team/features/Employees/presentation/cubit/employees_cubit.dart';
 import 'package:summit_team/features/Employees/presentation/pages/employees_screen.dart';
 import 'package:summit_team/features/dashboard/presentation/screens/dashboard_screen.dart';
+import 'package:summit_team/features/dashboard/presentation/screens/dashboard_screen_s.dart';
 import 'package:summit_team/features/dashboard/presentation/screens/property_form_screen.dart';
 import 'package:summit_team/features/home/presentation/screens/details.dart';
 import 'package:summit_team/features/home/presentation/screens/home_screen.dart';
@@ -20,7 +21,7 @@ abstract class AppRouts {
       GoRoute(
         path: Routes.kHome,
         name: Routes.kHome,
-        builder: (context, state) => const HomeScreen(),
+        builder: (context, state) => const PureFlutterDashboard(),
       ),
 
       // Login Route
@@ -28,14 +29,14 @@ abstract class AppRouts {
         path: Routes.kLogin,
         name: Routes.kLogin,
         builder: (context, state) =>
-            const HomeScreen(), // TODO: Change to LoginScreen
+            const PureFlutterDashboard(), // TODO: Change to LoginScreen
       ),
 
       // Dashboard Route
       GoRoute(
         path: Routes.kDashboard,
         name: Routes.kDashboard,
-        builder: (context, state) => const DashboardScreen(),
+        builder: (context, state) => const PureFlutterDashboard(),
       ),
 
       // Property Form Route (Add/Edit)

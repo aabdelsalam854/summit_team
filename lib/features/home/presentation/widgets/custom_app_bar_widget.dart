@@ -21,12 +21,12 @@ class CustomAppBarWidget extends StatelessWidget
       shadowColor: Colors.black.withValues(alpha: 0.1),
       title: Row(
         children: [
-          Icon(Icons.home_work, color: AlessamyColors.primaryGold, size: 32.sp),
-          SizedBox(width: 8.w),
+          Icon(Icons.home_work, color: AlessamyColors.primaryGold, size: 32),
+          SizedBox(width: 8),
           Text(
             l10n.translate(KeysTranslate.appName),
             style: TextStyle(
-              fontSize: 20.sp,
+              fontSize: 20,
               fontWeight: FontWeight.bold,
               color: AlessamyColors.primaryGold,
             ),
@@ -39,7 +39,7 @@ class CustomAppBarWidget extends StatelessWidget
           icon: Icon(
             Icons.notifications_outlined,
             color: AlessamyColors.darkGray,
-            size: 24.sp,
+            size: 24,
           ),
         ),
 
@@ -49,7 +49,7 @@ class CustomAppBarWidget extends StatelessWidget
           icon: Icon(
             Icons.favorite_border,
             color: AlessamyColors.darkGray,
-            size: 24.sp,
+            size: 24,
           ),
         ),
 
@@ -60,7 +60,7 @@ class CustomAppBarWidget extends StatelessWidget
               AppLocalizations.of(context)!.translate(KeysTranslate.menuHome),
               style: TextStyle(
                 color: AlessamyColors.textPrimary,
-                fontSize: 14.sp,
+                fontSize: 14,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -73,7 +73,7 @@ class CustomAppBarWidget extends StatelessWidget
               )!.translate(KeysTranslate.menuFeatured),
               style: TextStyle(
                 color: AlessamyColors.textPrimary,
-                fontSize: 14.sp,
+                fontSize: 14,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -84,7 +84,7 @@ class CustomAppBarWidget extends StatelessWidget
               AppLocalizations.of(context)!.translate(KeysTranslate.menuAbout),
               style: TextStyle(
                 color: AlessamyColors.textPrimary,
-                fontSize: 14.sp,
+                fontSize: 14,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -95,10 +95,10 @@ class CustomAppBarWidget extends StatelessWidget
             onPressed: () {
               Scaffold.of(context).openEndDrawer();
             },
-            icon: Icon(Icons.menu, color: AlessamyColors.darkGray, size: 24.sp),
+            icon: Icon(Icons.menu, color: AlessamyColors.darkGray, size: 24),
           ),
         ],
-        SizedBox(width: 8.w),
+        SizedBox(width: 8),
       ],
     );
   }
@@ -125,14 +125,14 @@ class CustomDrawerWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Icon(Icons.home_work, color: AlessamyColors.white, size: 48.sp),
+                Icon(Icons.home_work, color: AlessamyColors.white, size: 48),
                 SizedBox(height: 8.h),
                 Text(
                   AppLocalizations.of(
                     context,
                   )!.translate(KeysTranslate.appName),
                   style: TextStyle(
-                    fontSize: 24.sp,
+                    fontSize: 24,
                     fontWeight: FontWeight.bold,
                     color: AlessamyColors.white,
                   ),
@@ -209,11 +209,11 @@ class CustomDrawerWidget extends StatelessWidget {
     required VoidCallback onTap,
   }) {
     return ListTile(
-      leading: Icon(icon, color: AlessamyColors.primaryGold, size: 24.sp),
+      leading: Icon(icon, color: AlessamyColors.primaryGold, size: 24),
       title: Text(
         title,
         style: TextStyle(
-          fontSize: 16.sp,
+          fontSize: 16,
           fontWeight: FontWeight.w500,
           color: AlessamyColors.black,
         ),

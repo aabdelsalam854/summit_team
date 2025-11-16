@@ -206,6 +206,7 @@ import 'package:flutter/material.dart';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:summit_team/core/utils/alessamy_colors.dart';
+import 'package:summit_team/features/Employees/presentation/widgets/employee_form_dialog.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/custom_drower.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/dashboard_stats_card.dart';
 
@@ -330,7 +331,7 @@ class _ProfessionalEmployeesDashboardState
         backgroundColor: AlessamyColors.backgroundColor,
         body: Row(
           children: [
-            Expanded(flex: 1, child: CustomDrower()),
+            // Expanded(flex: 1, child: CustomDrower()),
             Expanded(
               flex: 5,
               child: CustomScrollView(
@@ -440,7 +441,10 @@ class _ProfessionalEmployeesDashboardState
                       ),
                     ),
                   ),
+
                   // Main Content
+                  SliverToBoxAdapter(child: _buildAppBar()),
+
                   SliverPadding(
                     padding: const EdgeInsets.all(24),
                     sliver: SliverList(
@@ -574,6 +578,11 @@ class _ProfessionalEmployeesDashboardState
           ),
           ElevatedButton.icon(
             onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => EmployeeFormDialog(employee: null),
+              );
+
               // _showAddEmployeeDialog();
             },
             icon: const Icon(Icons.add, size: 20),

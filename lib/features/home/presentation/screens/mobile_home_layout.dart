@@ -237,7 +237,7 @@ class FeaturedPropertiesList extends StatelessWidget {
     return SizedBox(
       height: 380,
       child: ScrollConfiguration(
-        behavior: _MouseScrollBehavior(),
+        behavior: MouseScrollBehavior(),
         child: ListView.separated(
           scrollDirection: Axis.vertical,
           padding: EdgeInsets.symmetric(horizontal: 12),
@@ -264,7 +264,7 @@ class FeaturedPropertiesList extends StatelessWidget {
 }
 
 /// يجعل ListView تستجيب للـ mouse wheel على الويب والديسكتوب
-class _MouseScrollBehavior extends ScrollBehavior {
+class MouseScrollBehavior extends ScrollBehavior {
   @override
   ScrollPhysics getScrollPhysics(BuildContext context) {
     return const ClampingScrollPhysics(); // أفضل لتجربة الفأرة

@@ -26,14 +26,14 @@ class CustomDropdown<T> extends StatelessWidget {
         Text(
           label,
           style: TextStyle(
-            fontSize: 14.sp,
+            fontSize: 14,
             fontWeight: FontWeight.w600,
             color: AlessamyColors.textSecondary,
           ),
         ),
-        SizedBox(height: 8.h),
+        SizedBox(height: 8),
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 12.w),
+          padding: EdgeInsets.symmetric(horizontal: 12),
           decoration: BoxDecoration(
             border: Border.all(color: AlessamyColors.borderLight),
             borderRadius: BorderRadius.circular(8.r),
@@ -45,7 +45,7 @@ class CustomDropdown<T> extends StatelessWidget {
               hint: Text(
                 'اختر $label',
                 style: TextStyle(
-                  fontSize: 14.sp,
+                  fontSize: 14,
                   color: AlessamyColors.textLight,
                 ),
               ),
@@ -55,7 +55,7 @@ class CustomDropdown<T> extends StatelessWidget {
                   child: Text(
                     itemBuilder(item),
                     style: TextStyle(
-                      fontSize: 14.sp,
+                      fontSize: 14,
                       color: AlessamyColors.textPrimary,
                     ),
                   ),

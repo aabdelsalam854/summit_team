@@ -1,18 +1,15 @@
-import 'dart:ui';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
+
 import 'package:summit_team/config/locale/app_localizations.dart';
 import 'package:summit_team/config/locale/keys_translate.dart';
-import 'package:summit_team/config/routes/routes.dart';
+
 import 'package:summit_team/core/utils/alessamy_colors.dart';
+import 'package:summit_team/features/dashboard/presentation/screens/desktop_dashboard_layout.dart';
+import 'package:summit_team/features/home/presentation/screens/search_view.dart';
 import 'package:summit_team/features/home/presentation/widgets/custom_app_bar_widget.dart';
-import 'package:summit_team/features/home/presentation/widgets/hero_section_widget.dart';
+
 import 'package:summit_team/features/home/presentation/widgets/search_filter_widget.dart';
 import 'package:summit_team/features/properties/data/models/property_model.dart';
-import 'package:summit_team/features/properties/presentation/widgets/property_card_widget.dart';
 
 /// ---------------------------------------------------------------------------
 /// 🟥 MobileHomeLayout — الصفحة الرئيسية للموبايل
@@ -31,73 +28,70 @@ class MobileHomeLayout extends StatelessWidget {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            /// Hero Section
-            SliverToBoxAdapter(child: const HeroSectionWidget()),
+            CustomAppBarSliever(),
+            SliverToBoxAdapter(child: SizedBox(height: 40)),
 
-            SliverToBoxAdapter(child: SizedBox(height: 16.h)),
-
-            /// Search Filter
+            // Search Filter + Quick Stats
             SliverToBoxAdapter(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 12.w),
-                child: SearchFilterWidget(
-                  onSearch: (filter) {
-                    debugPrint('Mobile Search: $filter');
-                  },
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: SearchFilterWidget(onSearch: (filter) {}),
               ),
             ),
 
-            SliverToBoxAdapter(child: SizedBox(height: 20.h)),
+            SliverToBoxAdapter(child: SizedBox(height: 48)),
 
-            /// العقارات المميزة - Header
+            // العقارات المميزة - Header
             SliverToBoxAdapter(
               child: SectionHeaderWidget(
                 title: l10n.translate(KeysTranslate.sectionFeatured),
+                subtitle: l10n.translate(KeysTranslate.sectionFeaturedSubtitle),
                 onViewAll: () {},
               ),
             ),
 
-            SliverToBoxAdapter(child: SizedBox(height: 10.h)),
+            SliverToBoxAdapter(child: SizedBox(height: 24)),
 
-            /// العقارات المميزة - القائمة الأفقية
+            // العقارات المميزة - القائمة
             SliverToBoxAdapter(
-              child: FeaturedPropertiesList(properties: _getDemoProperties()),
+              child: FeaturedPropertiesWidget(
+                properties: _getDemoProperties()
+                    .where((p) => p.isFeatured)
+                    .toList(),
+              ),
             ),
 
-            SliverToBoxAdapter(child: SizedBox(height: 20.h)),
+            SliverToBoxAdapter(child: SizedBox(height: 48)),
 
-            /// أحدث العروض - Header
+            // أحدث العروض - Header
             SliverToBoxAdapter(
               child: SectionHeaderWidget(
                 title: l10n.translate(KeysTranslate.sectionLatest),
-                onViewAll: () {},
-              ),
-            ),
-
-            SliverToBoxAdapter(child: SizedBox(height: 10.h)),
-
-            /// أحدث العروض - القائمة الرأسية
-            SliverPadding(
-              padding: EdgeInsets.symmetric(horizontal: 12.w),
-              sliver: SliverList(
-                delegate: SliverChildBuilderDelegate((context, index) {
-                  final latest = _getDemoProperties().take(4).toList();
-                  return Padding(
-                    padding: EdgeInsets.only(bottom: 10.h),
-                    child: PropertyCardWidget(
-                      property: latest[index],
-                      onTap: () {},
+                subtitle: l10n.translate(KeysTranslate.sectionLatestSubtitle),
+                onViewAll: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DesktopHomes(),
                     ),
                   );
-                }, childCount: _getDemoProperties().take(4).length),
+                },
               ),
             ),
 
-            SliverToBoxAdapter(child: SizedBox(height: 20.h)),
+            SliverToBoxAdapter(child: SizedBox(height: 24)),
 
-            /// Footer
-            if (kIsWeb) const SliverToBoxAdapter(child: FooterWidget()),
+            // أحدث العروض - Grid
+            SliverToBoxAdapter(
+              child: LatestPropertiesGrid(properties: _getDemoProperties()),
+            ),
+
+            SliverToBoxAdapter(child: SizedBox(height: 48)),
+
+            SliverToBoxAdapter(child: SizedBox(height: 48)),
+
+            // Footer
+            SliverToBoxAdapter(child: FooterWidget()),
           ],
         ),
       ),
@@ -168,197 +162,197 @@ class MobileHomeLayout extends StatelessWidget {
 /// ---------------------------------------------------------------------------
 /// 🟩 SectionHeaderWidget — عنوان القسم (العقارات المميزة / أحدث العروض)
 /// ---------------------------------------------------------------------------
-class SectionHeaderWidget extends StatelessWidget {
-  const SectionHeaderWidget({
-    super.key,
-    required this.title,
-    required this.onViewAll,
-  });
+// class SectionHeaderWidget extends StatelessWidget {
+//   const SectionHeaderWidget({
+//     super.key,
+//     required this.title,
+//     required this.onViewAll,
+//   });
 
-  final String title;
-  final VoidCallback onViewAll;
+//   final String title;
+//   final VoidCallback onViewAll;
 
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 12.w),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 18.sp,
-              fontWeight: FontWeight.bold,
-              color: AlessamyColors.white,
-            ),
-          ),
-          TextButton(
-            onPressed: onViewAll,
-            child: Row(
-              children: [
-                Text(
-                  l10n.translate(KeysTranslate.viewAll),
-                  style: TextStyle(
-                    fontSize: 11.sp,
-                    fontWeight: FontWeight.w600,
-                    color: AlessamyColors.primaryGold,
-                  ),
-                ),
-                SizedBox(width: 3.w),
-                Icon(
-                  Icons.arrow_forward,
-                  size: 12.sp,
-                  color: AlessamyColors.primaryGold,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     final l10n = AppLocalizations.of(context)!;
+//     return Padding(
+//       padding: EdgeInsets.symmetric(horizontal: 12.w),
+//       child: Row(
+//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//         children: [
+//           Text(
+//             title,
+//             style: TextStyle(
+//               fontSize: 18.sp,
+//               fontWeight: FontWeight.bold,
+//               color: AlessamyColors.white,
+//             ),
+//           ),
+//           TextButton(
+//             onPressed: onViewAll,
+//             child: Row(
+//               children: [
+//                 Text(
+//                   l10n.translate(KeysTranslate.viewAll),
+//                   style: TextStyle(
+//                     fontSize: 11.sp,
+//                     fontWeight: FontWeight.w600,
+//                     color: AlessamyColors.primaryGold,
+//                   ),
+//                 ),
+//                 SizedBox(width: 3.w),
+//                 Icon(
+//                   Icons.arrow_forward,
+//                   size: 12.sp,
+//                   color: AlessamyColors.primaryGold,
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
-/// ---------------------------------------------------------------------------
-/// 🟦 FeaturedPropertiesList — قائمة العقارات المميزة (أفقية)
-/// ---------------------------------------------------------------------------
+// /// ---------------------------------------------------------------------------
+// /// 🟦 FeaturedPropertiesList — قائمة العقارات المميزة (أفقية)
+// /// ---------------------------------------------------------------------------
 
-class FeaturedPropertiesList extends StatelessWidget {
-  const FeaturedPropertiesList({super.key, required this.properties});
+// class FeaturedPropertiesList extends StatelessWidget {
+//   const FeaturedPropertiesList({super.key, required this.properties});
 
-  final List<PropertyModel> properties;
+//   final List<PropertyModel> properties;
 
-  @override
-  Widget build(BuildContext context) {
-    final featured = properties.where((p) => p.isFeatured).toList();
+//   @override
+//   Widget build(BuildContext context) {
+//     final featured = properties.where((p) => p.isFeatured).toList();
 
-    return SizedBox(
-      height: 380,
-      child: ScrollConfiguration(
-        behavior: MouseScrollBehavior(),
-        child: ListView.separated(
-          scrollDirection: Axis.vertical,
-          padding: EdgeInsets.symmetric(horizontal: 12),
-          itemCount: featured.length,
-          separatorBuilder: (context, index) => SizedBox(width: 10),
-          itemBuilder: (context, index) {
-            return SizedBox(
-              width: 260,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: PropertyCardWidget(
-                  property: featured[index],
-                  onTap: () {
-                    context.push('${Routes.kPropertyDetails}/${featured[index].id}', extra: featured[index]);
-                  },
-                ),
-              ),
-            );
-          },
-        ),
-      ),
-    );
-  }
-}
+//     return SizedBox(
+//       height: 380,
+//       child: ScrollConfiguration(
+//         behavior: MouseScrollBehavior(),
+//         child: ListView.separated(
+//           scrollDirection: Axis.vertical,
+//           padding: EdgeInsets.symmetric(horizontal: 12),
+//           itemCount: featured.length,
+//           separatorBuilder: (context, index) => SizedBox(width: 10),
+//           itemBuilder: (context, index) {
+//             return SizedBox(
+//               width: 260,
+//               child: Padding(
+//                 padding: const EdgeInsets.all(8.0),
+//                 child: PropertyCardWidget(
+//                   property: featured[index],
+//                   onTap: () {
+//                     context.push('${Routes.kPropertyDetails}/${featured[index].id}', extra: featured[index]);
+//                   },
+//                 ),
+//               ),
+//             );
+//           },
+//         ),
+//       ),
+//     );
+//   }
+// }
 
-/// يجعل ListView تستجيب للـ mouse wheel على الويب والديسكتوب
-class MouseScrollBehavior extends ScrollBehavior {
-  @override
-  ScrollPhysics getScrollPhysics(BuildContext context) {
-    return const ClampingScrollPhysics(); // أفضل لتجربة الفأرة
-  }
+// /// يجعل ListView تستجيب للـ mouse wheel على الويب والديسكتوب
+// class MouseScrollBehavior extends ScrollBehavior {
+//   @override
+//   ScrollPhysics getScrollPhysics(BuildContext context) {
+//     return const ClampingScrollPhysics(); // أفضل لتجربة الفأرة
+//   }
 
-  @override
-  Set<PointerDeviceKind> get dragDevices => {
-    PointerDeviceKind.touch,
-    PointerDeviceKind.mouse, // مهم للفأرة
-    PointerDeviceKind.stylus,
-    PointerDeviceKind.unknown,
-  };
-}
+//   @override
+//   Set<PointerDeviceKind> get dragDevices => {
+//     PointerDeviceKind.touch,
+//     PointerDeviceKind.mouse, // مهم للفأرة
+//     PointerDeviceKind.stylus,
+//     PointerDeviceKind.unknown,
+//   };
+// }
 
-/// ---------------------------------------------------------------------------
-/// 🟨 LatestPropertiesList — أحدث العقارات (رأسي)
-/// ---------------------------------------------------------------------------
-class LatestPropertiesList extends StatelessWidget {
-  const LatestPropertiesList({super.key, required this.properties});
+// /// ---------------------------------------------------------------------------
+// /// 🟨 LatestPropertiesList — أحدث العقارات (رأسي)
+// /// ---------------------------------------------------------------------------
+// class LatestPropertiesList extends StatelessWidget {
+//   const LatestPropertiesList({super.key, required this.properties});
 
-  final List<PropertyModel> properties;
+//   final List<PropertyModel> properties;
 
-  @override
-  Widget build(BuildContext context) {
-    final latest = properties.take(4).toList();
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 12.w),
-      child: Column(
-        children: latest.map((property) {
-          return Padding(
-            padding: EdgeInsets.only(bottom: 10.h),
-            child: PropertyCardWidget(property: property, onTap: () {}),
-          );
-        }).toList(),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     final latest = properties.take(4).toList();
+//     return Padding(
+//       padding: EdgeInsets.symmetric(horizontal: 12.w),
+//       child: Column(
+//         children: latest.map((property) {
+//           return Padding(
+//             padding: EdgeInsets.only(bottom: 10.h),
+//             child: PropertyCardWidget(property: property, onTap: () {}),
+//           );
+//         }).toList(),
+//       ),
+//     );
+//   }
+// }
 
-/// ---------------------------------------------------------------------------
-/// 🟧 FooterWidget — الفوتر السفلي
-/// ---------------------------------------------------------------------------
-class FooterWidget extends StatelessWidget {
-  const FooterWidget({super.key});
+// /// ---------------------------------------------------------------------------
+// /// 🟧 FooterWidget — الفوتر السفلي
+// /// ---------------------------------------------------------------------------
+// class FooterWidget extends StatelessWidget {
+//   const FooterWidget({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(16.w),
-      color: AlessamyColors.black,
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.facebook,
-                  color: AlessamyColors.white,
-                  size: 20.sp,
-                ),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.chat,
-                  color: AlessamyColors.white,
-                  size: 20.sp,
-                ),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.phone,
-                  color: AlessamyColors.white,
-                  size: 20.sp,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 10.h),
-          Text(
-            AppLocalizations.of(
-              context,
-            )!.translate(KeysTranslate.rightsReserved),
-            style: TextStyle(
-              fontSize: 10.sp,
-              color: AlessamyColors.white.withValues(alpha: 0.7),
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       padding: EdgeInsets.all(16.w),
+//       color: AlessamyColors.black,
+//       child: Column(
+//         children: [
+//           Row(
+//             mainAxisAlignment: MainAxisAlignment.spaceAround,
+//             children: [
+//               IconButton(
+//                 onPressed: () {},
+//                 icon: Icon(
+//                   Icons.facebook,
+//                   color: AlessamyColors.white,
+//                   size: 20.sp,
+//                 ),
+//               ),
+//               IconButton(
+//                 onPressed: () {},
+//                 icon: Icon(
+//                   Icons.chat,
+//                   color: AlessamyColors.white,
+//                   size: 20.sp,
+//                 ),
+//               ),
+//               IconButton(
+//                 onPressed: () {},
+//                 icon: Icon(
+//                   Icons.phone,
+//                   color: AlessamyColors.white,
+//                   size: 20.sp,
+//                 ),
+//               ),
+//             ],
+//           ),
+//           SizedBox(height: 10.h),
+//           Text(
+//             AppLocalizations.of(
+//               context,
+//             )!.translate(KeysTranslate.rightsReserved),
+//             style: TextStyle(
+//               fontSize: 10.sp,
+//               color: AlessamyColors.white.withValues(alpha: 0.7),
+//             ),
+//             textAlign: TextAlign.center,
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }

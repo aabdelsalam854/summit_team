@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 import 'package:summit_team/core/utils/alessamy_colors.dart';
 import 'package:summit_team/features/dashboard/presentation/screens/desktop_dashboard_layout.dart';
@@ -4445,7 +4446,7 @@ class LatestPropertiesGrid extends StatelessWidget {
         // ---- حسابات الريسبونسيف ----
         final targetCardWidth = 360;
         int crossAxisCount = (width / targetCardWidth).floor();
-        crossAxisCount = crossAxisCount.clamp(3, 6);
+        crossAxisCount = crossAxisCount.clamp(1, 3);
 
         final spacing = 24;
         final totalSpacing = spacing * (crossAxisCount - 1);
@@ -4453,6 +4454,7 @@ class LatestPropertiesGrid extends StatelessWidget {
         final itemWidth = availableWidth / crossAxisCount;
         final itemHeight = itemWidth * .85;
         final childAspectRatio = itemWidth / itemHeight;
+        log('crossAxisCount: $crossAxisCount');
 
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 48),

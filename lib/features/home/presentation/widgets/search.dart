@@ -9,7 +9,8 @@ class ModernSearchFilterWidget extends StatefulWidget {
   final Function(SearchFilter)? onSearch;
 
   @override
-  State<ModernSearchFilterWidget> createState() => _ModernSearchFilterWidgetState();
+  State<ModernSearchFilterWidget> createState() =>
+      _ModernSearchFilterWidgetState();
 }
 
 class _ModernSearchFilterWidgetState extends State<ModernSearchFilterWidget> {
@@ -285,7 +286,8 @@ class _ModernSearchFilterWidgetState extends State<ModernSearchFilterWidget> {
             return Expanded(
               child: Padding(
                 padding: EdgeInsets.only(
-                    right: purposeValue == PropertyPurpose.values.last ? 0 : 8),
+                  right: purposeValue == PropertyPurpose.values.last ? 0 : 8,
+                ),
                 child: GestureDetector(
                   onTap: () => selectedPurpose.value = purposeValue,
                   child: Container(
@@ -346,7 +348,11 @@ class _ModernSearchFilterWidgetState extends State<ModernSearchFilterWidget> {
                         padding: EdgeInsets.symmetric(horizontal: 2),
                         child: Container(
                           width: 16,
-                          height: isCenter ? 100 : isActive ? 80 : 40,
+                          height: isCenter
+                              ? 100
+                              : isActive
+                              ? 80
+                              : 40,
                           decoration: BoxDecoration(
                             color: isActive
                                 ? AlessamyColors.primaryGold
@@ -451,8 +457,9 @@ class _ModernSearchFilterWidgetState extends State<ModernSearchFilterWidget> {
           type?.arabicName,
           PropertyType.values.map((e) => e.arabicName).toList(),
           (value) {
-            final newType =
-                PropertyType.values.firstWhere((e) => e.arabicName == value);
+            final newType = PropertyType.values.firstWhere(
+              (e) => e.arabicName == value,
+            );
             selectedType.value = newType;
           },
         );
@@ -511,7 +518,10 @@ class _ModernSearchFilterWidgetState extends State<ModernSearchFilterWidget> {
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
               hintText: 'من',
-              hintStyle: TextStyle(fontSize: 14, color: AlessamyColors.textLight),
+              hintStyle: TextStyle(
+                fontSize: 14,
+                color: AlessamyColors.textLight,
+              ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(color: AlessamyColors.borderLight),
@@ -524,7 +534,10 @@ class _ModernSearchFilterWidgetState extends State<ModernSearchFilterWidget> {
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(color: AlessamyColors.primaryGold),
               ),
-              contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 12,
+              ),
             ),
           ),
         ),
@@ -535,7 +548,10 @@ class _ModernSearchFilterWidgetState extends State<ModernSearchFilterWidget> {
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
               hintText: 'إلى',
-              hintStyle: TextStyle(fontSize: 14, color: AlessamyColors.textLight),
+              hintStyle: TextStyle(
+                fontSize: 14,
+                color: AlessamyColors.textLight,
+              ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(color: AlessamyColors.borderLight),
@@ -548,7 +564,10 @@ class _ModernSearchFilterWidgetState extends State<ModernSearchFilterWidget> {
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(color: AlessamyColors.primaryGold),
               ),
-              contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 12,
+              ),
             ),
           ),
         ),
@@ -557,7 +576,11 @@ class _ModernSearchFilterWidgetState extends State<ModernSearchFilterWidget> {
   }
 
   Widget _buildDropdown(
-      String label, String? value, List<String> items, Function(String?) onChanged) {
+    String label,
+    String? value,
+    List<String> items,
+    Function(String?) onChanged,
+  ) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
       decoration: BoxDecoration(
@@ -574,13 +597,13 @@ class _ModernSearchFilterWidgetState extends State<ModernSearchFilterWidget> {
         isExpanded: true,
         underline: SizedBox(),
         dropdownColor: AlessamyColors.cardBackground,
-        icon: Icon(Icons.keyboard_arrow_down, color: AlessamyColors.textSecondary),
+        icon: Icon(
+          Icons.keyboard_arrow_down,
+          color: AlessamyColors.textSecondary,
+        ),
         style: TextStyle(fontSize: 14, color: AlessamyColors.white),
         items: items.map((item) {
-          return DropdownMenuItem(
-            value: item,
-            child: Text(item),
-          );
+          return DropdownMenuItem(value: item, child: Text(item));
         }).toList(),
         onChanged: onChanged,
       ),

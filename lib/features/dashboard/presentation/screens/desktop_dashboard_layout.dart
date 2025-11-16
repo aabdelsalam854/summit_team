@@ -246,11 +246,11 @@ class _DesktopDashboardLayoutState extends State<DesktopDashboardLayout> {
                                           ),
                                         ],
                                       ),
-                                      Expanded(
-                                        child: FeaturedPropertiesList(
-                                          properties: _getDemoProperties(),
-                                        ),
-                                      ),
+                                      // Expanded(
+                                      //   child: FeaturedPropertiesList(
+                                      //     properties: _getDemoProperties(),
+                                      //   ),
+                                      // ),
                                     ],
                                   ),
                                 ),

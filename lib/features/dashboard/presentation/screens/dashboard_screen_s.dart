@@ -315,7 +315,6 @@ class _MenuItem {
 // الصفحات
 // ════════════════════════════════════════════════════════════
 
-
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final String userName;

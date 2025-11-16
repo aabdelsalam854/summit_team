@@ -148,7 +148,8 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
                           label: 'المدينة',
                           value: selectedCity,
                           items: cities,
-                          onChanged: (value) => setState(() => selectedCity = value),
+                          onChanged: (value) =>
+                              setState(() => selectedCity = value),
                           itemBuilder: (city) => city,
                         ),
                       ),
@@ -160,7 +161,8 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
                           label: 'المرحلة',
                           value: selectedPhase,
                           items: phases,
-                          onChanged: (value) => setState(() => selectedPhase = value),
+                          onChanged: (value) =>
+                              setState(() => selectedPhase = value),
                           itemBuilder: (phase) => phase,
                         ),
                       ),
@@ -172,7 +174,8 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
                           label: 'النموذج',
                           value: selectedModel,
                           items: models,
-                          onChanged: (value) => setState(() => selectedModel = value),
+                          onChanged: (value) =>
+                              setState(() => selectedModel = value),
                           itemBuilder: (model) => model,
                         ),
                       ),
@@ -184,7 +187,8 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
                           label: 'نوع العقار',
                           value: selectedType,
                           items: PropertyType.values,
-                          onChanged: (value) => setState(() => selectedType = value),
+                          onChanged: (value) =>
+                              setState(() => selectedType = value),
                           itemBuilder: (type) => type.arabicName,
                         ),
                       ),
@@ -196,7 +200,8 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
                           label: 'الغرض',
                           value: selectedPurpose,
                           items: PropertyPurpose.values,
-                          onChanged: (value) => setState(() => selectedPurpose = value),
+                          onChanged: (value) =>
+                              setState(() => selectedPurpose = value),
                           itemBuilder: (purpose) => purpose.arabicName,
                         ),
                       ),
@@ -208,7 +213,8 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
                           label: 'نظام الدفع',
                           value: selectedPaymentSystem,
                           items: paymentSystems,
-                          onChanged: (value) => setState(() => selectedPaymentSystem = value),
+                          onChanged: (value) =>
+                              setState(() => selectedPaymentSystem = value),
                           itemBuilder: (payment) => payment,
                         ),
                       ),
@@ -220,7 +226,8 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
                           label: 'نوع التشطيب',
                           value: selectedFinishingType,
                           items: finishingTypes,
-                          onChanged: (value) => setState(() => selectedFinishingType = value),
+                          onChanged: (value) =>
+                              setState(() => selectedFinishingType = value),
                           itemBuilder: (finishing) => finishing,
                         ),
                       ),
@@ -232,7 +239,8 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
                           label: 'عدد الغرف',
                           value: selectedRoomsCount,
                           items: roomsCounts,
-                          onChanged: (value) => setState(() => selectedRoomsCount = value),
+                          onChanged: (value) =>
+                              setState(() => selectedRoomsCount = value),
                           itemBuilder: (rooms) => rooms,
                         ),
                       ),
@@ -375,8 +383,7 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
               color: AlessamyColors.textSecondary,
             ),
           ),
-        if (label != 'من' && label != 'إلى')
-          SizedBox(height: 8),
+        if (label != 'من' && label != 'إلى') SizedBox(height: 8),
         TextField(
           controller: controller,
           keyboardType: keyboardType,

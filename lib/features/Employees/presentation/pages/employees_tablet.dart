@@ -38,6 +38,7 @@ class EmployeesTablet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double h = MediaQuery.sizeOf(context).height;
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
@@ -63,41 +64,49 @@ class EmployeesTablet extends StatelessWidget {
                   const SizedBox(height: 24),
 
                   // Statistics Cards - Mobile Column
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Card(
-                        color: AlessamyColors.cardBackground,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: EmployeesStatesRowWidget(
-                            totalEmployees: _totalEmployees,
-                            admins: _admins,
-                            accountants: _accountants,
-                            employees: _regularEmployees,
+                  SizedBox(
+                    height: h * 0.4,
+                    width: double.infinity,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Expanded(
+                          child: Card(
+                            color: AlessamyColors.cardBackground,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: EmployeesStatesRowWidget(
+                                totalEmployees: _totalEmployees,
+                                admins: _admins,
+                                accountants: _accountants,
+                                employees: _regularEmployees,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 16),
-                      Card(
-                        color: AlessamyColors.cardBackground,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: RoleDistributionCard(
-                            totalEmployees: _totalEmployees,
-                            admins: _admins,
-                            accountants: _accountants,
-                            employees: _regularEmployees,
+                        // const SizedBox(height: 16),
+                        Expanded(
+                          child: Card(
+                            color: AlessamyColors.cardBackground,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: RoleDistributionCard(
+                                totalEmployees: _totalEmployees,
+                                admins: _admins,
+                                accountants: _accountants,
+                                employees: _regularEmployees,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
 
                   const SizedBox(height: 32),

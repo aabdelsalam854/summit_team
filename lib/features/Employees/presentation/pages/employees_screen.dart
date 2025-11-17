@@ -10,14 +10,14 @@ import 'package:summit_team/features/Employees/presentation/widgets/employees_st
 import 'package:summit_team/features/Employees/presentation/widgets/role_distribution_card.dart';
 
 
-class EmployeesDashboard extends StatelessWidget {
+class EmployeesDeskTop extends StatelessWidget {
   final List<Employee> employees;
   final EmployeeRole? selectedRole;
   final String searchQuery;
   final ValueChanged<EmployeeRole?>? onRoleChanged;
   final ValueChanged<String>? onSearchChanged;
 
-  const EmployeesDashboard({
+  const EmployeesDeskTop({
     super.key,
     required this.employees,
     this.selectedRole,
@@ -51,110 +51,110 @@ class EmployeesDashboard extends StatelessWidget {
               child: CustomScrollView(
                 slivers: [
                   // App Bar
-                  // SliverAppBar(
-                  //   backgroundColor: AlessamyColors.cardBackground,
-                  //   pinned: true,
-                  //   expandedHeight: 100,
-                  //   toolbarHeight: 80, // ارتفاع عند التمرير إلى الأعلى
+                  SliverAppBar(
+                    backgroundColor: AlessamyColors.cardBackground,
+                    pinned: true,
+                    expandedHeight: 100,
+                    toolbarHeight: 80, // ارتفاع عند التمرير إلى الأعلى
 
-                  //   flexibleSpace: FlexibleSpaceBar(
-                  //     titlePadding: const EdgeInsets.symmetric(
-                  //       horizontal: 24,
-                  //       vertical: 12,
-                  //     ),
+                    flexibleSpace: FlexibleSpaceBar(
+                      titlePadding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 12,
+                      ),
 
-                  //     title: Row(
-                  //       children: [
-                  //         Expanded(
-                  //           flex: 3,
-                  //           child: Text(
-                  //             "SUMMIT TEAM",
-                  //             style: const TextStyle(
-                  //               fontSize: 22,
-                  //               fontWeight: FontWeight.bold,
-                  //               color: Colors.white,
-                  //             ),
-                  //             overflow: TextOverflow.ellipsis,
-                  //           ),
-                  //         ),
-                  //         const SizedBox(width: 16),
-                  //         Expanded(
-                  //           flex: 3,
-                  //           child: SizedBox(
-                  //             height: 40,
-                  //             child: TextField(
-                  //               // controller: searchController,
-                  //               decoration: InputDecoration(
-                  //                 hintText: 'بحث...',
-                  //                 prefixIcon: const Icon(Icons.search),
-                  //                 filled: true,
-                  //                 fillColor: Colors.white,
-                  //                 contentPadding: const EdgeInsets.symmetric(
-                  //                   vertical: 0,
-                  //                   horizontal: 12,
-                  //                 ),
-                  //                 border: OutlineInputBorder(
-                  //                   borderRadius: BorderRadius.circular(12),
-                  //                   borderSide: BorderSide.none,
-                  //                 ),
-                  //               ),
-                  //             ),
-                  //           ),
-                  //         ),
-                  //         const SizedBox(width: 16),
-                  //         Expanded(
-                  //           flex: 2,
-                  //           child: Row(
-                  //             children: [
-                  //               CircleAvatar(
-                  //                 radius: 20,
-                  //                 backgroundColor: AlessamyColors.primaryGold,
-                  //                 child: IconButton(
-                  //                   onPressed: () {},
-                  //                   icon: const Icon(
-                  //                     Icons.person,
-                  //                     color: Colors.white,
-                  //                     size: 20,
-                  //                   ),
-                  //                 ),
-                  //               ),
-                  //               const SizedBox(width: 8),
-                  //               Expanded(
-                  //                 child: Padding(
-                  //                   padding: const EdgeInsets.all(8.0),
-                  //                   child: Column(
-                  //                     crossAxisAlignment:
-                  //                         CrossAxisAlignment.start,
-                  //                     mainAxisAlignment:
-                  //                         MainAxisAlignment.center,
-                  //                     children: const [
-                  //                       Text(
-                  //                         'اسم المستخدم',
-                  //                         style: TextStyle(
-                  //                           fontSize: 14,
-                  //                           color: Colors.white,
-                  //                         ),
-                  //                         overflow: TextOverflow.ellipsis,
-                  //                       ),
-                  //                       Text(
-                  //                         'دور المستخدم',
-                  //                         style: TextStyle(
-                  //                           fontSize: 12,
-                  //                           color: Colors.white70,
-                  //                         ),
-                  //                         overflow: TextOverflow.ellipsis,
-                  //                       ),
-                  //                     ],
-                  //                   ),
-                  //                 ),
-                  //               ),
-                  //             ],
-                  //           ),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
+                      title: Row(
+                        children: [
+                          Expanded(
+                            flex: 3,
+                            child: Text(
+                              "SUMMIT TEAM",
+                              style: const TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            flex: 3,
+                            child: SizedBox(
+                              height: 40,
+                              child: TextField(
+                                // controller: searchController,
+                                decoration: InputDecoration(
+                                  hintText: 'بحث...',
+                                  prefixIcon: const Icon(Icons.search),
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 0,
+                                    horizontal: 12,
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            flex: 2,
+                            child: Row(
+                              children: [
+                                CircleAvatar(
+                                  radius: 20,
+                                  backgroundColor: AlessamyColors.primaryGold,
+                                  child: IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(
+                                      Icons.person,
+                                      color: Colors.white,
+                                      size: 20,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: const [
+                                        Text(
+                                          'اسم المستخدم',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: Colors.white,
+                                          ),
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        Text(
+                                          'دور المستخدم',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.white70,
+                                          ),
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
 
                   // Main Content
                   SliverToBoxAdapter(

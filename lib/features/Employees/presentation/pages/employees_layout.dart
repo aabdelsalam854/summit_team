@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:summit_team/core/adaptive_layout/adaptive_layout_widget.dart';
 import 'package:summit_team/features/Employees/presentation/models/employee.dart';
 import 'package:summit_team/features/Employees/presentation/pages/employees_mopile.dart';
-import 'package:summit_team/features/Employees/presentation/pages/employees_screen.dart' hide Employee;
+import 'package:summit_team/features/Employees/presentation/pages/employees_screen.dart';
 import 'package:summit_team/features/Employees/presentation/pages/employees_tablet.dart';
 
 class EmployeesLayout extends StatefulWidget {
@@ -140,7 +140,7 @@ class _EmployeesLayoutState extends State<EmployeesLayout> {
         onRoleChanged: _handleRoleChanged,
         onSearchChanged: _handleSearchChanged,
       ),
-      desktopLayout: (context) => EmployeesDashboard(
+      desktopLayout: (context) => EmployeesDeskTop(
         employees: _filteredEmployees,
         selectedRole: _selectedRole,
         searchQuery: _searchQuery,

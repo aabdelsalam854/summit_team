@@ -161,7 +161,6 @@ class EmployeesListSection extends StatelessWidget {
             duration: Duration(milliseconds: 250 + (index * 30)),
             child: EmployeeCard(
               employee: employee,
-              
 
               // onEdit: () {},
               // onDelete: () {},

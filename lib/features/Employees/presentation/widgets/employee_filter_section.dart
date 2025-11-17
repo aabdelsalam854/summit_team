@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:summit_team/core/utils/alessamy_colors.dart';
 import 'package:summit_team/features/Employees/presentation/models/employee.dart';
-import 'package:summit_team/features/Employees/presentation/pages/employees_screen.dart';
+import 'package:summit_team/features/Employees/presentation/widgets/role_chip.dart';
 
 class FiltersSection extends StatelessWidget {
   final TextEditingController searchController;

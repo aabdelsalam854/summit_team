@@ -8,7 +8,6 @@ import 'package:summit_team/config/locale/keys_translate.dart';
 import 'package:summit_team/config/routes/routes.dart';
 
 import 'package:summit_team/core/utils/alessamy_colors.dart';
-import 'package:summit_team/features/dashboard/presentation/screens/desktop_dashboard_layout.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/custom_app_bar_sliever.dart';
 import 'package:summit_team/features/home/presentation/screens/search_view.dart';
 import 'package:summit_team/features/home/presentation/widgets/custom_app_bar_widget.dart';

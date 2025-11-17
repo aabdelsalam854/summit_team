@@ -1,35 +1,31 @@
 import 'package:equatable/equatable.dart';
 
 enum EmployeeRole {
-  admin,
-  manager,
-  employee;
+  admin('مدير', 'admin'),
+  accountant('محاسب', 'accountant'),
+  employee('موظف', 'employee');
+  
 
-  String get arabicName {
-    switch (this) {
-      case EmployeeRole.admin:
-        return 'مدير';
-      case EmployeeRole.manager:
-        return 'مشرف';
-      case EmployeeRole.employee:
-        return 'موظف';
-    }
-  }
+
+  final String arabicName;
+  final String value;
+
+  const EmployeeRole(this.arabicName, this.value);
 }
 
 class Employee extends Equatable {
-  final String id;
+  final String? id;
   final String name;
-  final String phoneNumber;
+  final String phone;
   final String address;
   final EmployeeRole role;
   final DateTime createdAt;
   final DateTime? updatedAt;
 
   const Employee({
-    required this.id,
+    this.id,
     required this.name,
-    required this.phoneNumber,
+    required this.phone,
     required this.address,
     required this.role,
     required this.createdAt,
@@ -39,7 +35,7 @@ class Employee extends Equatable {
   Employee copyWith({
     String? id,
     String? name,
-    String? phoneNumber,
+    String? phone,
     String? address,
     EmployeeRole? role,
     DateTime? createdAt,
@@ -48,7 +44,7 @@ class Employee extends Equatable {
     return Employee(
       id: id ?? this.id,
       name: name ?? this.name,
-      phoneNumber: phoneNumber ?? this.phoneNumber,
+      phone: phone ?? this.phone,
       address: address ?? this.address,
       role: role ?? this.role,
       createdAt: createdAt ?? this.createdAt,
@@ -58,12 +54,12 @@ class Employee extends Equatable {
 
   @override
   List<Object?> get props => [
-        id,
-        name,
-        phoneNumber,
-        address,
-        role,
-        createdAt,
-        updatedAt,
-      ];
+    id,
+    name,
+    phone,
+    address,
+    role,
+    createdAt,
+    updatedAt,
+  ];
 }

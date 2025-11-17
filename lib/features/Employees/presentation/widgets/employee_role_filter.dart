@@ -4,13 +4,13 @@ import 'package:summit_team/features/Employees/presentation/models/employee.dart
 import 'package:summit_team/features/Employees/presentation/cubit/employees_cubit.dart';
 
 class EmployeeRoleFilter extends StatelessWidget {
-  const EmployeeRoleFilter({Key? key}) : super(key: key);
+  const EmployeeRoleFilter({super.key});
 
   Color _getRoleColor(EmployeeRole role) {
     switch (role) {
       case EmployeeRole.admin:
         return Colors.red.shade700;
-      case EmployeeRole.manager:
+      case EmployeeRole.accountant:
         return Colors.blue.shade700;
       case EmployeeRole.employee:
         return Colors.green.shade700;
@@ -74,7 +74,7 @@ class EmployeeRoleFilter extends StatelessWidget {
                     ),
                   ),
                 );
-              }).toList(),
+              }),
             ],
           ),
         );
@@ -86,7 +86,7 @@ class EmployeeRoleFilter extends StatelessWidget {
     switch (role) {
       case EmployeeRole.admin:
         return Icons.admin_panel_settings;
-      case EmployeeRole.manager:
+      case EmployeeRole.accountant:
         return Icons.supervisor_account;
       case EmployeeRole.employee:
         return Icons.person;

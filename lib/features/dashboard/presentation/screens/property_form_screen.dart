@@ -4,8 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:summit_team/core/adaptive_layout/adaptive_layout_widget.dart';
 import 'package:summit_team/core/utils/alessamy_colors.dart';
 import 'package:summit_team/features/auth/presentation/widgets/custom_text_field_widget.dart';
-import 'package:summit_team/features/dashboard/presentation/screens/desktop_dashboard_layout.dart';
-import 'package:summit_team/features/dashboard/presentation/widgets/custom_drower.dart';
 import 'package:summit_team/features/properties/data/models/property_model.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/property_form_section_widget.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/property_text_field_widget.dart';
@@ -660,8 +658,9 @@ class _PropertyFormScreenState extends State<PropertyFormScreen> {
                               icon: Icons.description,
                               maxLines: 3,
                               validator: (value) {
-                                if (value?.isEmpty ?? true)
+                                if (value?.isEmpty ?? true) {
                                   return 'الوصف مطلوب';
+                                }
                                 return null;
                               },
                             ),
@@ -672,8 +671,9 @@ class _PropertyFormScreenState extends State<PropertyFormScreen> {
                               icon: Icons.phone_android,
                               maxLines: 3,
                               validator: (value) {
-                                if (value?.isEmpty ?? true)
+                                if (value?.isEmpty ?? true) {
                                   return 'الوصف مطلوب';
+                                }
                                 return null;
                               },
                             ),
@@ -683,8 +683,8 @@ class _PropertyFormScreenState extends State<PropertyFormScreen> {
 
                       Expanded(
                         child: PropertyFormSectionWidget(
-                          children: [buttons(context, isEdit)],
                           title: "",
+                          children: [buttons(context, isEdit)],
                         ),
                       ),
                     ],

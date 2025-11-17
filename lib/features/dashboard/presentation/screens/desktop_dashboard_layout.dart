@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sidebarx/sidebarx.dart';
 import 'package:summit_team/config/routes/routes.dart';
 import 'package:summit_team/core/utils/alessamy_colors.dart';
 import 'package:summit_team/core/widget/custom_text_button_with_icon.dart';

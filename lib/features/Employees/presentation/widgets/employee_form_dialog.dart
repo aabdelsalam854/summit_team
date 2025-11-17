@@ -6,7 +6,7 @@ import 'package:summit_team/features/Employees/presentation/cubit/employees_cubi
 class EmployeeFormDialog extends StatefulWidget {
   final Employee? employee;
 
-  const EmployeeFormDialog({Key? key, this.employee}) : super(key: key);
+  const EmployeeFormDialog({super.key, this.employee});
 
   @override
   State<EmployeeFormDialog> createState() => _EmployeeFormDialogState();
@@ -24,7 +24,7 @@ class _EmployeeFormDialogState extends State<EmployeeFormDialog> {
     super.initState();
     _nameController = TextEditingController(text: widget.employee?.name ?? '');
     _phoneController =
-        TextEditingController(text: widget.employee?.phoneNumber ?? '');
+        TextEditingController(text: widget.employee?.phone ?? '');
     _addressController =
         TextEditingController(text: widget.employee?.address ?? '');
     _selectedRole = widget.employee?.role ?? EmployeeRole.employee;
@@ -45,7 +45,7 @@ class _EmployeeFormDialogState extends State<EmployeeFormDialog> {
       final employee = Employee(
         id: widget.employee?.id ?? DateTime.now().millisecondsSinceEpoch.toString(),
         name: _nameController.text.trim(),
-        phoneNumber: _phoneController.text.trim(),
+        phone: _phoneController.text.trim(),
         address: _addressController.text.trim(),
         role: _selectedRole,
         createdAt: widget.employee?.createdAt ?? DateTime.now(),
@@ -168,7 +168,7 @@ class _EmployeeFormDialogState extends State<EmployeeFormDialog> {
 
                 // Role Dropdown
                 DropdownButtonFormField<EmployeeRole>(
-                  value: _selectedRole,
+                  initialValue: _selectedRole,
                   decoration: InputDecoration(
                     labelText: 'الدور الوظيفي',
                     border: OutlineInputBorder(

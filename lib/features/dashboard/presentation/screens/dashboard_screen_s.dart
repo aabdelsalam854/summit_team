@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:summit_team/core/utils/alessamy_colors.dart';
+import 'package:summit_team/features/Employees/presentation/pages/employees_layout.dart';
 
-import 'package:summit_team/features/Employees/presentation/pages/employees_screen.dart';
 import 'package:summit_team/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/custom_drower.dart';
 import 'package:summit_team/features/home/presentation/screens/home_screen.dart';
@@ -39,7 +39,7 @@ class _PureFlutterDashboardState extends State<PureFlutterDashboard> {
             // ═══════════════════════════════════════
             // Custom Sidebar
             // ═══════════════════════════════════════
-            _buildSidebar(),
+            // _buildSidebar(),
 
             // ═══════════════════════════════════════
             // Content Area
@@ -60,7 +60,7 @@ class _PureFlutterDashboardState extends State<PureFlutterDashboard> {
                     const SizedBox.shrink(),
 
                   if (_visitedPages.contains(2))
-                    const ProfessionalEmployeesDashboard()
+                    const EmployeesLayout()
                   else
                     const SizedBox.shrink(),
 

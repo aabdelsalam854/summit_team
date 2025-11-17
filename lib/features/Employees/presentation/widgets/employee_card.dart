@@ -7,13 +7,13 @@ import 'package:summit_team/features/Employees/presentation/widgets/employee_for
 class EmployeeCard extends StatelessWidget {
   final Employee employee;
 
-  const EmployeeCard({Key? key, required this.employee}) : super(key: key);
+  const EmployeeCard({super.key, required this.employee});
 
   Color _getRoleColor(EmployeeRole role) {
     switch (role) {
       case EmployeeRole.admin:
         return Colors.red.shade700;
-      case EmployeeRole.manager:
+      case EmployeeRole.accountant:
         return Colors.blue.shade700;
       case EmployeeRole.employee:
         return Colors.green.shade700;
@@ -24,7 +24,7 @@ class EmployeeCard extends StatelessWidget {
     switch (role) {
       case EmployeeRole.admin:
         return Icons.admin_panel_settings;
-      case EmployeeRole.manager:
+      case EmployeeRole.accountant:
         return Icons.supervisor_account;
       case EmployeeRole.employee:
         return Icons.person;
@@ -34,10 +34,7 @@ class EmployeeCard extends StatelessWidget {
   void _showEditDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder: (dialogContext) => BlocProvider.value(
-        value: context.read<EmployeesCubit>(),
-        child: EmployeeFormDialog(employee: employee),
-      ),
+      builder: (dialogContext) => EmployeeFormDialog(employee: employee),
     );
   }
 
@@ -57,7 +54,7 @@ class EmployeeCard extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              context.read<EmployeesCubit>().deleteEmployee(employee.id);
+              // context.read<EmployeesCubit>().deleteEmployee(employee.id);
               Navigator.of(dialogContext).pop();
             },
             style: ElevatedButton.styleFrom(
@@ -175,7 +172,7 @@ class EmployeeCard extends StatelessWidget {
             _buildDetailRow(
               Icons.phone,
               'رقم الهاتف',
-              employee.phoneNumber,
+              employee.phone,
             ),
             const SizedBox(height: 12),
             _buildDetailRow(

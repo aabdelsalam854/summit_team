@@ -833,8 +833,7 @@ enum PropertyCategory {
 class PropertyOverviewWidget extends StatelessWidget {
   final PropertyModel property;
 
-  const PropertyOverviewWidget({Key? key, required this.property})
-    : super(key: key);
+  const PropertyOverviewWidget({super.key, required this.property});
 
   @override
   Widget build(BuildContext context) {
@@ -1061,7 +1060,7 @@ class PropertyOverviewWidget extends StatelessWidget {
 // ============= Example Usage =============
 
 class PropertyDetailsExample extends StatelessWidget {
-  const PropertyDetailsExample({Key? key}) : super(key: key);
+  const PropertyDetailsExample({super.key});
 
   @override
   Widget build(BuildContext context) {

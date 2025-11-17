@@ -5,7 +5,6 @@ import 'package:summit_team/config/routes/routes.dart';
 import 'package:summit_team/core/utils/alessamy_colors.dart';
 import 'package:summit_team/core/widget/custom_text_button_with_icon.dart';
 
-import 'package:summit_team/features/dashboard/presentation/widgets/custom_app_bar_sliever.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/dashboard_stats_card.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/detailed_income_chart.dart';
 import 'package:summit_team/features/home/presentation/screens/desktop_home_layout.dart';
@@ -180,7 +179,7 @@ class _MobileDashboardLayoutState extends State<MobileDashboardLayout> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            Container(
+            SizedBox(
               height: 100, // الارتفاع اللي انت عايزه
               width: double.infinity, // يمين وشمال
               child: DetailedIncomeChart(),

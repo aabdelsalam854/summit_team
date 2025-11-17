@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:summit_team/core/utils/alessamy_colors.dart';
 import 'package:summit_team/features/properties/data/models/property_model.dart';
 
@@ -336,7 +335,7 @@ class _ModernSearchFilterWidgetState extends State<ModernSearchFilterWidget> {
             return Column(
               children: [
                 // Visual Budget Bars
-                Container(
+                SizedBox(
                   height: 100,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -664,15 +663,15 @@ class _ModernSearchFilterWidgetState extends State<ModernSearchFilterWidget> {
 
     return ValueListenableBuilder<List<String>>(
       valueListenable: selectedExtras,
-      builder: (context, extras_list, child) {
+      builder: (context, extrasList, child) {
         return Wrap(
           spacing: 12,
           runSpacing: 12,
           children: extras.map((extra) {
-            final isSelected = extras_list.contains(extra['label']);
+            final isSelected = extrasList.contains(extra['label']);
             return GestureDetector(
               onTap: () {
-                final newList = List<String>.from(extras_list);
+                final newList = List<String>.from(extrasList);
                 if (isSelected) {
                   newList.remove(extra['label']);
                 } else {

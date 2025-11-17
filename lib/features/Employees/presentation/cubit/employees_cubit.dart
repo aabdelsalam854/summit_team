@@ -19,7 +19,7 @@ class EmployeesCubit extends Cubit<EmployeesState> {
       Employee(
         id: '1',
         name: 'أحمد محمد',
-        phoneNumber: '01012345678',
+        phone: '01012345678',
         address: 'القاهرة، مصر الجديدة',
         role: EmployeeRole.admin,
         createdAt: now.subtract(const Duration(days: 30)),
@@ -27,15 +27,15 @@ class EmployeesCubit extends Cubit<EmployeesState> {
       Employee(
         id: '2',
         name: 'فاطمة علي',
-        phoneNumber: '01123456789',
+        phone: '01123456789',
         address: 'الجيزة، المهندسين',
-        role: EmployeeRole.manager,
+        role: EmployeeRole.accountant,
         createdAt: now.subtract(const Duration(days: 25)),
       ),
       Employee(
         id: '3',
         name: 'محمود حسن',
-        phoneNumber: '01234567890',
+        phone: '01234567890',
         address: 'الإسكندرية، سموحة',
         role: EmployeeRole.employee,
         createdAt: now.subtract(const Duration(days: 20)),
@@ -43,15 +43,15 @@ class EmployeesCubit extends Cubit<EmployeesState> {
       Employee(
         id: '4',
         name: 'سارة أحمد',
-        phoneNumber: '01098765432',
+        phone: '01098765432',
         address: 'القاهرة، مدينة نصر',
-        role: EmployeeRole.manager,
+        role: EmployeeRole.accountant,
         createdAt: now.subtract(const Duration(days: 15)),
       ),
       Employee(
         id: '5',
         name: 'خالد عبدالله',
-        phoneNumber: '01156789012',
+        phone: '01156789012',
         address: 'الجيزة، الدقي',
         role: EmployeeRole.employee,
         createdAt: now.subtract(const Duration(days: 10)),
@@ -59,7 +59,7 @@ class EmployeesCubit extends Cubit<EmployeesState> {
       Employee(
         id: '6',
         name: 'مريم سعيد',
-        phoneNumber: '01267890123',
+        phone: '01267890123',
         address: 'القاهرة، التجمع الخامس',
         role: EmployeeRole.employee,
         createdAt: now.subtract(const Duration(days: 5)),
@@ -80,8 +80,9 @@ class EmployeesCubit extends Cubit<EmployeesState> {
     _currentFilter = role;
     // TODO: Implement filtering logic here
     await Future.delayed(const Duration(milliseconds: 500));
-    final filteredEmployees =
-        _employees.where((emp) => emp.role == role).toList();
+    final filteredEmployees = _employees
+        .where((emp) => emp.role == role)
+        .toList();
     emit(EmployeesLoaded(employees: filteredEmployees, filteredRole: role));
   }
 

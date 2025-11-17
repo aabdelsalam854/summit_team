@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:summit_team/features/Employees/presentation/models/employee.dart';
-import 'package:summit_team/features/Employees/presentation/cubit/employees_cubit.dart';
 import 'package:summit_team/features/Employees/presentation/widgets/employee_form_dialog.dart';
 
 class EmployeeCard extends StatelessWidget {

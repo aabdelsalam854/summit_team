@@ -4,8 +4,12 @@ import 'package:go_router/go_router.dart';
 import 'package:summit_team/config/routes/routes.dart';
 import 'package:summit_team/core/utils/alessamy_colors.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/dashboard_stats_card.dart';
+import 'package:summit_team/features/dashboard/presentation/widgets/detailed_income_chart.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/properties_table_widget.dart';
+import 'package:summit_team/features/home/presentation/screens/desktop_home_layout.dart';
+import 'package:summit_team/features/home/presentation/screens/mobile_home_layout.dart';
 import 'package:summit_team/features/properties/data/models/property_model.dart';
+import 'dr.dart' as property_stats;
 
 /// ---------------------------------------------------------------------------
 /// 📱 TabletDashboardLayout — تخطيط الداشبورد للتابلت
@@ -19,7 +23,29 @@ class TabletDashboardLayout extends StatefulWidget {
 
 class _TabletDashboardLayoutState extends State<TabletDashboardLayout> {
   final List<PropertyModel> _properties = [];
-
+  final Map<property_stats.PropertyType, property_stats.PropertyStats>
+  _propertyData = {
+    property_stats.PropertyType.villa: property_stats.PropertyStats(
+      available: 15,
+      rented: 8,
+      sold: 3,
+    ),
+    property_stats.PropertyType.apartment: property_stats.PropertyStats(
+      available: 25,
+      rented: 18,
+      sold: 7,
+    ),
+    property_stats.PropertyType.shop: property_stats.PropertyStats(
+      available: 10,
+      rented: 6,
+      sold: 2,
+    ),
+    property_stats.PropertyType.land: property_stats.PropertyStats(
+      available: 12,
+      rented: 4,
+      sold: 5,
+    ),
+  };
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,26 +88,118 @@ class _TabletDashboardLayoutState extends State<TabletDashboardLayout> {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            SliverToBoxAdapter(
-              child: SizedBox(height: 24.h),
-            ),
-
             // Stats Cards
+            SliverToBoxAdapter(child: _buildStatsCards(context)),
             SliverToBoxAdapter(
-              child: _buildStatsCards(context),
-            ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 14),
+                child: Row(
+                  children: [
+                    // Income Chart (الكارت الثالث)
+                    Expanded(
+                      child: Card(
+                        color: AlessamyColors.cardBackground,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: SizedBox(
+                            height: 480,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 400,
+                                  child: DetailedIncomeChart(),
+                                ),
+                                const SizedBox(height: 16),
+                                IncomeLegend(),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 16),
 
-            SliverToBoxAdapter(
-              child: SizedBox(height: 32.h),
+                    // Featured Properties (الكارت الرابع)
+                    Expanded(
+                      child: Card(
+                        color: AlessamyColors.cardBackground,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: SizedBox(
+                            height: 480,
+                            child: property_stats.PropertyStatsChart(
+                              propertyData: _propertyData,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-
-            // Properties Section
+            // SliverToBoxAdapter(child: Expanded(child: _buildPropertiesSection(context))),
+            // Properties Table (الكارت الخامس)
             SliverToBoxAdapter(
-              child: _buildPropertiesSection(context),
-            ),
-
-            SliverToBoxAdapter(
-              child: SizedBox(height: 32.h),
+              child: Padding(
+                padding: const EdgeInsets.all(14),
+                child: Expanded(
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    color: AlessamyColors.cardBackground,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: SizedBox(
+                        height: 480,
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'العقارات المميزة',
+                                  style: TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                    color: AlessamyColors.white,
+                                  ),
+                                ),
+                                TextButton(
+                                  onPressed: () {},
+                                  child: Text(
+                                    'عرض المزيد',
+                                    style: TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                      color: AlessamyColors.primaryGold,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Expanded(
+                              child: FeaturedPropertiesList(
+                                scrollDirection: Axis.horizontal,
+                                properties: getDemoProperties(),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
@@ -93,10 +211,7 @@ class _TabletDashboardLayoutState extends State<TabletDashboardLayout> {
         icon: const Icon(Icons.add),
         label: Text(
           'إضافة عقار',
-          style: TextStyle(
-            fontSize: 14.sp,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
         ),
       ),
     );
@@ -139,17 +254,25 @@ class _TabletDashboardLayoutState extends State<TabletDashboardLayout> {
             onTap: () {},
           ),
           ListTile(
-            leading: Icon(Icons.dashboard_customize, color: AlessamyColors.primaryGold),
+            leading: Icon(
+              Icons.dashboard_customize,
+              color: AlessamyColors.primaryGold,
+            ),
             title: Text(
               'الداشبورد',
               style: TextStyle(color: AlessamyColors.white),
             ),
             selected: true,
-            selectedTileColor: AlessamyColors.primaryGold.withValues(alpha: 0.1),
+            selectedTileColor: AlessamyColors.primaryGold.withValues(
+              alpha: 0.1,
+            ),
             onTap: () {},
           ),
           ListTile(
-            leading: Icon(Icons.real_estate_agent, color: AlessamyColors.textLight),
+            leading: Icon(
+              Icons.real_estate_agent,
+              color: AlessamyColors.textLight,
+            ),
             title: Text(
               'العقارات',
               style: TextStyle(color: AlessamyColors.textLight),
@@ -198,13 +321,15 @@ class _TabletDashboardLayoutState extends State<TabletDashboardLayout> {
           ),
           DashboardStatsCard(
             title: 'عقارات للبيع',
-            value: '${_properties.where((p) => p.purpose == PropertyPurpose.sale).length}',
+            value:
+                '${_properties.where((p) => p.purpose == PropertyPurpose.sale).length}',
             icon: Icons.sell,
             color: Colors.green,
           ),
           DashboardStatsCard(
             title: 'عقارات للإيجار',
-            value: '${_properties.where((p) => p.purpose == PropertyPurpose.rent).length}',
+            value:
+                '${_properties.where((p) => p.purpose == PropertyPurpose.rent).length}',
             icon: Icons.key,
             color: Colors.orange,
           ),
@@ -221,8 +346,8 @@ class _TabletDashboardLayoutState extends State<TabletDashboardLayout> {
 
   Widget _buildPropertiesSection(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 24.w),
-      padding: EdgeInsets.all(20.w),
+      margin: EdgeInsets.symmetric(horizontal: 24),
+      padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: AlessamyColors.cardBackground,
         borderRadius: BorderRadius.circular(16.r),
@@ -236,13 +361,13 @@ class _TabletDashboardLayoutState extends State<TabletDashboardLayout> {
           Text(
             'قائمة العقارات',
             style: TextStyle(
-              fontSize: 20.sp,
+              fontSize: 20,
               fontWeight: FontWeight.bold,
               color: AlessamyColors.white,
             ),
           ),
-          SizedBox(height: 20.h),
-          PropertiesTableWidget(properties: _properties),
+          SizedBox(height: 20),
+          PropertiesTableWidget(properties: getDemoProperties()),
         ],
       ),
     );

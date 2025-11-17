@@ -1,15 +1,22 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:summit_team/config/locale/app_localizations.dart';
 import 'package:summit_team/config/locale/keys_translate.dart';
+import 'package:summit_team/config/routes/routes.dart';
 
 import 'package:summit_team/core/utils/alessamy_colors.dart';
 import 'package:summit_team/features/dashboard/presentation/screens/desktop_dashboard_layout.dart';
+import 'package:summit_team/features/dashboard/presentation/widgets/custom_app_bar_sliever.dart';
 import 'package:summit_team/features/home/presentation/screens/search_view.dart';
 import 'package:summit_team/features/home/presentation/widgets/custom_app_bar_widget.dart';
+import 'package:summit_team/features/home/presentation/widgets/footer_widget.dart';
 
 import 'package:summit_team/features/home/presentation/widgets/search_filter_widget.dart';
 import 'package:summit_team/features/properties/data/models/property_model.dart';
+import 'package:summit_team/features/properties/presentation/widgets/property_card_widget.dart';
 
 /// ---------------------------------------------------------------------------
 /// 🟥 MobileHomeLayout — الصفحة الرئيسية للموبايل
@@ -83,10 +90,11 @@ class MobileHomeLayout extends StatelessWidget {
 
             // أحدث العروض - Grid
             SliverToBoxAdapter(
-              child: LatestPropertiesGrid(properties: _getDemoProperties()),
+              child: LatestPropertiesGrid(
+                
+                
+                properties: _getDemoProperties()),
             ),
-
-            SliverToBoxAdapter(child: SizedBox(height: 48)),
 
             SliverToBoxAdapter(child: SizedBox(height: 48)),
 
@@ -219,43 +227,54 @@ class MobileHomeLayout extends StatelessWidget {
 // /// 🟦 FeaturedPropertiesList — قائمة العقارات المميزة (أفقية)
 // /// ---------------------------------------------------------------------------
 
-// class FeaturedPropertiesList extends StatelessWidget {
-//   const FeaturedPropertiesList({super.key, required this.properties});
+class FeaturedPropertiesList extends StatelessWidget {
+  const FeaturedPropertiesList({super.key, required this.properties, this.scrollDirection});
 
-//   final List<PropertyModel> properties;
+  final List<PropertyModel> properties;
+  final Axis? scrollDirection;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     final featured = properties.where((p) => p.isFeatured).toList();
+  @override
+  Widget build(BuildContext context) {
+    final featured = properties.where((p) => p.isFeatured).toList();
 
-//     return SizedBox(
-//       height: 380,
-//       child: ScrollConfiguration(
-//         behavior: MouseScrollBehavior(),
-//         child: ListView.separated(
-//           scrollDirection: Axis.vertical,
-//           padding: EdgeInsets.symmetric(horizontal: 12),
-//           itemCount: featured.length,
-//           separatorBuilder: (context, index) => SizedBox(width: 10),
-//           itemBuilder: (context, index) {
-//             return SizedBox(
-//               width: 260,
-//               child: Padding(
-//                 padding: const EdgeInsets.all(8.0),
-//                 child: PropertyCardWidget(
-//                   property: featured[index],
-//                   onTap: () {
-//                     context.push('${Routes.kPropertyDetails}/${featured[index].id}', extra: featured[index]);
-//                   },
-//                 ),
-//               ),
-//             );
-//           },
-//         ),
-//       ),
-//     );
-//   }
-// }
+    return SizedBox(
+      height: 380,
+      child: ScrollConfiguration(
+        behavior: const MaterialScrollBehavior().copyWith(
+          scrollbars: false,
+          dragDevices: {
+            PointerDeviceKind.mouse,
+            PointerDeviceKind.touch,
+            PointerDeviceKind.trackpad,
+          },
+        ),
+        child: ListView.separated(
+          scrollDirection: scrollDirection ?? Axis.vertical,
+          padding: EdgeInsets.symmetric(horizontal: 12),
+          itemCount: featured.length,
+          separatorBuilder: (context, index) => SizedBox(width: 10),
+          itemBuilder: (context, index) {
+            return SizedBox(
+              width: 260,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: PropertyCardWidget(
+                  property: featured[index],
+                  onTap: () {
+                    context.push(
+                      '${Routes.kPropertyDetails}/${featured[index].id}',
+                      extra: featured[index],
+                    );
+                  },
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
 
 // /// يجعل ListView تستجيب للـ mouse wheel على الويب والديسكتوب
 // class MouseScrollBehavior extends ScrollBehavior {

@@ -1,6 +1,8 @@
 import 'package:summit_team/core/utils/alessamy_colors.dart';
-import 'package:summit_team/features/dashboard/presentation/screens/desktop_dashboard_layout.dart';
+
+import 'package:summit_team/features/dashboard/presentation/widgets/custom_app_bar_sliever.dart';
 import 'package:summit_team/features/home/presentation/screens/search_view.dart';
+import 'package:summit_team/features/home/presentation/widgets/footer_widget.dart';
 
 import 'package:summit_team/features/home/presentation/widgets/search_filter_widget.dart';
 import 'package:summit_team/features/properties/data/models/property_model.dart';

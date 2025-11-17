@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:summit_team/core/utils/alessamy_colors.dart';
 
 /// ---------------------------------------------------------------------------
@@ -54,7 +54,7 @@ class DashboardStatsCard extends StatelessWidget {
           Text(
             value,
             style: TextStyle(
-              fontSize: 32,
+              fontSize: 20,
               fontWeight: FontWeight.bold,
               color: AlessamyColors.white,
             ),

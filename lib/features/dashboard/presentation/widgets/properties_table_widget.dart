@@ -74,7 +74,7 @@ class PropertiesTableWidget extends StatelessWidget {
       label: Text(
         label,
         style: TextStyle(
-          fontSize: 14.sp,
+          fontSize: 14,
           fontWeight: FontWeight.bold,
           color: AlessamyColors.white,
         ),
@@ -89,7 +89,7 @@ class PropertiesTableWidget extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            fontSize: 13.sp,
+            fontSize: 13,
             color: AlessamyColors.textLight,
           ),
           overflow: TextOverflow.ellipsis,
@@ -123,7 +123,7 @@ class PropertiesTableWidget extends StatelessWidget {
 
     return DataCell(
       Container(
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
           color: bgColor,
           borderRadius: BorderRadius.circular(8.r),
@@ -131,7 +131,7 @@ class PropertiesTableWidget extends StatelessWidget {
         child: Text(
           label,
           style: TextStyle(
-            fontSize: 12.sp,
+            fontSize: 12,
             fontWeight: FontWeight.bold,
             color: textColor,
           ),
@@ -162,7 +162,7 @@ class PropertiesTableWidget extends StatelessWidget {
             },
             icon: Icon(
               Icons.edit,
-              size: 20.sp,
+              size: 20,
               color: Colors.blue,
             ),
             tooltip: 'تعديل',
@@ -174,7 +174,7 @@ class PropertiesTableWidget extends StatelessWidget {
             },
             icon: Icon(
               Icons.delete,
-              size: 20.sp,
+              size: 20,
               color: Colors.red,
             ),
             tooltip: 'حذف',
@@ -187,19 +187,19 @@ class PropertiesTableWidget extends StatelessWidget {
   Widget _buildEmptyState() {
     return Center(
       child: Padding(
-        padding: EdgeInsets.all(48.w),
+        padding: EdgeInsets.all(48),
         child: Column(
           children: [
             Icon(
               Icons.home_work_outlined,
-              size: 80.sp,
+              size: 80,
               color: AlessamyColors.textLight.withValues(alpha: 0.5),
             ),
-            SizedBox(height: 16.h),
+            SizedBox(height: 16),
             Text(
               'لا توجد عقارات بعد',
               style: TextStyle(
-                fontSize: 20.sp,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: AlessamyColors.textLight,
               ),
@@ -232,7 +232,7 @@ class PropertiesTableWidget extends StatelessWidget {
           'تأكيد الحذف',
           style: TextStyle(
             color: AlessamyColors.white,
-            fontSize: 20.sp,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -240,7 +240,7 @@ class PropertiesTableWidget extends StatelessWidget {
           'هل أنت متأكد من حذف العقار "${property.title}"؟',
           style: TextStyle(
             color: AlessamyColors.textLight,
-            fontSize: 15.sp,
+            fontSize: 15,
           ),
         ),
         actions: [
@@ -250,7 +250,7 @@ class PropertiesTableWidget extends StatelessWidget {
               'إلغاء',
               style: TextStyle(
                 color: AlessamyColors.textLight,
-                fontSize: 15.sp,
+                fontSize: 15,
               ),
             ),
           ),
@@ -266,7 +266,7 @@ class PropertiesTableWidget extends StatelessWidget {
             child: Text(
               'حذف',
               style: TextStyle(
-                fontSize: 15.sp,
+                fontSize: 15,
                 fontWeight: FontWeight.bold,
               ),
             ),

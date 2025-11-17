@@ -1,17 +1,17 @@
 import 'dart:developer';
 import 'dart:ui';
 import 'package:summit_team/core/utils/alessamy_colors.dart';
-import 'package:summit_team/features/dashboard/presentation/screens/desktop_dashboard_layout.dart';
-import 'package:summit_team/features/home/presentation/widgets/custom_app_bar_widget.dart';
+import 'package:summit_team/features/dashboard/presentation/widgets/custom_app_bar_sliever.dart';
+
+import 'package:summit_team/features/home/presentation/widgets/footer_widget.dart';
 import 'package:summit_team/features/home/presentation/widgets/search.dart';
-import 'package:summit_team/features/home/presentation/widgets/search_filter_widget.dart';
+
 import 'package:summit_team/features/properties/data/models/property_model.dart';
 import 'package:summit_team/features/properties/presentation/widgets/property_card_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:summit_team/config/locale/app_localizations.dart';
 import 'package:summit_team/config/locale/keys_translate.dart';
-
 
 class DesktopHomes extends StatelessWidget {
   const DesktopHomes({super.key});
@@ -26,14 +26,14 @@ class DesktopHomes extends StatelessWidget {
       body: SafeArea(
         child: Row(
           children: [
-                 Expanded(
-                  flex: 1,
-                   child: ModernSearchFilterWidget(
-                     onSearch: (filter) {
-                       debugPrint('Desktop Search: $filter');
-                     },
-                   ),
-                 ),
+            Expanded(
+              flex: 1,
+              child: ModernSearchFilterWidget(
+                onSearch: (filter) {
+                  debugPrint('Desktop Search: $filter');
+                },
+              ),
+            ),
 
             Expanded(
               flex: 5,
@@ -41,58 +41,32 @@ class DesktopHomes extends StatelessWidget {
                 slivers: [
                   CustomAppBarSliever(),
                   SliverToBoxAdapter(child: SizedBox(height: 40)),
-              
-                  // Search Filter + Quick Stats
-                  // SliverToBoxAdapter(
-                  //   child: Padding(
-                  //     padding: const EdgeInsets.symmetric(horizontal: 20),
-                  //     child: SearchFilterWidget(
-                  //       onSearch: (filter) {
-                  //         debugPrint('Desktop Search: $filter');
-                  //       },
-                  //     ),
-                  //   ),
-                  // ),
-              
+
                   SliverToBoxAdapter(child: SizedBox(height: 48)),
-              
-                  // // العقارات المميزة - Header
-                 
-                  // SliverToBoxAdapter(child: SizedBox(height: 24)),
-              
-                  // // العقارات المميزة - القائمة
-                  // SliverToBoxAdapter(
-                  //   child: FeaturedPropertiesWidget(
-                  //     properties: _getDemoProperties()
-                  //         .where((p) => p.isFeatured)
-                  //         .toList(),
-                  //   ),
-                  // ),
-              
-                  // SliverToBoxAdapter(child: SizedBox(height: 48)),
-              
+
                   // أحدث العروض - Header
                   SliverToBoxAdapter(
                     child: SectionHeaderWidget(
                       title: l10n.translate(KeysTranslate.sectionLatest),
-                      subtitle: l10n.translate(KeysTranslate.sectionLatestSubtitle),
+                      subtitle: l10n.translate(
+                        KeysTranslate.sectionLatestSubtitle,
+                      ),
                       onViewAll: () {},
                     ),
                   ),
-              
+
                   SliverToBoxAdapter(child: SizedBox(height: 24)),
-              
-                  // أحدث العروض - Grid
+
                   SliverToBoxAdapter(
-                    child: LatestPropertiesGrid(properties: _getDemoProperties()),
+                    child: LatestPropertiesGrid(
+                      properties: _getDemoProperties(),
+                    ),
                   ),
-              
+
                   SliverToBoxAdapter(child: SizedBox(height: 48)),
-              
-                  // Stats Section
-                  // SliverToBoxAdapter(child: _buildStatsSection(context)),
+
                   SliverToBoxAdapter(child: SizedBox(height: 48)),
-              
+
                   // Footer
                   SliverToBoxAdapter(child: FooterWidget()),
                 ],
@@ -103,59 +77,6 @@ class DesktopHomes extends StatelessWidget {
       ),
     );
   }
-
-  // Widget _buildFooter(BuildContext context) {
-  //   return Container(
-  //     padding: EdgeInsets.symmetric(horizontal: 48.w, vertical: 40),
-  //     color: AlessamyColors.black,
-  //     child: Column(
-  //       children: [
-  //         Row(
-  //           mainAxisAlignment: MainAxisAlignment.center,
-  //           children: [
-  //             _buildFooterIcon(Icons.facebook),
-  //             SizedBox(width: 28),
-  //             _buildFooterIcon(Icons.chat),
-  //             SizedBox(width: 28),
-  //             _buildFooterIcon(Icons.phone),
-  //             SizedBox(width: 28),
-  //             _buildFooterIcon(Icons.email),
-  //           ],
-  //         ),
-  //         SizedBox(height: 28),
-  //         Container(
-  //           height: 1,
-  //           width: 220.w,
-  //           color: AlessamyColors.primaryGold.withValues(alpha: 0.3),
-  //         ),
-  //         SizedBox(height: 28),
-  //         Text(
-  //           AppLocalizations.of(
-  //             context,
-  //           )!.translate(KeysTranslate.rightsReserved),
-  //           style: TextStyle(
-  //             fontSize: 15,
-  //             color: AlessamyColors.white.withValues(alpha: 0.7),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  // Widget _buildFooterIcon(IconData icon) {
-  //   return Container(
-  //     padding: EdgeInsets.all(14),
-  //     decoration: BoxDecoration(
-  //       color: AlessamyColors.primaryGold.withValues(alpha: 0.1),
-  //       borderRadius: BorderRadius.circular(50),
-  //       border: Border.all(
-  //         color: AlessamyColors.primaryGold.withValues(alpha: 0.3),
-  //       ),
-  //     ),
-  //     child: Icon(icon, color: AlessamyColors.primaryGold, size: 26),
-  //   );
-  // }
 
   List<PropertyModel> _getDemoProperties() {
     return [
@@ -4491,60 +4412,4 @@ class LatestPropertiesGrid extends StatelessWidget {
   }
 }
 
-class FooterWidget extends StatelessWidget {
-  const FooterWidget({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 48.w, vertical: 40),
-      color: AlessamyColors.black,
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _buildFooterIcon(Icons.facebook),
-              SizedBox(width: 28),
-              _buildFooterIcon(Icons.chat),
-              SizedBox(width: 28),
-              _buildFooterIcon(Icons.phone),
-              SizedBox(width: 28),
-              _buildFooterIcon(Icons.email),
-            ],
-          ),
-          SizedBox(height: 28),
-          Container(
-            height: 1,
-            width: 220.w,
-            color: AlessamyColors.primaryGold.withValues(alpha: 0.3),
-          ),
-          SizedBox(height: 28),
-          Text(
-            AppLocalizations.of(
-              context,
-            )!.translate(KeysTranslate.rightsReserved),
-            style: TextStyle(
-              fontSize: 15,
-              color: AlessamyColors.white.withValues(alpha: 0.7),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildFooterIcon(IconData icon) {
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: AlessamyColors.primaryGold.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(50),
-        border: Border.all(
-          color: AlessamyColors.primaryGold.withValues(alpha: 0.3),
-        ),
-      ),
-      child: Icon(icon, color: AlessamyColors.primaryGold, size: 26),
-    );
-  }
-}

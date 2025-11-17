@@ -3,9 +3,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:summit_team/config/routes/routes.dart';
 import 'package:summit_team/core/utils/alessamy_colors.dart';
+import 'package:summit_team/core/widget/custom_text_button_with_icon.dart';
+
+import 'package:summit_team/features/dashboard/presentation/widgets/custom_app_bar_sliever.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/dashboard_stats_card.dart';
+import 'package:summit_team/features/dashboard/presentation/widgets/detailed_income_chart.dart';
+import 'package:summit_team/features/home/presentation/screens/desktop_home_layout.dart';
+import 'package:summit_team/features/home/presentation/screens/mobile_home_layout.dart';
 import 'package:summit_team/features/properties/data/models/property_model.dart';
-import 'package:summit_team/features/properties/presentation/widgets/property_card_widget.dart';
+
+import 'dr.dart' as property_stats;
 
 /// ---------------------------------------------------------------------------
 /// 📱 MobileDashboardLayout — تخطيط الداشبورد للموبايل
@@ -19,7 +26,29 @@ class MobileDashboardLayout extends StatefulWidget {
 
 class _MobileDashboardLayoutState extends State<MobileDashboardLayout> {
   final List<PropertyModel> _properties = [];
-
+  final Map<property_stats.PropertyType, property_stats.PropertyStats>
+  _propertyData = {
+    property_stats.PropertyType.villa: property_stats.PropertyStats(
+      available: 15,
+      rented: 8,
+      sold: 3,
+    ),
+    property_stats.PropertyType.apartment: property_stats.PropertyStats(
+      available: 25,
+      rented: 18,
+      sold: 7,
+    ),
+    property_stats.PropertyType.shop: property_stats.PropertyStats(
+      available: 10,
+      rented: 6,
+      sold: 2,
+    ),
+    property_stats.PropertyType.land: property_stats.PropertyStats(
+      available: 12,
+      rented: 4,
+      sold: 5,
+    ),
+  };
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +59,7 @@ class _MobileDashboardLayoutState extends State<MobileDashboardLayout> {
         title: Text(
           'لوحة التحكم',
           style: TextStyle(
-            fontSize: 18.sp,
+            fontSize: 18,
             fontWeight: FontWeight.bold,
             color: AlessamyColors.white,
           ),
@@ -49,71 +78,178 @@ class _MobileDashboardLayoutState extends State<MobileDashboardLayout> {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            SliverToBoxAdapter(child: SizedBox(height: 16.h)),
-
-            // Stats Cards
-            SliverToBoxAdapter(child: _buildStatsCards(context)),
-
-            SliverToBoxAdapter(child: SizedBox(height: 24.h)),
-
-            // Properties Section Header
+            // Greeting & Buttons
             SliverToBoxAdapter(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                padding: const EdgeInsets.all(14),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'العقارات',
+                      'مرحباً بك في لوحة التحكم',
                       style: TextStyle(
-                        fontSize: 18.sp,
+                        fontSize: 28,
                         fontWeight: FontWeight.bold,
                         color: AlessamyColors.white,
                       ),
                     ),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'عرض الكل',
-                        style: TextStyle(
-                          fontSize: 13.sp,
-                          color: AlessamyColors.primaryGold,
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: CustomButtonWithIcon(
+                            arrowIconRight: true,
+                            textColor: Colors.white,
+                            height: 60,
+                            text: "Export Excel",
+                            onPressed: () {},
+                            icon: Icons.table_chart_rounded,
+                            buttonType: ButtonType.outlined,
+                            arrowIconLeft: true,
+                          ),
                         ),
-                      ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: CustomButtonWithIcon(
+                            arrowIconRight: true,
+                            textColor: Colors.white,
+                            height: 60,
+                            text: "إضافة عقار جديد",
+                            onPressed: () => context.push(Routes.kPropertyForm),
+                            icon: Icons.arrow_circle_down_rounded,
+                            buttonType: ButtonType.outlined,
+                            arrowIconLeft: true,
+                          ),
+                        ),
+                      ],
                     ),
+                    const SizedBox(height: 24),
                   ],
                 ),
               ),
             ),
 
-            SliverToBoxAdapter(child: SizedBox(height: 12.h)),
+            // Stats Cards
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 14),
+                child: Card(
+                  color: AlessamyColors.cardBackground,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: _buildStatsCards(context),
+                  ),
+                ),
+              ),
+            ),
+            const SliverToBoxAdapter(child: SizedBox(height: 16)),
 
-            // Properties List
-            _properties.isEmpty
-                ? SliverToBoxAdapter(child: _buildEmptyState())
-                : SliverPadding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
-                    sliver: SliverList(
-                      delegate: SliverChildBuilderDelegate((context, index) {
-                        return Padding(
-                          padding: EdgeInsets.only(bottom: 16.h),
-                          child: PropertyCardWidget(
-                            property: _properties[index],
-                            onTap: () {
-                              // TODO: Navigate to property details
-                            },
-                          ),
-                        );
-                      }, childCount: _properties.length),
+            // Property Stats Chart
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 14),
+                child: Card(
+                  color: AlessamyColors.cardBackground,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: property_stats.PropertyStatsChart(
+                      propertyData: _propertyData,
                     ),
                   ),
-
-            SliverToBoxAdapter(
-              child: SizedBox(height: 80.h), // Space for FAB
+                ),
+              ),
             ),
+            const SliverToBoxAdapter(child: SizedBox(height: 16)),
+
+            // Income Chart
+      SliverToBoxAdapter(
+  child: Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 14),
+    child: Card(
+      color: AlessamyColors.cardBackground,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Container(
+              height: 100, // الارتفاع اللي انت عايزه
+              width: double.infinity, // يمين وشمال
+              child: DetailedIncomeChart(),
+            ),
+            const SizedBox(height: 16),
+            IncomeLegend(),
           ],
         ),
       ),
+    ),
+  ),
+),
+
+            const SliverToBoxAdapter(child: SizedBox(height: 16)),
+
+            // Featured Properties
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 14),
+                child: Card(
+                  color: AlessamyColors.cardBackground,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'العقارات المميزة',
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                                color: AlessamyColors.white,
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                'عرض المزيد',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: AlessamyColors.primaryGold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 12),
+                        FeaturedPropertiesList(
+                          scrollDirection: Axis.horizontal,
+                          
+                          properties: getDemoProperties()),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const SliverToBoxAdapter(child: SizedBox(height: 16)),
+          ],
+        ),
+      ),
+
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.push(Routes.kPropertyForm),
         backgroundColor: AlessamyColors.primaryGold,
@@ -240,7 +376,7 @@ class _MobileDashboardLayoutState extends State<MobileDashboardLayout> {
 
   Widget _buildStatsCards(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      padding: EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         children: [
           Row(
@@ -253,7 +389,7 @@ class _MobileDashboardLayoutState extends State<MobileDashboardLayout> {
                   color: Colors.blue,
                 ),
               ),
-              SizedBox(width: 12.w),
+              SizedBox(width: 12),
               Expanded(
                 child: DashboardStatsCard(
                   title: 'عقارات للبيع',
@@ -265,7 +401,7 @@ class _MobileDashboardLayoutState extends State<MobileDashboardLayout> {
               ),
             ],
           ),
-          SizedBox(height: 12.h),
+          SizedBox(height: 12),
           Row(
             children: [
               Expanded(
@@ -277,7 +413,7 @@ class _MobileDashboardLayoutState extends State<MobileDashboardLayout> {
                   color: Colors.orange,
                 ),
               ),
-              SizedBox(width: 12.w),
+              SizedBox(width: 12),
               Expanded(
                 child: DashboardStatsCard(
                   title: 'عقارات مميزة',

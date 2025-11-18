@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:summit_team/features/resposive/utils/size_config.dart';
+import 'package:summit_team/core/utils/size_config.dart';
 
 abstract class AppStyles {
   static TextStyle styleRegular16(context) {
     return TextStyle(
       color: const Color(0xFF064060),
       fontSize: getResponsiveFontSize(context, fontSize: 16),
-      fontFamily: 'Montserrat',
+      fontFamily: 'NotoKufiArabic',
       fontWeight: FontWeight.w400,
     );
   }
@@ -15,7 +15,7 @@ abstract class AppStyles {
     return TextStyle(
       color: const Color(0xFF4EB7F2),
       fontSize: getResponsiveFontSize(context, fontSize: 16),
-      fontFamily: 'Montserrat',
+      fontFamily: 'NotoKufiArabic',
       fontWeight: FontWeight.w700,
     );
   }
@@ -24,7 +24,7 @@ abstract class AppStyles {
     return TextStyle(
       color: const Color(0xFF064061),
       fontSize: getResponsiveFontSize(context, fontSize: 16),
-      fontFamily: 'Montserrat',
+      fontFamily: 'NotoKufiArabic',
       fontWeight: FontWeight.w500,
     );
   }
@@ -33,7 +33,7 @@ abstract class AppStyles {
     return TextStyle(
       color: const Color(0xFFFFFFFF),
       fontSize: getResponsiveFontSize(context, fontSize: 20),
-      fontFamily: 'Montserrat',
+      fontFamily: 'NotoKufiArabic',
       fontWeight: FontWeight.w500,
     );
   }
@@ -42,7 +42,7 @@ abstract class AppStyles {
     return TextStyle(
       color: const Color(0xFF064061),
       fontSize: getResponsiveFontSize(context, fontSize: 16),
-      fontFamily: 'Montserrat',
+      fontFamily: 'NotoKufiArabic',
       fontWeight: FontWeight.w600,
     );
   }
@@ -51,7 +51,7 @@ abstract class AppStyles {
     return TextStyle(
       color: const Color(0xFF064061),
       fontSize: getResponsiveFontSize(context, fontSize: 20),
-      fontFamily: 'Montserrat',
+      fontFamily: 'NotoKufiArabic',
       fontWeight: FontWeight.w600,
     );
   }
@@ -60,7 +60,7 @@ abstract class AppStyles {
     return TextStyle(
       color: const Color(0xFFAAAAAA),
       fontSize: getResponsiveFontSize(context, fontSize: 12),
-      fontFamily: 'Montserrat',
+      fontFamily: 'NotoKufiArabic',
       fontWeight: FontWeight.w400,
     );
   }
@@ -69,7 +69,7 @@ abstract class AppStyles {
     return TextStyle(
       color: const Color(0xFF4EB7F2),
       fontSize: getResponsiveFontSize(context, fontSize: 24),
-      fontFamily: 'Montserrat',
+      fontFamily: 'NotoKufiArabic',
       fontWeight: FontWeight.w600,
     );
   }
@@ -78,7 +78,7 @@ abstract class AppStyles {
     return TextStyle(
       color: const Color(0xFFAAAAAA),
       fontSize: getResponsiveFontSize(context, fontSize: 14),
-      fontFamily: 'Montserrat',
+      fontFamily: 'NotoKufiArabic',
       fontWeight: FontWeight.w400,
     );
   }
@@ -87,7 +87,7 @@ abstract class AppStyles {
     return TextStyle(
       color: const Color(0xFFFFFFFF),
       fontSize: getResponsiveFontSize(context, fontSize: 18),
-      fontFamily: 'Montserrat',
+      fontFamily: 'NotoKufiArabic',
       fontWeight: FontWeight.w600,
     );
   }

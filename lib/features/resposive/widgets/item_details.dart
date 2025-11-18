@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:summit_team/features/resposive/models/item_details_model.dart';
-import 'package:summit_team/features/resposive/utils/app_styles.dart';
+import 'package:summit_team/core/utils/app_styles.dart';
 
 class ItemDetails extends StatelessWidget {
   const ItemDetails({super.key, required this.itemDetailsModel});

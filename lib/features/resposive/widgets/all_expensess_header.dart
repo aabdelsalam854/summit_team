@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:summit_team/features/resposive/utils/app_styles.dart';
+import 'package:summit_team/core/utils/app_styles.dart';
 import 'package:summit_team/features/resposive/widgets/range_options.dart';
 
 class AllExpensessHeader extends StatelessWidget {

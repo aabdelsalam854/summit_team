@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:summit_team/features/resposive/models/all_expensess_item_model.dart';
-import 'package:summit_team/features/resposive/utils/app_images.dart';
+import 'package:summit_team/core/utils/app_images.dart';
 import 'package:summit_team/features/resposive/widgets/all_expenssess_item.dart';
 
 class AllExpensessItemsListView extends StatefulWidget {

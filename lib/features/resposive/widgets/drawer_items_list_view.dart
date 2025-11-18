@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:summit_team/features/resposive/models/drawer_item_model.dart';
-import 'package:summit_team/features/resposive/utils/app_images.dart';
+import 'package:summit_team/core/utils/app_images.dart';
 import 'package:summit_team/features/resposive/widgets/drawer_item.dart';
 
 class DrawerItemsListView extends StatefulWidget {

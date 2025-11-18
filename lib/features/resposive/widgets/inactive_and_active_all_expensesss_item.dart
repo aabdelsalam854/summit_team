@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:summit_team/features/resposive/models/all_expensess_item_model.dart';
-import 'package:summit_team/features/resposive/utils/app_styles.dart';
+import 'package:summit_team/core/utils/app_styles.dart';
 import 'package:summit_team/features/resposive/widgets/all_expensess_item_header.dart';
 
 class InActiveAllExpensessItem extends StatelessWidget {

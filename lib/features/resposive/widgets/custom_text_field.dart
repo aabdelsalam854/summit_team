@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:summit_team/features/resposive/utils/app_styles.dart';
+import 'package:summit_team/core/utils/app_styles.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({super.key, required this.hint});

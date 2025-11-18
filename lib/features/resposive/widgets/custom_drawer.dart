@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:summit_team/features/resposive/models/drawer_item_model.dart';
 import 'package:summit_team/features/resposive/models/user_info_model.dart';
-import 'package:summit_team/features/resposive/utils/app_images.dart';
+import 'package:summit_team/core/utils/app_images.dart';
 import 'package:summit_team/features/resposive/widgets/active_and_inactive_item.dart';
 import 'package:summit_team/features/resposive/widgets/drawer_items_list_view.dart';
 import 'package:summit_team/features/resposive/widgets/user_info_list_tile.dart';

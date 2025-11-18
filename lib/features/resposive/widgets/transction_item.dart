@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:summit_team/features/resposive/models/transction_model.dart';
-import 'package:summit_team/features/resposive/utils/app_styles.dart';
+import 'package:summit_team/core/utils/app_styles.dart';
 
 class TransctionItem extends StatelessWidget {
   const TransctionItem({super.key, required this.transctionModel});

@@ -4,7 +4,7 @@ import 'package:summit_team/features/resposive/models/user_info_model.dart';
 
 
 
-import 'package:summit_team/features/resposive/utils/app_styles.dart';
+import 'package:summit_team/core/utils/app_styles.dart';
 
 class UserInfoListTile extends StatelessWidget {
   const UserInfoListTile({super.key, required this.userInfoModel});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:summit_team/features/resposive/utils/app_images.dart';
-import 'package:summit_team/features/resposive/utils/app_styles.dart';
+import 'package:summit_team/core/utils/app_images.dart';
+import 'package:summit_team/core/utils/app_styles.dart';
 
 class MyCard extends StatelessWidget {
   const MyCard({super.key});

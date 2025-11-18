@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:summit_team/features/resposive/utils/app_styles.dart';
+import 'package:summit_team/core/utils/app_styles.dart';
 import 'package:summit_team/features/resposive/widgets/custom_text_field.dart';
 
 class TitleTextField extends StatelessWidget {

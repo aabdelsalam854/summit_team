@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:summit_team/features/resposive/utils/size_config.dart';
+import 'package:summit_team/core/utils/size_config.dart';
 import 'package:summit_team/features/resposive/widgets/detailed_income_chart.dart';
 import 'package:summit_team/features/resposive/widgets/income_chart.dart';
 import 'package:summit_team/features/resposive/widgets/income_details.dart';

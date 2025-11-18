@@ -11,8 +11,8 @@
 //   @override
 //   Widget build(BuildContext context) {
 //     return Container(
-//       width: 100.w,
-//       height: 70.h,
+//       width: 100,
+//       height: 70,
 //       alignment: Alignment.bottomCenter,
 //       decoration: BoxDecoration(
 //         image: DecorationImage(
@@ -21,23 +21,23 @@
 //         ),
 //       ),
 //       child: Container(
-//         width: 100.w,
-//         height: 26.h,
-//         padding: EdgeInsets.all(4.r),
+//         width: 100,
+//         height: 26,
+//         padding: EdgeInsets.all(4),
 //         decoration: BoxDecoration(
 //           color: AppColors.white,
 //           borderRadius: BorderRadius.vertical(
-//             top: Radius.circular(3.h),
+//             top: Radius.circular(3),
 //           ),
 //         ),
 //         child: Column(
 //           children: [
-//             SizedBox(height: 3.h),
+//             SizedBox(height: 3),
 //             Text(
 //               model.title.tr,
 //               style: Theme.of(context).textTheme.headlineLarge,
 //             ),
-//             SizedBox(height: 3.h),
+//             SizedBox(height: 3),
 //             Text(
 //               model.body.tr,
 //               textAlign: TextAlign.center,

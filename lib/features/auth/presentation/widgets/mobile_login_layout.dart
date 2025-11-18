@@ -6,7 +6,6 @@ import 'package:summit_team/features/auth/presentation/widgets/custom_text_field
 import 'package:summit_team/features/auth/presentation/widgets/decorative_circle_widget.dart';
 import 'package:summit_team/features/auth/presentation/widgets/login_header_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MobileLoginLayout extends StatefulWidget {
   const MobileLoginLayout({super.key});
@@ -53,8 +52,8 @@ class _MobileLoginLayoutState extends State<MobileLoginLayout> {
 
             // العنصر الديكوري المتحرك
             Positioned(
-              top: -50.h,
-              left: -50.w,
+              top: -50,
+              left: -50,
               child: AnimatedBuilder(
                 animation:
                     context.animationController ??
@@ -68,7 +67,7 @@ class _MobileLoginLayoutState extends State<MobileLoginLayout> {
                     child: Transform.scale(
                       scale: scale,
                       child: DecorativeCircleWidget(
-                        size: 250.r,
+                        size: 250,
                         color: AppColors.primary,
                         opacity: 0.8,
                       ),
@@ -81,7 +80,7 @@ class _MobileLoginLayoutState extends State<MobileLoginLayout> {
             // المحتوى الرئيسي
             Center(
               child: SingleChildScrollView(
-                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                 child: FadeTransition(
                   opacity:
                       context.fadeAnimation ?? const AlwaysStoppedAnimation(1),
@@ -109,20 +108,20 @@ class _MobileLoginLayoutState extends State<MobileLoginLayout> {
     return Card(
       elevation: 10,
       color: Colors.white.withValues(alpha: 0.08),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.r)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Padding(
-        padding: EdgeInsets.all(20.w),
+        padding: EdgeInsets.all(20),
         child: Form(
           key: _formKey,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SizedBox(height: 20.h),
+              SizedBox(height: 20),
 
               // Header
               const LoginHeaderWidget(),
 
-              SizedBox(height: 32.h),
+              SizedBox(height: 32),
 
               // Email
               AnimatedAuthFieldWidget(
@@ -145,7 +144,7 @@ class _MobileLoginLayoutState extends State<MobileLoginLayout> {
                 ),
               ),
 
-              SizedBox(height: 16.h),
+              SizedBox(height: 16),
 
               // Password
               AnimatedAuthFieldWidget(
@@ -168,7 +167,7 @@ class _MobileLoginLayoutState extends State<MobileLoginLayout> {
                 ),
               ),
 
-              SizedBox(height: 20.h),
+              SizedBox(height: 20),
 
               // Login Button
               AnimatedAuthFieldWidget(
@@ -178,10 +177,10 @@ class _MobileLoginLayoutState extends State<MobileLoginLayout> {
                   builder: (context, isLoading, child) {
                     return Container(
                       width: double.infinity,
-                      height: 48.h,
+                      height: 48,
                       decoration: BoxDecoration(
                         gradient: AppColors.goldGradient,
-                        borderRadius: BorderRadius.circular(12.r),
+                        borderRadius: BorderRadius.circular(12),
                       ),
                       child: ElevatedButton(
                         onPressed: isLoading ? null : _handleLogin,
@@ -189,7 +188,7 @@ class _MobileLoginLayoutState extends State<MobileLoginLayout> {
                           backgroundColor: Colors.transparent,
                           shadowColor: Colors.transparent,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12.r),
+                            borderRadius: BorderRadius.circular(12),
                           ),
                         ),
                         child: isLoading
@@ -200,7 +199,7 @@ class _MobileLoginLayoutState extends State<MobileLoginLayout> {
                                 'Access Portal',
                                 style: TextStyle(
                                   color: AppColors.richBlack,
-                                  fontSize: 16.sp,
+                                  fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -210,7 +209,7 @@ class _MobileLoginLayoutState extends State<MobileLoginLayout> {
                 ),
               ),
 
-              SizedBox(height: 20.h),
+              SizedBox(height: 20),
 
               // Sign Up Link
               AnimatedAuthFieldWidget(
@@ -220,10 +219,7 @@ class _MobileLoginLayoutState extends State<MobileLoginLayout> {
                   children: [
                     Text(
                       "New to Elite Properties? ",
-                      style: TextStyle(
-                        color: AppColors.darkGrey,
-                        fontSize: 14.sp,
-                      ),
+                      style: TextStyle(color: AppColors.darkGrey, fontSize: 14),
                     ),
                     GestureDetector(
                       onTap: () {},
@@ -237,7 +233,7 @@ class _MobileLoginLayoutState extends State<MobileLoginLayout> {
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: AppColors.white,
-                            fontSize: 14.sp,
+                            fontSize: 14,
                           ),
                         ),
                       ),

@@ -1,6 +1,6 @@
 import 'package:summit_team/core/utils/alessamy_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:summit_team/config/locale/app_localizations.dart';
 import 'package:summit_team/config/locale/keys_translate.dart';
 
@@ -104,7 +104,7 @@ class CustomAppBarWidget extends StatelessWidget
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(56.h);
+  Size get preferredSize => Size.fromHeight(56);
 }
 
 class CustomDrawerWidget extends StatelessWidget {
@@ -126,7 +126,7 @@ class CustomDrawerWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Icon(Icons.home_work, color: AlessamyColors.white, size: 48),
-                SizedBox(height: 8.h),
+                SizedBox(height: 8),
                 Text(
                   AppLocalizations.of(
                     context,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:summit_team/core/utils/alessamy_colors.dart';
 
 /// ---------------------------------------------------------------------------
@@ -23,7 +23,7 @@ class PropertyFormSectionWidget extends StatelessWidget {
       padding: EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: AlessamyColors.cardBackground,
-        borderRadius: BorderRadius.circular(16.r),
+        borderRadius: BorderRadius.circular(16),
         border: Border.all(
           color: AlessamyColors.primaryGold.withValues(alpha: 0.1),
         ),

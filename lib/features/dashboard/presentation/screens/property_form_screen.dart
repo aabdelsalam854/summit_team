@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:summit_team/core/adaptive_layout/adaptive_layout_widget.dart';
 import 'package:summit_team/core/utils/alessamy_colors.dart';
@@ -129,7 +129,7 @@ class _PropertyFormScreenState extends State<PropertyFormScreen> {
       //   title: Text(
       //     isEdit ? 'تعديل العقار' : 'إضافة عقار جديد',
       //     style: TextStyle(
-      //       fontSize: 20.sp,
+      //       fontSize: 20,
       //       fontWeight: FontWeight.bold,
       //       color: AlessamyColors.white,
       //     ),
@@ -153,42 +153,42 @@ class _PropertyFormScreenState extends State<PropertyFormScreen> {
   CustomScrollView tabletLayout(BuildContext context, bool isEdit) {
     return CustomScrollView(
       slivers: [
-        SliverToBoxAdapter(child: SizedBox(height: 24.h)),
+        SliverToBoxAdapter(child: SizedBox(height: 24)),
 
         // المعلومات الأساسية
         SliverToBoxAdapter(child: BasicInformation()),
 
-        SliverToBoxAdapter(child: SizedBox(height: 24.h)),
+        SliverToBoxAdapter(child: SizedBox(height: 24)),
 
         // العنوان
         SliverToBoxAdapter(child: location()),
 
-        SliverToBoxAdapter(child: SizedBox(height: 24.h)),
+        SliverToBoxAdapter(child: SizedBox(height: 24)),
 
         // مواصفات الوحدة
         UnitSpecifications(),
 
-        SliverToBoxAdapter(child: SizedBox(height: 24.h)),
+        SliverToBoxAdapter(child: SizedBox(height: 24)),
 
         // تاريخ الحجز ومدة القسط
         Bookingdateandinstallmentperiod(),
 
-        SliverToBoxAdapter(child: SizedBox(height: 24.h)),
+        SliverToBoxAdapter(child: SizedBox(height: 24)),
 
         // التفاصيل المالية
         SliverToBoxAdapter(child: FinancialDetails()),
 
-        SliverToBoxAdapter(child: SizedBox(height: 24.h)),
+        SliverToBoxAdapter(child: SizedBox(height: 24)),
 
         // ملاحظات وإعدادات إضافية
         SliverToBoxAdapter(child: AdditionalNotes()),
 
-        SliverToBoxAdapter(child: SizedBox(height: 32.h)),
+        SliverToBoxAdapter(child: SizedBox(height: 32)),
 
         // Action Buttons
         SliverToBoxAdapter(child: buttons(context, isEdit)),
 
-        SliverToBoxAdapter(child: SizedBox(height: 32.h)),
+        SliverToBoxAdapter(child: SizedBox(height: 32)),
       ],
     );
   }
@@ -228,7 +228,7 @@ class _PropertyFormScreenState extends State<PropertyFormScreen> {
                 foregroundColor: AlessamyColors.black,
                 padding: EdgeInsets.symmetric(vertical: 16),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.r),
+                  borderRadius: BorderRadius.circular(12),
                 ),
               ),
               child: Text(
@@ -591,7 +591,7 @@ class _PropertyFormScreenState extends State<PropertyFormScreen> {
                             color: AlessamyColors.white,
                           ),
                         ),
-                        SizedBox(width: 8.w),
+                        SizedBox(width: 8),
                         Text(
                           isEdit ? 'تعديل العقار' : 'إضافة عقار جديد',
                           style: TextStyle(
@@ -616,7 +616,7 @@ class _PropertyFormScreenState extends State<PropertyFormScreen> {
                   ),
                 ),
 
-                SliverToBoxAdapter(child: SizedBox(height: 24.h)),
+                SliverToBoxAdapter(child: SizedBox(height: 24)),
                 SliverToBoxAdapter(
                   child: Row(
                     children: [
@@ -629,7 +629,7 @@ class _PropertyFormScreenState extends State<PropertyFormScreen> {
                 // العنوان
 
                 // تاريخ الحجز ومدة القسط
-                SliverToBoxAdapter(child: SizedBox(height: 24.h)),
+                SliverToBoxAdapter(child: SizedBox(height: 24)),
                 SliverToBoxAdapter(
                   child: Row(
                     children: [
@@ -641,7 +641,7 @@ class _PropertyFormScreenState extends State<PropertyFormScreen> {
                 ),
 
                 // التفاصيل المالية
-                SliverToBoxAdapter(child: SizedBox(height: 32.h)),
+                SliverToBoxAdapter(child: SizedBox(height: 32)),
 
                 // Action Buttons
                 SliverToBoxAdapter(
@@ -701,7 +701,7 @@ class _PropertyFormScreenState extends State<PropertyFormScreen> {
   CustomScrollView mobileLayout(BuildContext context, bool isEdit) {
     return CustomScrollView(
       slivers: [
-        SliverToBoxAdapter(child: SizedBox(height: 24.h)),
+        SliverToBoxAdapter(child: SizedBox(height: 24)),
 
         // المعلومات الأساسية
         SliverToBoxAdapter(
@@ -761,7 +761,7 @@ class _PropertyFormScreenState extends State<PropertyFormScreen> {
           ),
         ),
 
-        SliverToBoxAdapter(child: SizedBox(height: 24.h)),
+        SliverToBoxAdapter(child: SizedBox(height: 24)),
 
         // العنوان
         SliverToBoxAdapter(
@@ -807,7 +807,7 @@ class _PropertyFormScreenState extends State<PropertyFormScreen> {
           ),
         ),
 
-        SliverToBoxAdapter(child: SizedBox(height: 24.h)),
+        SliverToBoxAdapter(child: SizedBox(height: 24)),
 
         // مواصفات الوحدة
         SliverToBoxAdapter(
@@ -881,7 +881,7 @@ class _PropertyFormScreenState extends State<PropertyFormScreen> {
           ),
         ),
 
-        SliverToBoxAdapter(child: SizedBox(height: 24.h)),
+        SliverToBoxAdapter(child: SizedBox(height: 24)),
 
         // تاريخ الحجز ومدة القسط
         SliverToBoxAdapter(
@@ -904,7 +904,7 @@ class _PropertyFormScreenState extends State<PropertyFormScreen> {
           ),
         ),
 
-        SliverToBoxAdapter(child: SizedBox(height: 24.h)),
+        SliverToBoxAdapter(child: SizedBox(height: 24)),
 
         // التفاصيل المالية
         SliverToBoxAdapter(
@@ -947,7 +947,7 @@ class _PropertyFormScreenState extends State<PropertyFormScreen> {
           ),
         ),
 
-        SliverToBoxAdapter(child: SizedBox(height: 24.h)),
+        SliverToBoxAdapter(child: SizedBox(height: 24)),
 
         // ملاحظات وإعدادات إضافية
         SliverToBoxAdapter(
@@ -979,12 +979,12 @@ class _PropertyFormScreenState extends State<PropertyFormScreen> {
           ),
         ),
 
-        SliverToBoxAdapter(child: SizedBox(height: 32.h)),
+        SliverToBoxAdapter(child: SizedBox(height: 32)),
 
         // Action Buttons
         SliverToBoxAdapter(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            padding: EdgeInsets.symmetric(horizontal: 24),
             child: Row(
               children: [
                 Expanded(
@@ -992,22 +992,22 @@ class _PropertyFormScreenState extends State<PropertyFormScreen> {
                     onPressed: () => Navigator.pop(context),
                     style: OutlinedButton.styleFrom(
                       side: BorderSide(color: AlessamyColors.textLight),
-                      padding: EdgeInsets.symmetric(vertical: 16.h),
+                      padding: EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.r),
+                        borderRadius: BorderRadius.circular(12),
                       ),
                     ),
                     child: Text(
                       'إلغاء',
                       style: TextStyle(
-                        fontSize: 16.sp,
+                        fontSize: 16,
                         color: AlessamyColors.textLight,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ),
-                SizedBox(width: 16.w),
+                SizedBox(width: 16),
                 Expanded(
                   flex: 2,
                   child: ElevatedButton(
@@ -1015,15 +1015,15 @@ class _PropertyFormScreenState extends State<PropertyFormScreen> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AlessamyColors.primaryGold,
                       foregroundColor: AlessamyColors.black,
-                      padding: EdgeInsets.symmetric(vertical: 16.h),
+                      padding: EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.r),
+                        borderRadius: BorderRadius.circular(12),
                       ),
                     ),
                     child: Text(
                       isEdit ? 'حفظ التعديلات' : 'إضافة العقار',
                       style: TextStyle(
-                        fontSize: 16.sp,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -1034,7 +1034,7 @@ class _PropertyFormScreenState extends State<PropertyFormScreen> {
           ),
         ),
 
-        SliverToBoxAdapter(child: SizedBox(height: 32.h)),
+        SliverToBoxAdapter(child: SizedBox(height: 32)),
       ],
     );
   }

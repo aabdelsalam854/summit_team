@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:summit_team/core/utils/alessamy_colors.dart';
 import 'package:summit_team/features/properties/data/models/property_model.dart';
 
@@ -121,7 +121,7 @@ class PropertyImageWidget extends StatelessWidget {
           ),
           child: Image.network(
             property.imageUrl,
-            height: 180.h,
+            height: 180,
             width: double.infinity,
             fit: BoxFit.cover,
             errorBuilder: (context, error, stackTrace) {
@@ -201,7 +201,7 @@ class PropertyPriceWidget extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
         color: AlessamyColors.primaryGold.withValues(alpha: 0.15),
-        borderRadius: BorderRadius.circular(6.r),
+        borderRadius: BorderRadius.circular(6),
       ),
       child: Text(
         _formatPrice(price),

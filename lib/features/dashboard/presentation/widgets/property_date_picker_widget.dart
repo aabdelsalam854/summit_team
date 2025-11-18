@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:summit_team/core/utils/alessamy_colors.dart';
 
 /// ---------------------------------------------------------------------------
@@ -21,7 +21,7 @@ class PropertyDatePickerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 16.h),
+      padding: EdgeInsets.only(bottom: 16),
       child: InkWell(
         onTap: () async {
           final picked = await showDatePicker(
@@ -46,10 +46,10 @@ class PropertyDatePickerWidget extends StatelessWidget {
           }
         },
         child: Container(
-          padding: EdgeInsets.all(16.w),
+          padding: EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: AlessamyColors.backgroundColor,
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(12),
             border: Border.all(
               color: AlessamyColors.primaryGold.withValues(alpha: 0.1),
             ),

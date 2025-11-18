@@ -5,12 +5,8 @@ class AppConstants {
   static const String fontFamilyAr = 'DroidKufi';
   static const String fontFamilyEn = 'IBMPlexSans';
   // static String fontFamily = isArabic ? fontFamilyAr : fontFamilyEn;
-  static customConstraints(double h) => BoxConstraints(
-    minHeight: h,
-    maxHeight: h,
-    maxWidth: 100.w,
-    minWidth: 100.w,
-  );
+  static customConstraints(double h) =>
+      BoxConstraints(minHeight: h, maxHeight: h, maxWidth: 100, minWidth: 100);
   static final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
   static final navigatorKey = GlobalKey<NavigatorState>();
 }

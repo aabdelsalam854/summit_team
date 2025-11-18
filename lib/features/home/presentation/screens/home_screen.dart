@@ -9,22 +9,14 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const AdaptiveLayout(
-      mobileLayout: _buildMobileLayout,
-      tabletLayout: _buildTabletLayout,
-      desktopLayout: _buildDesktopLayout,
-    );
-  }
+    final width = MediaQuery.sizeOf(context).width;
 
-  static Widget _buildMobileLayout(BuildContext context) {
-    return const MobileHomeLayout();
-  }
-
-  static Widget _buildTabletLayout(BuildContext context) {
-    return const TabletHomeLayout();
-  }
-
-  static Widget _buildDesktopLayout(BuildContext context) {
-    return const DesktopHomeLayout();
+    if (width < 800) {
+      return const MobileHomeLayout();
+    } else if (width < 1200) {
+      return const TabletHomeLayout();
+    } else {
+      return const DesktopHomeLayout();
+    }
   }
 }

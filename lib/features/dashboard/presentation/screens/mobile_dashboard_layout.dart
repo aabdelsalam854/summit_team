@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:summit_team/config/routes/routes.dart';
 import 'package:summit_team/core/utils/alessamy_colors.dart';
@@ -263,40 +263,40 @@ class _MobileDashboardLayoutState extends State<MobileDashboardLayout> {
       backgroundColor: AlessamyColors.cardBackground,
       child: Column(
         children: [
-          SizedBox(height: 48.h),
+          SizedBox(height: 48),
           Container(
-            padding: EdgeInsets.all(14.w),
+            padding: EdgeInsets.all(14),
             decoration: BoxDecoration(
               gradient: AlessamyColors.goldToBlackGradient,
               shape: BoxShape.circle,
             ),
             child: Icon(
               Icons.dashboard,
-              size: 32.sp,
+              size: 32,
               color: AlessamyColors.white,
             ),
           ),
-          SizedBox(height: 12.h),
+          SizedBox(height: 12),
           Text(
             'لوحة التحكم',
             style: TextStyle(
-              fontSize: 18.sp,
+              fontSize: 18,
               fontWeight: FontWeight.bold,
               color: AlessamyColors.white,
             ),
           ),
-          SizedBox(height: 24.h),
+          SizedBox(height: 24),
           ListTile(
             leading: Icon(
               Icons.home,
               color: AlessamyColors.textLight,
-              size: 22.sp,
+              size: 22,
             ),
             title: Text(
               'الرئيسية',
               style: TextStyle(
                 color: AlessamyColors.textLight,
-                fontSize: 14.sp,
+                fontSize: 14,
               ),
             ),
             onTap: () {},
@@ -305,13 +305,13 @@ class _MobileDashboardLayoutState extends State<MobileDashboardLayout> {
             leading: Icon(
               Icons.dashboard_customize,
               color: AlessamyColors.primaryGold,
-              size: 22.sp,
+              size: 22,
             ),
             title: Text(
               'الداشبورد',
               style: TextStyle(
                 color: AlessamyColors.white,
-                fontSize: 14.sp,
+                fontSize: 14,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -325,13 +325,13 @@ class _MobileDashboardLayoutState extends State<MobileDashboardLayout> {
             leading: Icon(
               Icons.real_estate_agent,
               color: AlessamyColors.textLight,
-              size: 22.sp,
+              size: 22,
             ),
             title: Text(
               'العقارات',
               style: TextStyle(
                 color: AlessamyColors.textLight,
-                fontSize: 14.sp,
+                fontSize: 14,
               ),
             ),
             onTap: () {},
@@ -340,13 +340,13 @@ class _MobileDashboardLayoutState extends State<MobileDashboardLayout> {
             leading: Icon(
               Icons.settings,
               color: AlessamyColors.textLight,
-              size: 22.sp,
+              size: 22,
             ),
             title: Text(
               'الإعدادات',
               style: TextStyle(
                 color: AlessamyColors.textLight,
-                fontSize: 14.sp,
+                fontSize: 14,
               ),
             ),
             onTap: () {},
@@ -356,18 +356,18 @@ class _MobileDashboardLayoutState extends State<MobileDashboardLayout> {
             leading: Icon(
               Icons.logout,
               color: AlessamyColors.textLight,
-              size: 22.sp,
+              size: 22,
             ),
             title: Text(
               'تسجيل الخروج',
               style: TextStyle(
                 color: AlessamyColors.textLight,
-                fontSize: 14.sp,
+                fontSize: 14,
               ),
             ),
             onTap: () {},
           ),
-          SizedBox(height: 24.h),
+          SizedBox(height: 24),
         ],
       ),
     );
@@ -431,28 +431,28 @@ class _MobileDashboardLayoutState extends State<MobileDashboardLayout> {
   Widget _buildEmptyState() {
     return Center(
       child: Padding(
-        padding: EdgeInsets.all(32.w),
+        padding: EdgeInsets.all(32),
         child: Column(
           children: [
             Icon(
               Icons.home_work_outlined,
-              size: 64.sp,
+              size: 64,
               color: AlessamyColors.textLight.withValues(alpha: 0.5),
             ),
-            SizedBox(height: 16.h),
+            SizedBox(height: 16),
             Text(
               'لا توجد عقارات بعد',
               style: TextStyle(
-                fontSize: 18.sp,
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: AlessamyColors.textLight,
               ),
             ),
-            SizedBox(height: 8.h),
+            SizedBox(height: 8),
             Text(
               'ابدأ بإضافة عقار جديد',
               style: TextStyle(
-                fontSize: 13.sp,
+                fontSize: 13,
                 color: AlessamyColors.textLight.withValues(alpha: 0.7),
               ),
             ),

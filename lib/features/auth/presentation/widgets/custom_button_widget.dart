@@ -1,6 +1,5 @@
 import 'package:summit_team/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomButtonWidget extends StatelessWidget {
   const CustomButtonWidget({
@@ -20,7 +19,7 @@ class CustomButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 48.h,
+      height: 48,
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
@@ -29,13 +28,13 @@ class CustomButtonWidget extends StatelessWidget {
           elevation: 5,
           shadowColor: AppColors.primary.withValues(alpha: 0.5),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(12),
           ),
         ),
         child: isLoading
             ? SizedBox(
-                height: 24.sp,
-                width: 24.sp,
+                height: 24,
+                width: 24,
                 child: const CircularProgressIndicator(
                   color: AppColors.richBlack,
                   strokeWidth: 3,
@@ -44,7 +43,7 @@ class CustomButtonWidget extends StatelessWidget {
             : Text(
                 text,
                 style: TextStyle(
-                  fontSize: 16.sp,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1,
                 ),

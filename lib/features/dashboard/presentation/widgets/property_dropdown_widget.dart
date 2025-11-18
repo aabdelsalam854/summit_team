@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:summit_team/core/utils/alessamy_colors.dart';
 
 /// ---------------------------------------------------------------------------
@@ -35,10 +35,7 @@ class PropertyDropdownWidget<T> extends StatelessWidget {
             value: item,
             child: Text(
               itemLabel(item),
-              style: TextStyle(
-                color: AlessamyColors.white,
-                fontSize: 14,
-              ),
+              style: TextStyle(color: AlessamyColors.white, fontSize: 14),
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
             ),
@@ -47,29 +44,23 @@ class PropertyDropdownWidget<T> extends StatelessWidget {
         onChanged: onChanged,
         decoration: InputDecoration(
           labelText: label,
-          labelStyle: TextStyle(
-            color: AlessamyColors.textLight,
-            fontSize: 14,
-          ),
+          labelStyle: TextStyle(color: AlessamyColors.textLight, fontSize: 14),
           prefixIcon: Icon(icon, color: AlessamyColors.primaryGold),
           filled: true,
           fillColor: AlessamyColors.backgroundColor,
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide.none,
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide(
               color: AlessamyColors.primaryGold.withValues(alpha: 0.1),
             ),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.r),
-            borderSide: BorderSide(
-              color: AlessamyColors.primaryGold,
-              width: 2,
-            ),
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: AlessamyColors.primaryGold, width: 2),
           ),
         ),
         dropdownColor: AlessamyColors.cardBackground,

@@ -4,9 +4,9 @@ import 'package:summit_team/features/dashboard/presentation/screens/desktop_dash
 import 'package:summit_team/features/dashboard/presentation/screens/mobile_dashboard_layout.dart';
 import 'package:summit_team/features/dashboard/presentation/screens/tablet_dashboard_layout.dart';
 
-/// ---------------------------------------------------------------------------
-/// 🎛️ DashboardScreen — الشاشة الرئيسية للداشبورد
-/// ---------------------------------------------------------------------------
+// /// ---------------------------------------------------------------------------
+// / 🎛️ DashboardScreen — الشاشة الرئيسية للداشبورد
+// / ---------------------------------------------------------------------------
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
 
@@ -27,8 +27,8 @@ class DashboardScreen extends StatelessWidget {
     return const TabletDashboardLayout();
   }
 
-/// / Desktop Layout for the DashboardScreen
-///
+  /// / Desktop Layout for the DashboardScreen
+  ///
   static Widget _buildDesktopLayout(BuildContext context) {
     return const DesktopDashboardLayout();
   }

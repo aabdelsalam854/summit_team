@@ -89,10 +89,7 @@ class MobileHomeLayout extends StatelessWidget {
 
             // أحدث العروض - Grid
             SliverToBoxAdapter(
-              child: LatestPropertiesGrid(
-                
-                
-                properties: _getDemoProperties()),
+              child: LatestPropertiesGrid(properties: _getDemoProperties()),
             ),
 
             SliverToBoxAdapter(child: SizedBox(height: 48)),
@@ -166,68 +163,12 @@ class MobileHomeLayout extends StatelessWidget {
   }
 }
 
-/// ---------------------------------------------------------------------------
-/// 🟩 SectionHeaderWidget — عنوان القسم (العقارات المميزة / أحدث العروض)
-/// ---------------------------------------------------------------------------
-// class SectionHeaderWidget extends StatelessWidget {
-//   const SectionHeaderWidget({
-//     super.key,
-//     required this.title,
-//     required this.onViewAll,
-//   });
-
-//   final String title;
-//   final VoidCallback onViewAll;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final l10n = AppLocalizations.of(context)!;
-//     return Padding(
-//       padding: EdgeInsets.symmetric(horizontal: 12.w),
-//       child: Row(
-//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//         children: [
-//           Text(
-//             title,
-//             style: TextStyle(
-//               fontSize: 18.sp,
-//               fontWeight: FontWeight.bold,
-//               color: AlessamyColors.white,
-//             ),
-//           ),
-//           TextButton(
-//             onPressed: onViewAll,
-//             child: Row(
-//               children: [
-//                 Text(
-//                   l10n.translate(KeysTranslate.viewAll),
-//                   style: TextStyle(
-//                     fontSize: 11.sp,
-//                     fontWeight: FontWeight.w600,
-//                     color: AlessamyColors.primaryGold,
-//                   ),
-//                 ),
-//                 SizedBox(width: 3.w),
-//                 Icon(
-//                   Icons.arrow_forward,
-//                   size: 12.sp,
-//                   color: AlessamyColors.primaryGold,
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-// /// ---------------------------------------------------------------------------
-// /// 🟦 FeaturedPropertiesList — قائمة العقارات المميزة (أفقية)
-// /// ---------------------------------------------------------------------------
-
 class FeaturedPropertiesList extends StatelessWidget {
-  const FeaturedPropertiesList({super.key, required this.properties, this.scrollDirection});
+  const FeaturedPropertiesList({
+    super.key,
+    required this.properties,
+    this.scrollDirection,
+  });
 
   final List<PropertyModel> properties;
   final Axis? scrollDirection;
@@ -303,11 +244,11 @@ class FeaturedPropertiesList extends StatelessWidget {
 //   Widget build(BuildContext context) {
 //     final latest = properties.take(4).toList();
 //     return Padding(
-//       padding: EdgeInsets.symmetric(horizontal: 12.w),
+//       padding: EdgeInsets.symmetric(horizontal: 12),
 //       child: Column(
 //         children: latest.map((property) {
 //           return Padding(
-//             padding: EdgeInsets.only(bottom: 10.h),
+//             padding: EdgeInsets.only(bottom: 10),
 //             child: PropertyCardWidget(property: property, onTap: () {}),
 //           );
 //         }).toList(),
@@ -325,7 +266,7 @@ class FeaturedPropertiesList extends StatelessWidget {
 //   @override
 //   Widget build(BuildContext context) {
 //     return Container(
-//       padding: EdgeInsets.all(16.w),
+//       padding: EdgeInsets.all(16),
 //       color: AlessamyColors.black,
 //       child: Column(
 //         children: [
@@ -337,7 +278,7 @@ class FeaturedPropertiesList extends StatelessWidget {
 //                 icon: Icon(
 //                   Icons.facebook,
 //                   color: AlessamyColors.white,
-//                   size: 20.sp,
+//                   size: 20,
 //                 ),
 //               ),
 //               IconButton(
@@ -345,7 +286,7 @@ class FeaturedPropertiesList extends StatelessWidget {
 //                 icon: Icon(
 //                   Icons.chat,
 //                   color: AlessamyColors.white,
-//                   size: 20.sp,
+//                   size: 20,
 //                 ),
 //               ),
 //               IconButton(
@@ -353,18 +294,18 @@ class FeaturedPropertiesList extends StatelessWidget {
 //                 icon: Icon(
 //                   Icons.phone,
 //                   color: AlessamyColors.white,
-//                   size: 20.sp,
+//                   size: 20,
 //                 ),
 //               ),
 //             ],
 //           ),
-//           SizedBox(height: 10.h),
+//           SizedBox(height: 10),
 //           Text(
 //             AppLocalizations.of(
 //               context,
 //             )!.translate(KeysTranslate.rightsReserved),
 //             style: TextStyle(
-//               fontSize: 10.sp,
+//               fontSize: 10,
 //               color: AlessamyColors.white.withValues(alpha: 0.7),
 //             ),
 //             textAlign: TextAlign.center,

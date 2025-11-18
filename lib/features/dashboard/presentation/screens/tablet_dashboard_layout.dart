@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:summit_team/config/routes/routes.dart';
 import 'package:summit_team/core/utils/alessamy_colors.dart';
@@ -56,7 +56,7 @@ class _TabletDashboardLayoutState extends State<TabletDashboardLayout> {
         title: Text(
           'لوحة التحكم',
           style: TextStyle(
-            fontSize: 20.sp,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
             color: AlessamyColors.white,
           ),
@@ -69,16 +69,16 @@ class _TabletDashboardLayoutState extends State<TabletDashboardLayout> {
               color: AlessamyColors.primaryGold,
             ),
           ),
-          SizedBox(width: 8.w),
+          SizedBox(width: 8),
           Padding(
-            padding: EdgeInsets.only(right: 16.w),
+            padding: EdgeInsets.only(right: 16),
             child: CircleAvatar(
-              radius: 18.r,
+              radius: 18,
               backgroundColor: AlessamyColors.primaryGold,
               child: Icon(
                 Icons.person,
                 color: AlessamyColors.black,
-                size: 20.sp,
+                size: 20,
               ),
             ),
           ),
@@ -211,7 +211,7 @@ class _TabletDashboardLayoutState extends State<TabletDashboardLayout> {
         icon: const Icon(Icons.add),
         label: Text(
           'إضافة عقار',
-          style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
         ),
       ),
     );
@@ -222,29 +222,29 @@ class _TabletDashboardLayoutState extends State<TabletDashboardLayout> {
       backgroundColor: AlessamyColors.cardBackground,
       child: Column(
         children: [
-          SizedBox(height: 48.h),
+          SizedBox(height: 48),
           Container(
-            padding: EdgeInsets.all(16.w),
+            padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
               gradient: AlessamyColors.goldToBlackGradient,
               shape: BoxShape.circle,
             ),
             child: Icon(
               Icons.dashboard,
-              size: 40.sp,
+              size: 40,
               color: AlessamyColors.white,
             ),
           ),
-          SizedBox(height: 12.h),
+          SizedBox(height: 12),
           Text(
             'لوحة التحكم',
             style: TextStyle(
-              fontSize: 20.sp,
+              fontSize: 20,
               fontWeight: FontWeight.bold,
               color: AlessamyColors.white,
             ),
           ),
-          SizedBox(height: 32.h),
+          SizedBox(height: 32),
           ListTile(
             leading: Icon(Icons.home, color: AlessamyColors.textLight),
             title: Text(
@@ -296,7 +296,7 @@ class _TabletDashboardLayoutState extends State<TabletDashboardLayout> {
             ),
             onTap: () {},
           ),
-          SizedBox(height: 24.h),
+          SizedBox(height: 24),
         ],
       ),
     );
@@ -304,13 +304,13 @@ class _TabletDashboardLayoutState extends State<TabletDashboardLayout> {
 
   Widget _buildStatsCards(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 24.w),
+      padding: EdgeInsets.symmetric(horizontal: 24),
       child: GridView.count(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         crossAxisCount: 2,
-        mainAxisSpacing: 16.h,
-        crossAxisSpacing: 16.w,
+        mainAxisSpacing: 16,
+        crossAxisSpacing: 16,
         childAspectRatio: 1.5,
         children: [
           DashboardStatsCard(
@@ -350,7 +350,7 @@ class _TabletDashboardLayoutState extends State<TabletDashboardLayout> {
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: AlessamyColors.cardBackground,
-        borderRadius: BorderRadius.circular(16.r),
+        borderRadius: BorderRadius.circular(16),
         border: Border.all(
           color: AlessamyColors.primaryGold.withValues(alpha: 0.1),
         ),

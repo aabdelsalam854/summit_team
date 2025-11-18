@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:intl/intl.dart';
 import 'package:summit_team/core/utils/alessamy_colors.dart';
 import 'package:summit_team/features/properties/data/models/property_model.dart';
@@ -8,10 +8,7 @@ import 'package:summit_team/features/properties/data/models/property_model.dart'
 /// 📋 PropertiesTableWidget — جدول العقارات في الداشبورد
 /// ---------------------------------------------------------------------------
 class PropertiesTableWidget extends StatelessWidget {
-  const PropertiesTableWidget({
-    super.key,
-    required this.properties,
-  });
+  const PropertiesTableWidget({super.key, required this.properties});
 
   final List<PropertyModel> properties;
 
@@ -33,9 +30,7 @@ class PropertiesTableWidget extends StatelessWidget {
           }
           return Colors.transparent;
         }),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.r),
-        ),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
         columns: [
           _buildColumn('الكود'),
           _buildColumn('العنوان'),
@@ -51,10 +46,7 @@ class PropertiesTableWidget extends StatelessWidget {
           return DataRow(
             cells: [
               _buildCell(property.code),
-              _buildCell(
-                property.title,
-                maxWidth: 200.w,
-              ),
+              _buildCell(property.title, maxWidth: 200),
               _buildCell(property.city),
               _buildCell(property.category?.arabicName ?? '-'),
               _buildCell(property.type.arabicName),
@@ -88,10 +80,7 @@ class PropertiesTableWidget extends StatelessWidget {
         width: maxWidth,
         child: Text(
           text,
-          style: TextStyle(
-            fontSize: 13,
-            color: AlessamyColors.textLight,
-          ),
+          style: TextStyle(fontSize: 13, color: AlessamyColors.textLight),
           overflow: TextOverflow.ellipsis,
         ),
       ),
@@ -126,7 +115,7 @@ class PropertiesTableWidget extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
           color: bgColor,
-          borderRadius: BorderRadius.circular(8.r),
+          borderRadius: BorderRadius.circular(8),
         ),
         child: Text(
           label,
@@ -151,7 +140,7 @@ class PropertiesTableWidget extends StatelessWidget {
             },
             icon: Icon(
               Icons.visibility,
-              size: 20.sp,
+              size: 20,
               color: AlessamyColors.primaryGold,
             ),
             tooltip: 'عرض',
@@ -160,11 +149,7 @@ class PropertiesTableWidget extends StatelessWidget {
             onPressed: () {
               // TODO: Edit property
             },
-            icon: Icon(
-              Icons.edit,
-              size: 20,
-              color: Colors.blue,
-            ),
+            icon: Icon(Icons.edit, size: 20, color: Colors.blue),
             tooltip: 'تعديل',
           ),
           IconButton(
@@ -172,11 +157,7 @@ class PropertiesTableWidget extends StatelessWidget {
               // TODO: Delete property
               _showDeleteDialog(context, property);
             },
-            icon: Icon(
-              Icons.delete,
-              size: 20,
-              color: Colors.red,
-            ),
+            icon: Icon(Icons.delete, size: 20, color: Colors.red),
             tooltip: 'حذف',
           ),
         ],
@@ -204,11 +185,11 @@ class PropertiesTableWidget extends StatelessWidget {
                 color: AlessamyColors.textLight,
               ),
             ),
-            SizedBox(height: 8.h),
+            SizedBox(height: 8),
             Text(
               'ابدأ بإضافة عقار جديد من الزر في الأسفل',
               style: TextStyle(
-                fontSize: 14.sp,
+                fontSize: 14,
                 color: AlessamyColors.textLight.withValues(alpha: 0.7),
               ),
             ),
@@ -238,20 +219,14 @@ class PropertiesTableWidget extends StatelessWidget {
         ),
         content: Text(
           'هل أنت متأكد من حذف العقار "${property.title}"؟',
-          style: TextStyle(
-            color: AlessamyColors.textLight,
-            fontSize: 15,
-          ),
+          style: TextStyle(color: AlessamyColors.textLight, fontSize: 15),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: Text(
               'إلغاء',
-              style: TextStyle(
-                color: AlessamyColors.textLight,
-                fontSize: 15,
-              ),
+              style: TextStyle(color: AlessamyColors.textLight, fontSize: 15),
             ),
           ),
           ElevatedButton(
@@ -265,10 +240,7 @@ class PropertiesTableWidget extends StatelessWidget {
             ),
             child: Text(
               'حذف',
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
             ),
           ),
         ],

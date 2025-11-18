@@ -1,6 +1,6 @@
 import 'package:summit_team/core/utils/alessamy_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+//
 import 'package:summit_team/config/locale/app_localizations.dart';
 import 'package:summit_team/config/locale/keys_translate.dart';
 
@@ -61,8 +61,8 @@ class HeroSectionWidget extends StatelessWidget {
             ),
             SizedBox(height: 2),
             Wrap(
-              spacing: 12.w,
-              runSpacing: 8.h,
+              spacing: 12,
+              runSpacing: 8,
               children: [
                 _buildActionButton(
                   text: l10n.translate(KeysTranslate.heroActionRequest),
@@ -109,8 +109,8 @@ class HeroSectionWidget extends StatelessWidget {
         backgroundColor: isPrimary
             ? AlessamyColors.primaryGold
             : AlessamyColors.white,
-        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 1),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
+        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 1),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
     );
   }

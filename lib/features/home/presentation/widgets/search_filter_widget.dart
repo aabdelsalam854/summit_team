@@ -2,7 +2,7 @@ import 'package:summit_team/core/utils/alessamy_colors.dart';
 import 'package:summit_team/core/widget/custom_drop_down.dart';
 import 'package:summit_team/features/properties/data/models/property_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 class SearchFilterWidget extends StatefulWidget {
   const SearchFilterWidget({super.key, this.onSearch});
@@ -72,7 +72,7 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: AlessamyColors.cardBackground,
-        borderRadius: BorderRadius.circular(16.r),
+        borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.1),
@@ -333,7 +333,7 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AlessamyColors.primaryGold,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12.r),
+                              borderRadius: BorderRadius.circular(12),
                             ),
                           ),
                           child: Row(
@@ -391,15 +391,15 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
             hintText: hint,
             hintStyle: TextStyle(fontSize: 14, color: AlessamyColors.textLight),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.r),
+              borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(color: AlessamyColors.borderLight),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.r),
+              borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(color: AlessamyColors.borderLight),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.r),
+              borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(color: AlessamyColors.primaryGold),
             ),
             contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),

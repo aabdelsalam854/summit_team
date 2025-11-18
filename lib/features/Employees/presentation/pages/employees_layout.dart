@@ -125,28 +125,31 @@ class _EmployeesLayoutState extends State<EmployeesLayout> {
 
   @override
   Widget build(BuildContext context) {
-    return AdaptiveLayout(
-      mobileLayout: (context) => EmployeesMopile(
+    final width = MediaQuery.sizeOf(context).width;
+    if (width < 800) {
+      return EmployeesMopile(
         employees: _filteredEmployees,
         selectedRole: _selectedRole,
         searchQuery: _searchQuery,
         onRoleChanged: _handleRoleChanged,
         onSearchChanged: _handleSearchChanged,
-      ),
-      tabletLayout: (context) => EmployeesTablet(
+      );
+    } else if (width < 1200) {
+      return EmployeesTablet(
         employees: _filteredEmployees,
         selectedRole: _selectedRole,
         searchQuery: _searchQuery,
         onRoleChanged: _handleRoleChanged,
         onSearchChanged: _handleSearchChanged,
-      ),
-      desktopLayout: (context) => EmployeesDeskTop(
+      );
+    } else {
+      return EmployeesDeskTop(
         employees: _filteredEmployees,
         selectedRole: _selectedRole,
         searchQuery: _searchQuery,
         onRoleChanged: _handleRoleChanged,
         onSearchChanged: _handleSearchChanged,
-      ),
-    );
+      );
+    }
   }
 }

@@ -1,6 +1,5 @@
 import 'package:summit_team/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginHeaderWidget extends StatelessWidget {
   const LoginHeaderWidget({
@@ -17,10 +16,10 @@ class LoginHeaderWidget extends StatelessWidget {
       children: [
         // Real Estate Logo with Gold and Black theme
         Container(
-          padding: EdgeInsets.all(12.w),
+          padding: EdgeInsets.all(12),
           decoration: BoxDecoration(
             gradient: AppColors.goldGradient,
-            borderRadius: BorderRadius.circular(20.r),
+            borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
                 color: AppColors.gold.withValues(alpha: 0.6),
@@ -36,15 +35,15 @@ class LoginHeaderWidget extends StatelessWidget {
             ],
           ),
           child: Container(
-            padding: EdgeInsets.all(24.w),
+            padding: EdgeInsets.all(24),
             decoration: BoxDecoration(
               color: AppColors.richBlack,
-              borderRadius: BorderRadius.circular(16.r),
+              borderRadius: BorderRadius.circular(16),
             ),
             child: Column(
               children: [
-                Icon(Icons.home_work, size: 48.sp, color: AppColors.gold),
-                SizedBox(height: 8.h),
+                Icon(Icons.home_work, size: 48, color: AppColors.gold),
+                SizedBox(height: 8),
                 ShaderMask(
                   shaderCallback: (bounds) =>
                       AppColors.goldGradient.createShader(
@@ -53,7 +52,7 @@ class LoginHeaderWidget extends StatelessWidget {
                   child: Text(
                     'SUMMIT',
                     style: TextStyle(
-                      fontSize: 14.sp,
+                      fontSize: 14,
                       fontWeight: FontWeight.w900,
                       color: AppColors.white,
                       letterSpacing: 2,
@@ -64,7 +63,7 @@ class LoginHeaderWidget extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 10.h),
+        SizedBox(height: 10),
 
         // Welcome Back
         ShaderMask(
@@ -74,14 +73,14 @@ class LoginHeaderWidget extends StatelessWidget {
           child: Text(
             'Welcome Back',
             style: TextStyle(
-              fontSize: 28.sp,
+              fontSize: 28,
               fontWeight: FontWeight.bold,
               color: AppColors.white,
               letterSpacing: 1,
             ),
           ),
         ),
-        SizedBox(height: 8.h),
+        SizedBox(height: 8),
 
         // Elite Properties
         ShaderMask(
@@ -91,20 +90,20 @@ class LoginHeaderWidget extends StatelessWidget {
           child: Text(
             'Elite Properties',
             style: TextStyle(
-              fontSize: 20.sp,
+              fontSize: 20,
               fontWeight: FontWeight.w600,
               color: AppColors.white,
               letterSpacing: 0.5,
             ),
           ),
         ),
-        SizedBox(height: 12.h),
+        SizedBox(height: 12),
 
         // Tagline
         Text(
           'Your Gateway to SUMMIT Living',
           style: TextStyle(
-            fontSize: 14.sp,
+            fontSize: 14,
             color: AppColors.darkGrey,
             fontStyle: FontStyle.italic,
           ),

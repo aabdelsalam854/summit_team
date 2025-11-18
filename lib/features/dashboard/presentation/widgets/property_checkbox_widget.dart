@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:summit_team/core/utils/alessamy_colors.dart';
 
 /// ---------------------------------------------------------------------------
@@ -21,7 +21,7 @@ class PropertyCheckboxWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 8.h),
+      padding: EdgeInsets.only(bottom: 8),
       child: Row(
         children: [
           Checkbox(
@@ -30,13 +30,10 @@ class PropertyCheckboxWidget extends StatelessWidget {
             activeColor: AlessamyColors.primaryGold,
             checkColor: AlessamyColors.black,
           ),
-          SizedBox(width: 8.w),
+          SizedBox(width: 8),
           Text(
             label,
-            style: TextStyle(
-              color: AlessamyColors.white,
-              fontSize: 15,
-            ),
+            style: TextStyle(color: AlessamyColors.white, fontSize: 15),
           ),
         ],
       ),

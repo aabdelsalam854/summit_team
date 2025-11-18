@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:summit_team/core/utils/alessamy_colors.dart';
 
 class CustomDropdown<T> extends StatelessWidget {
@@ -36,7 +36,7 @@ class CustomDropdown<T> extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 12),
           decoration: BoxDecoration(
             border: Border.all(color: AlessamyColors.borderLight),
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(8),
           ),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<T>(
@@ -44,10 +44,7 @@ class CustomDropdown<T> extends StatelessWidget {
               isExpanded: true,
               hint: Text(
                 'اختر $label',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: AlessamyColors.textLight,
-                ),
+                style: TextStyle(fontSize: 14, color: AlessamyColors.textLight),
               ),
               items: items.map((item) {
                 return DropdownMenuItem<T>(

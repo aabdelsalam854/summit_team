@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:summit_team/core/utils/alessamy_colors.dart';
+import 'package:summit_team/core/utils/app_styles.dart';
 
 /// ---------------------------------------------------------------------------
 /// 📊 DashboardStatsCard — بطاقة الإحصائيات في الداشبورد
@@ -35,44 +36,53 @@ class DashboardStatsCard extends StatelessWidget {
           ),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Icon
-          Container(
-            padding: EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: color.withValues(alpha: 0.15),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Icon(icon, size: 28, color: color),
-          ),
-
-          SizedBox(height: 16),
-
-          // Value
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: AlessamyColors.white,
-            ),
-          ),
-
-          SizedBox(height: 6),
-
-          // Title
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 14,
-              color: AlessamyColors.textLight,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ],
+      child:  Column(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  mainAxisSize: MainAxisSize.min,
+  children: [
+    // Icon
+    Container(
+      padding: EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.15),
+        borderRadius: BorderRadius.circular(12),
       ),
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        
+        child: Icon(icon, size: 28, color: color)),
+    ),
+
+    const SizedBox(height: 16),
+
+    // VALUE (مرن)
+    Flexible(
+      fit: FlexFit.loose,   
+      child: Text(
+        value,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: AppStyles.styleBold16(context)
+            .copyWith(color: AlessamyColors.white),
+      ),
+    ),
+
+    const SizedBox(height: 6),
+
+    // TITLE (مرن)
+    Flexible(
+      fit: FlexFit.loose,
+      child: Text(
+        title,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: AppStyles.styleRegular14(context)
+            .copyWith(color: AlessamyColors.textLight),
+      ),
+    ),
+  ],
+),
+
     );
   }
 }

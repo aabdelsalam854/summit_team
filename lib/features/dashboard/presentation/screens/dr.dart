@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:summit_team/core/utils/alessamy_colors.dart';
+import 'package:summit_team/core/utils/app_styles.dart';
 
 class PropertyStats {
   final int available;
@@ -43,7 +44,19 @@ class PropertyStatsChart extends StatefulWidget {
 }
 
 class _PropertyStatsChartState extends State<PropertyStatsChart> {
-  PropertyType selectedType = PropertyType.villa;
+  late final ValueNotifier<PropertyType> selectedTypeNotifier;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedTypeNotifier = ValueNotifier<PropertyType>(PropertyType.villa);
+  }
+
+  @override
+  void dispose() {
+    selectedTypeNotifier.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +81,10 @@ class _PropertyStatsChartState extends State<PropertyStatsChart> {
           const SizedBox(height: 24),
           _buildTypeSelector(),
           const SizedBox(height: 32),
-          _buildChart(),
+          AspectRatio(
+            aspectRatio: 1.5,
+            child: _buildChart(),
+          ),
           const SizedBox(height: 24),
           _buildLegend(),
         ],
@@ -77,176 +93,228 @@ class _PropertyStatsChartState extends State<PropertyStatsChart> {
   }
 
   Widget _buildHeader() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        const Text(
-          'إحصائيات العقارات',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-          decoration: BoxDecoration(
-            color: const Color(0xFF3498DB).withValues(alpha: 0.1),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Text(
-            'إجمالي: ${widget.propertyData[selectedType]?.total ?? 0}',
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFF3498DB),
+    return ValueListenableBuilder<PropertyType>(
+      valueListenable: selectedTypeNotifier,
+      builder: (context, selectedType, _) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Flexible(
+              flex: 3,
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.centerRight,
+                child: Text(
+                  'إحصائيات العقارات',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
             ),
-          ),
-        ),
-      ],
+            const SizedBox(width: 8),
+            Flexible(
+              flex: 2,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF3498DB).withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    'إجمالي: ${widget.propertyData[selectedType]?.total ?? 0}',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF3498DB),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 
   Widget _buildTypeSelector() {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: PropertyType.values.map((type) {
-          final isSelected = selectedType == type;
-          return ChoiceChip(
-            label: FittedBox(
-              child: Text(
-                type.arabicName,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: isSelected ? Colors.white : const Color(0xFF2C3E50),
+    return ValueListenableBuilder<PropertyType>(
+      valueListenable: selectedTypeNotifier,
+      builder: (context, selectedType, _) {
+        return SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: PropertyType.values.map((type) {
+              final isSelected = selectedType == type;
+              return Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child: ChoiceChip(
+                  label: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      type.arabicName,
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: isSelected ? Colors.white : const Color(0xFF2C3E50),
+                      ),
+                    ),
+                  ),
+                  selected: isSelected,
+                  onSelected: (selected) {
+                    if (selected) {
+                      selectedTypeNotifier.value = type;
+                    }
+                  },
+                  selectedColor: AlessamyColors.borderGold,
+                  backgroundColor: Colors.grey.shade200,
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  elevation: isSelected ? 4 : 0,
                 ),
-              ),
-            ),
-            selected: isSelected,
-            onSelected: (selected) {
-              if (selected) {
-                setState(() {
-                  selectedType = type;
-                });
-              }
-            },
-            selectedColor: AlessamyColors.borderGold,
-            backgroundColor: Colors.grey.shade200,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            elevation: isSelected ? 4 : 0,
-          );
-        }).toList(),
-      ),
+              );
+            }).toList(),
+          ),
+        );
+      },
     );
   }
 
   Widget _buildChart() {
-    final stats = widget.propertyData[selectedType];
-    if (stats == null) {
-      return const Center(child: Text('لا توجد بيانات'));
-    }
-
-    return SizedBox(
-      height: 250,
-      child: BarChart(
-        BarChartData(
-          alignment: BarChartAlignment.spaceAround,
-          maxY: _getMaxY(stats),
-          barTouchData: BarTouchData(
-            enabled: true,
-            touchTooltipData: BarTouchTooltipData(
-              getTooltipColor: (group) => const Color(0xFF2C3E50),
-              tooltipBorder: const BorderSide(color: Colors.transparent),
-              tooltipPadding: const EdgeInsets.all(8),
-              tooltipMargin: 8,
-              getTooltipItem: (group, groupIndex, rod, rodIndex) {
-                String label = '';
-                switch (groupIndex) {
-                  case 0:
-                    label = 'متاح';
-                    break;
-                  case 1:
-                    label = 'مؤجر';
-                    break;
-                  case 2:
-                    label = 'مباع';
-                    break;
-                }
-                return BarTooltipItem(
-                  '$label\n${rod.toY.toInt()}',
-                  const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                  ),
-                );
-              },
-            ),
-          ),
-          titlesData: FlTitlesData(
-            show: true,
-            rightTitles: const AxisTitles(
-              sideTitles: SideTitles(showTitles: false),
-            ),
-            topTitles: const AxisTitles(
-              sideTitles: SideTitles(showTitles: false),
-            ),
-            bottomTitles: AxisTitles(
-              sideTitles: SideTitles(
-                showTitles: true,
-                getTitlesWidget: _getBottomTitles,
-                reservedSize: 42,
+    return ValueListenableBuilder<PropertyType>(
+      valueListenable: selectedTypeNotifier,
+      builder: (context, selectedType, _) {
+        final stats = widget.propertyData[selectedType];
+        if (stats == null) {
+          return Center(
+            child: FittedBox(
+              child: Text(
+                'لا توجد بيانات',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                ),
               ),
             ),
-            leftTitles: AxisTitles(
-              sideTitles: SideTitles(
-                showTitles: true,
-                reservedSize: 40,
-                interval: _getInterval(stats),
-                getTitlesWidget: (value, meta) {
-                  return Text(
-                    value.toInt().toString(),
-                    style: const TextStyle(
-                      color: Color(0xFF7F8C8D),
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
+          );
+        }
+
+        return BarChart(
+          BarChartData(
+            alignment: BarChartAlignment.spaceAround,
+            maxY: _getMaxY(stats),
+            barTouchData: BarTouchData(
+              enabled: true,
+              touchTooltipData: BarTouchTooltipData(
+                getTooltipColor: (group) => const Color(0xFF2C3E50),
+                tooltipBorder: const BorderSide(color: Colors.transparent),
+                tooltipPadding: const EdgeInsets.all(8),
+                tooltipMargin: 8,
+                getTooltipItem: (group, groupIndex, rod, rodIndex) {
+                  String label = '';
+                  switch (groupIndex) {
+                    case 0:
+                      label = 'متاح';
+                      break;
+                    case 1:
+                      label = 'مؤجر';
+                      break;
+                    case 2:
+                      label = 'مباع';
+                      break;
+                  }
+                  return BarTooltipItem(
+                    '$label\n${rod.toY.toInt()}',
+                    const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
                     ),
                   );
                 },
               ),
             ),
-          ),
-          gridData: FlGridData(
-            show: true,
-            drawVerticalLine: false,
-            horizontalInterval: _getInterval(stats),
-            getDrawingHorizontalLine: (value) {
-              return FlLine(color: Colors.grey.shade300, strokeWidth: 1);
-            },
-          ),
-          borderData: FlBorderData(show: false),
-          barGroups: [
-            _buildBarGroup(
-              0,
-              stats.available.toDouble(),
-              const Color(0xFF7BDCB5),
+            titlesData: FlTitlesData(
+              show: true,
+              rightTitles: const AxisTitles(
+                sideTitles: SideTitles(showTitles: false),
+              ),
+              topTitles: const AxisTitles(
+                sideTitles: SideTitles(showTitles: false),
+              ),
+              bottomTitles: AxisTitles(
+                sideTitles: SideTitles(
+                  showTitles: true,
+                  getTitlesWidget: (value, meta) =>
+                      _getBottomTitles(value, meta, context: context),
+                  reservedSize: 42,
+                ),
+              ),
+              leftTitles: AxisTitles(
+                sideTitles: SideTitles(
+                  showTitles: true,
+                  reservedSize: 40,
+                  interval: _getInterval(stats),
+                  getTitlesWidget: (value, meta) {
+                    return FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        value.toInt().toString(),
+                        style: const TextStyle(
+                          color: Color(0xFF7F8C8D),
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
             ),
-            _buildBarGroup(1, stats.rented.toDouble(), const Color(0xFFF9A875)),
-            _buildBarGroup(2, stats.sold.toDouble(), Color(0xFFB58DF1)),
-          ],
-        ),
-      ),
+            gridData: FlGridData(
+              show: true,
+              drawVerticalLine: false,
+              horizontalInterval: _getInterval(stats),
+              getDrawingHorizontalLine: (value) {
+                return FlLine(color: Colors.grey.shade300, strokeWidth: 1);
+              },
+            ),
+            borderData: FlBorderData(show: false),
+            barGroups: [
+              _buildBarGroup(
+                0,
+                stats.available.toDouble(),
+                const Color(0xFF7BDCB5),
+                stats,
+              ),
+              _buildBarGroup(
+                1,
+                stats.rented.toDouble(),
+                const Color(0xFFF9A875),
+                stats,
+              ),
+              _buildBarGroup(
+                2,
+                stats.sold.toDouble(),
+                const Color(0xFFB58DF1),
+                stats,
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
-  Widget _getBottomTitles(double value, TitleMeta meta) {
-    const style = TextStyle(
-      color: Color(0xFF2C3E50),
-      fontWeight: FontWeight.bold,
-      fontSize: 14,
-    );
+  Widget _getBottomTitles(
+    double value,
+    TitleMeta meta, {
+    required BuildContext context,
+  }) {
     String text;
     switch (value.toInt()) {
       case 0:
@@ -261,10 +329,18 @@ class _PropertyStatsChartState extends State<PropertyStatsChart> {
       default:
         text = '';
     }
-    return Text(text, style: style);
+    return FittedBox(
+      fit: BoxFit.scaleDown,
+      child: Text(
+        text,
+        style: AppStyles.styleBold16(context).copyWith(
+          color: const Color(0xFF2C3E50),
+        ),
+      ),
+    );
   }
 
-  BarChartGroupData _buildBarGroup(int x, double y, Color color) {
+  BarChartGroupData _buildBarGroup(int x, double y, Color color, PropertyStats stats) {
     return BarChartGroupData(
       x: x,
       barRods: [
@@ -278,7 +354,7 @@ class _PropertyStatsChartState extends State<PropertyStatsChart> {
           ),
           backDrawRodData: BackgroundBarChartRodData(
             show: true,
-            toY: _getMaxY(widget.propertyData[selectedType]!),
+            toY: _getMaxY(stats),
             color: Colors.grey.shade200,
           ),
         ),
@@ -287,18 +363,30 @@ class _PropertyStatsChartState extends State<PropertyStatsChart> {
   }
 
   Widget _buildLegend() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        _buildLegendItem('متاح', Color(0xFF7BDCB5)),
-        _buildLegendItem('مؤجر', const Color(0xFFF39C12)),
-        _buildLegendItem('مباع', const Color(0xFFE74C3C)),
-      ],
+    return ValueListenableBuilder<PropertyType>(
+      valueListenable: selectedTypeNotifier,
+      builder: (context, selectedType, _) {
+        final stats = widget.propertyData[selectedType];
+
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Flexible(
+              child: _buildLegendItem('متاح', const Color(0xFF7BDCB5), stats),
+            ),
+            Flexible(
+              child: _buildLegendItem('مؤجر', const Color(0xFFF9A875), stats),
+            ),
+            Flexible(
+              child: _buildLegendItem('مباع', const Color(0xFFB58DF1), stats),
+            ),
+          ],
+        );
+      },
     );
   }
 
-  Widget _buildLegendItem(String label, Color color) {
-    final stats = widget.propertyData[selectedType];
+  Widget _buildLegendItem(String label, Color color, PropertyStats? stats) {
     int value = 0;
 
     if (stats != null) {
@@ -308,6 +396,7 @@ class _PropertyStatsChartState extends State<PropertyStatsChart> {
     }
 
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Container(
           width: 12,
@@ -318,22 +407,32 @@ class _PropertyStatsChartState extends State<PropertyStatsChart> {
           ),
         ),
         const SizedBox(width: 8),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              label,
-              style: const TextStyle(fontSize: 12, color: Color(0xFF7F8C8D)),
-            ),
-            Text(
-              value.toString(),
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF2C3E50),
+        Flexible(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  label,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Color(0xFF7F8C8D),
+                  ),
+                ),
               ),
-            ),
-          ],
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  value.toString(),
+                  style: AppStyles.styleBold16(context).copyWith(
+                    color: const Color(0xFF2C3E50),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );

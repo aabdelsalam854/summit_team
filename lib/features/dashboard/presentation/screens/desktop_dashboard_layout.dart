@@ -6,6 +6,8 @@ import 'package:summit_team/core/widget/custom_text_button_with_icon.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/custom_app_bar_sliever.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/dashboard_stats_card.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/detailed_income_chart.dart';
+import 'package:summit_team/features/home/presentation/screens/desktop_home_layout.dart';
+import 'package:summit_team/features/home/presentation/screens/mobile_home_layout.dart';
 
 import 'package:summit_team/features/properties/data/models/property_model.dart';
 import 'dr.dart' as property_stats;
@@ -115,8 +117,9 @@ class _DesktopDashboardLayoutState extends State<DesktopDashboardLayout> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 14),
                       child: Row(
+                        crossAxisAlignment:
+                            CrossAxisAlignment.start, // مهم جداً
                         children: [
-                          // Stats Cards (الكارت الأول)
                           Expanded(
                             child: Card(
                               color: AlessamyColors.cardBackground,
@@ -125,15 +128,12 @@ class _DesktopDashboardLayoutState extends State<DesktopDashboardLayout> {
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(16),
-                                child: SizedBox(
-                                  height: 480,
-                                  child: _buildStatsCards(context),
-                                ),
+                                child: _buildStatsCards(context),
                               ),
                             ),
                           ),
+
                           const SizedBox(width: 16),
-                          // Property Stats Chart (الكارت الثاني)
                           Expanded(
                             child: Card(
                               color: AlessamyColors.cardBackground,
@@ -143,10 +143,9 @@ class _DesktopDashboardLayoutState extends State<DesktopDashboardLayout> {
                               child: Padding(
                                 padding: const EdgeInsets.all(16),
                                 child: SizedBox(
-                                  height: 480,
-                                  child: property_stats.PropertyStatsChart(
-                                    propertyData: _propertyData,
-                                  ),
+                                  width: 400,
+                                  height: 400,
+                                  child: IncomeSectionBody(),
                                 ),
                               ),
                             ),
@@ -173,24 +172,13 @@ class _DesktopDashboardLayoutState extends State<DesktopDashboardLayout> {
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(16),
-                                child: SizedBox(
-                                  height: 480,
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SizedBox(
-                                        height: 400,
-                                        child: DetailedIncomeChart(),
-                                      ),
-                                      const SizedBox(height: 16),
-                                      IncomeLegend(),
-                                    ],
-                                  ),
+                                child: property_stats.PropertyStatsChart(
+                                  propertyData: _propertyData,
                                 ),
                               ),
                             ),
                           ),
+
                           const SizedBox(width: 16),
                           // Featured Properties (الكارت الرابع)
                           Expanded(
@@ -231,11 +219,15 @@ class _DesktopDashboardLayoutState extends State<DesktopDashboardLayout> {
                                           ),
                                         ],
                                       ),
-                                      // Expanded(
-                                      //   child: FeaturedPropertiesList(
-                                      //     properties: _getDemoProperties(),
-                                      //   ),
-                                      // ),
+                                      Expanded(
+                                        child: SizedBox(
+                                          height: 400,
+                                          width:  400,
+                                          child: FeaturedPropertiesList(
+                                            properties: getDemoProperties(),
+                                          ),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),

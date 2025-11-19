@@ -9,7 +9,6 @@ import 'package:summit_team/features/Employees/presentation/widgets/employees_li
 import 'package:summit_team/features/Employees/presentation/widgets/employees_states_row.dart';
 import 'package:summit_team/features/Employees/presentation/widgets/role_distribution_card.dart';
 
-
 class EmployeesDeskTop extends StatelessWidget {
   final List<Employee> employees;
   final EmployeeRole? selectedRole;
@@ -266,5 +265,3 @@ class EmployeesDeskTop extends StatelessWidget {
     );
   }
 }
-
-

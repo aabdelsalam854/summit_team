@@ -4358,58 +4358,78 @@ class LatestPropertiesGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final featuredProperties = properties.where((p) => p.isFeatured).toList();
+    final featured = properties.where((p) => p.isFeatured).toList();
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        final width = constraints.maxWidth;
+        double width = constraints.maxWidth;
+        double height = constraints.maxHeight;
 
-        // ---- حسابات الريسبونسيف ----
-        final targetCardWidth = 360;
-        int crossAxisCount = (width / targetCardWidth).floor();
-        crossAxisCount = crossAxisCount.clamp(1, 3);
+        // int crossAxisCount;
 
-        final spacing = 24;
-        final totalSpacing = spacing * (crossAxisCount - 1);
-        final availableWidth = width - 96 - totalSpacing;
-        final itemWidth = availableWidth / crossAxisCount;
-        final itemHeight = itemWidth * .85;
-        final childAspectRatio = itemWidth / itemHeight;
-        log('crossAxisCount: $crossAxisCount');
+        // // if (width < 800) {
+        // //   crossAxisCount = 1;
+
+        // // } else if (width < 1200) {
+        // //   crossAxisCount = 2;
+
+        // // } else {
+        // //   crossAxisCount = 3;
+
+        // // }
+
+        // if (width <= 600) {
+        //   crossAxisCount = 1;
+        // } else if (width <= 800) {
+        //   crossAxisCount = 2;
+        // } else {
+        //   crossAxisCount = 3;
+        // }
+        int crossAxisCount;
+
+        if (width <= 600) {
+          crossAxisCount = 1;
+        } else if (width <= 800) {
+          crossAxisCount = 2;
+        } else if (width <= 1000) {
+          crossAxisCount = 3;
+        } else if (width <= 1200) {
+          crossAxisCount = 3;
+        } else if (width <= 1400) {
+          crossAxisCount = 4;
+        } else if (width <= 1600) {
+          crossAxisCount = 5;
+        } else if (width <= 1800) {
+          crossAxisCount = 6;
+        } else if (width <= 2000) {
+          crossAxisCount = 7;
+        } else if (width <= 2200) {
+          crossAxisCount = 8;
+        } else {
+          crossAxisCount = 10;
+        }
 
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 48),
-          child: ScrollConfiguration(
-            behavior: const MaterialScrollBehavior().copyWith(
-              dragDevices: {
-                PointerDeviceKind.mouse,
-                PointerDeviceKind.touch,
-                PointerDeviceKind.trackpad,
-                PointerDeviceKind.invertedStylus,
-              },
+          child: GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: crossAxisCount,
+              crossAxisSpacing: 24,
+              mainAxisSpacing: 24,
+              childAspectRatio: width <= 600 ? 1.2 : (width <= 1200 ? 1 : .8),
             ),
-            child: GridView.builder(
-              shrinkWrap: true,
-              physics: const BouncingScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: crossAxisCount,
-                childAspectRatio: childAspectRatio,
-                crossAxisSpacing: spacing.toDouble(),
-                mainAxisSpacing: 24,
-              ),
-              itemCount: featuredProperties.length,
-              itemBuilder: (context, index) {
-                return PropertyCardWidget(
-                  property: featuredProperties[index],
-                  onTap: () {},
-                );
-              },
-            ),
+            itemCount: featured.length,
+            itemBuilder: (context, index) {
+              return PropertyCardWidget(
+                property: featured[index],
+                onTap: () {},
+              );
+            },
           ),
         );
       },
     );
   }
 }
-
-

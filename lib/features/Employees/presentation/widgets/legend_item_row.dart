@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class LegendItemRow extends StatelessWidget {
@@ -23,15 +22,31 @@ class LegendItemRow extends StatelessWidget {
 
     return Row(
       children: [
-        Container(
-          width: 14,
-          height: 14,
-          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+        Flexible(
+          fit: FlexFit.tight,
+          child: Container(
+            width: 14,
+            height: 14,
+            decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+          ),
         ),
-        const SizedBox(width: 12),
-        Text(label, style: const TextStyle(color: Colors.white, fontSize: 16)),
-        const SizedBox(width: 12),
-        Text('($percentage)', style: const TextStyle(color: Colors.white70)),
+        Flexible(child: const SizedBox(width: 12)),
+        Flexible(
+          fit: FlexFit.tight,
+
+          child: Text(
+            label,
+            style:a,
+          ),
+        ),
+        Flexible(child: const SizedBox(width: 12)),
+        Flexible(
+          fit: FlexFit.tight,
+          child: Text(
+            '($percentage)',
+            style: const TextStyle(color: Colors.white70),
+          ),
+        ),
       ],
     );
   }

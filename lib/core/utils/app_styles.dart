@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:summit_team/core/utils/alessamy_colors.dart';
 import 'package:summit_team/core/utils/size_config.dart';
 
 abstract class AppStyles {
@@ -65,21 +66,21 @@ abstract class AppStyles {
     );
   }
 
-  static TextStyle styleSemiBold24(BuildContext context) {
+  static TextStyle styleBold18(BuildContext context) {
     return TextStyle(
-      color: const Color(0xFF4EB7F2),
-      fontSize: getResponsiveFontSize(context, fontSize: 24),
+      color:   AlessamyColors.primaryGold,
+      fontSize: getResponsiveFontSize(context, fontSize: 18),
       fontFamily: 'NotoKufiArabic',
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.bold,
     );
   }
 
   static TextStyle styleRegular14(BuildContext context) {
     return TextStyle(
       color: const Color(0xFFAAAAAA),
-      fontSize: getResponsiveFontSize(context, fontSize: 14),
+      fontSize: getResponsiveFontSize(context, fontSize: 18),
       fontFamily: 'NotoKufiArabic',
-      fontWeight: FontWeight.w400,
+      fontWeight: FontWeight.w700,
     );
   }
 

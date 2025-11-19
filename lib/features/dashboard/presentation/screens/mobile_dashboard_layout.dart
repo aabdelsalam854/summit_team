@@ -167,31 +167,31 @@ class _MobileDashboardLayoutState extends State<MobileDashboardLayout> {
             const SliverToBoxAdapter(child: SizedBox(height: 16)),
 
             // Income Chart
-      SliverToBoxAdapter(
-  child: Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 14),
-    child: Card(
-      color: AlessamyColors.cardBackground,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 100, // الارتفاع اللي انت عايزه
-              width: double.infinity, // يمين وشمال
-              child: DetailedIncomeChart(),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 14),
+                child: Card(
+                  color: AlessamyColors.cardBackground,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      children: [
+                        // SizedBox(
+                        //   height: 100, // الارتفاع اللي انت عايزه
+                        //   width: double.infinity, // يمين وشمال
+                        //   child: DetailedIncomeChart(),
+                        // ),
+                        const SizedBox(height: 16),
+                        IncomeSectionBody(),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ),
-            const SizedBox(height: 16),
-            IncomeLegend(),
-          ],
-        ),
-      ),
-    ),
-  ),
-),
 
             const SliverToBoxAdapter(child: SizedBox(height: 16)),
 
@@ -236,8 +236,9 @@ class _MobileDashboardLayoutState extends State<MobileDashboardLayout> {
                         const SizedBox(height: 12),
                         FeaturedPropertiesList(
                           scrollDirection: Axis.horizontal,
-                          
-                          properties: getDemoProperties()),
+
+                          properties: getDemoProperties(),
+                        ),
                       ],
                     ),
                   ),
@@ -270,11 +271,7 @@ class _MobileDashboardLayoutState extends State<MobileDashboardLayout> {
               gradient: AlessamyColors.goldToBlackGradient,
               shape: BoxShape.circle,
             ),
-            child: Icon(
-              Icons.dashboard,
-              size: 32,
-              color: AlessamyColors.white,
-            ),
+            child: Icon(Icons.dashboard, size: 32, color: AlessamyColors.white),
           ),
           SizedBox(height: 12),
           Text(
@@ -294,10 +291,7 @@ class _MobileDashboardLayoutState extends State<MobileDashboardLayout> {
             ),
             title: Text(
               'الرئيسية',
-              style: TextStyle(
-                color: AlessamyColors.textLight,
-                fontSize: 14,
-              ),
+              style: TextStyle(color: AlessamyColors.textLight, fontSize: 14),
             ),
             onTap: () {},
           ),
@@ -329,10 +323,7 @@ class _MobileDashboardLayoutState extends State<MobileDashboardLayout> {
             ),
             title: Text(
               'العقارات',
-              style: TextStyle(
-                color: AlessamyColors.textLight,
-                fontSize: 14,
-              ),
+              style: TextStyle(color: AlessamyColors.textLight, fontSize: 14),
             ),
             onTap: () {},
           ),
@@ -344,10 +335,7 @@ class _MobileDashboardLayoutState extends State<MobileDashboardLayout> {
             ),
             title: Text(
               'الإعدادات',
-              style: TextStyle(
-                color: AlessamyColors.textLight,
-                fontSize: 14,
-              ),
+              style: TextStyle(color: AlessamyColors.textLight, fontSize: 14),
             ),
             onTap: () {},
           ),
@@ -360,10 +348,7 @@ class _MobileDashboardLayoutState extends State<MobileDashboardLayout> {
             ),
             title: Text(
               'تسجيل الخروج',
-              style: TextStyle(
-                color: AlessamyColors.textLight,
-                fontSize: 14,
-              ),
+              style: TextStyle(color: AlessamyColors.textLight, fontSize: 14),
             ),
             onTap: () {},
           ),

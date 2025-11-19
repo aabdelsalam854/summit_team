@@ -115,7 +115,7 @@ class _TabletDashboardLayoutState extends State<TabletDashboardLayout> {
                                   child: DetailedIncomeChart(),
                                 ),
                                 const SizedBox(height: 16),
-                                IncomeLegend(),
+                                      IncomeSectionBody (),
                               ],
                             ),
                           ),

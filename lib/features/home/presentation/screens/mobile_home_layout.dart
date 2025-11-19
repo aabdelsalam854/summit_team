@@ -177,45 +177,35 @@ class FeaturedPropertiesList extends StatelessWidget {
   Widget build(BuildContext context) {
     final featured = properties.where((p) => p.isFeatured).toList();
 
-    return SizedBox(
-      height: 380,
-      child: ScrollConfiguration(
-        behavior: const MaterialScrollBehavior().copyWith(
-          scrollbars: false,
-          dragDevices: {
-            PointerDeviceKind.mouse,
-            PointerDeviceKind.touch,
-            PointerDeviceKind.trackpad,
-          },
-        ),
-        child: ListView.separated(
-          scrollDirection: scrollDirection ?? Axis.vertical,
-          padding: EdgeInsets.symmetric(horizontal: 12),
-          itemCount: featured.length,
-          separatorBuilder: (context, index) => SizedBox(width: 10),
-          itemBuilder: (context, index) {
-            return SizedBox(
-              width: 260,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: PropertyCardWidget(
-                  property: featured[index],
-                  onTap: () {
-                    context.push(
-                      '${Routes.kPropertyDetails}/${featured[index].id}',
-                      extra: featured[index],
-                    );
-                  },
-                ),
-              ),
-            );
-          },
-        ),
+    return ScrollConfiguration(
+      behavior: const MaterialScrollBehavior().copyWith(
+        scrollbars: false,
+        dragDevices: {
+          PointerDeviceKind.mouse,
+          PointerDeviceKind.touch,
+          PointerDeviceKind.trackpad,
+        },
+      ),
+      child: ListView.separated(
+        scrollDirection: scrollDirection ?? Axis.vertical,
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        itemCount: featured.length,
+        separatorBuilder: (context, index) => const SizedBox(height: 10),
+        itemBuilder: (context, index) {
+          return PropertyCardWidget(
+            property: featured[index],
+            onTap: () {
+              context.push(
+                '${Routes.kPropertyDetails}/${featured[index].id}',
+                extra: featured[index],
+              );
+            },
+          );
+        },
       ),
     );
   }
 }
-
 // /// يجعل ListView تستجيب للـ mouse wheel على الويب والديسكتوب
 // class MouseScrollBehavior extends ScrollBehavior {
 //   @override

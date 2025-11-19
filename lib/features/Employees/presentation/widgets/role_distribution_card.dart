@@ -1,4 +1,3 @@
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:summit_team/core/utils/alessamy_colors.dart';
@@ -22,7 +21,7 @@ class RoleDistributionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: AlessamyColors.cardBackground,
         borderRadius: BorderRadius.circular(16),
@@ -57,58 +56,66 @@ class RoleDistributionCard extends StatelessWidget {
             child: Row(
               children: [
                 // Pie Chart
-                Expanded(
+                Flexible(
+                  fit: FlexFit.loose,
                   flex: 2,
-                  child: PieChart(
-                    PieChartData(
-                      sectionsSpace: 2,
-                      centerSpaceRadius: 60,
-                      sections: [
-                        PieChartSectionData(
-                          value: admins.toDouble(),
-                          title: '$admins',
-                          color: const Color(0xFF9B59B6),
-                          radius: 60,
-                          titleStyle: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                  child: AspectRatio(
+                    aspectRatio: 1,
+                    child: PieChart(
+                      PieChartData(
+                        sectionsSpace: 2,
+                        centerSpaceRadius: 60,
+                        sections: [
+                          PieChartSectionData(
+                            value: admins.toDouble(),
+                            title: '$admins',
+                            color: const Color(0xFF9B59B6),
+                            radius: 60,
+                            titleStyle: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                           ),
-                        ),
-                        PieChartSectionData(
-                          value: accountants.toDouble(),
-                          title: '$accountants',
-                          color: const Color(0xFFF39C12),
-                          radius: 60,
-                          titleStyle: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                          PieChartSectionData(
+                            value: accountants.toDouble(),
+                            title: '$accountants',
+                            color: const Color(0xFFF39C12),
+                            radius: 60,
+                            titleStyle: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                           ),
-                        ),
-                        PieChartSectionData(
-                          value: employees.toDouble(),
-                          title: '$employees',
-                          color: const Color(0xFF27AE60),
-                          radius: 60,
-                          titleStyle: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                          PieChartSectionData(
+                            value: employees.toDouble(),
+                            title: '$employees',
+                            color: const Color(0xFF27AE60),
+                            radius: 60,
+                            titleStyle: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
 
-                const SizedBox(width: 32),
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: const SizedBox(width: 32),
+                ),
 
                 // Legend
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       LegendItemRow(
                         label: 'مدراء',
@@ -116,14 +123,14 @@ class RoleDistributionCard extends StatelessWidget {
                         total: totalEmployees,
                         color: const Color(0xFF9B59B6),
                       ),
-                      const SizedBox(height: 16),
+                      Flexible(child: const SizedBox(height: 16)),
                       LegendItemRow(
                         label: 'محاسبين',
                         count: accountants,
                         total: totalEmployees,
                         color: const Color(0xFFF39C12),
                       ),
-                      const SizedBox(height: 16),
+                      Flexible(child: const SizedBox(height: 16)),
                       LegendItemRow(
                         label: 'موظفين',
                         count: employees,

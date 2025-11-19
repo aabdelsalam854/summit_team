@@ -4356,58 +4356,32 @@ class LatestPropertiesGrid extends StatelessWidget {
 
   const LatestPropertiesGrid({super.key, required this.properties});
 
+  int _getCrossAxisCount(double width) {
+    if (width <= 600) return 1;
+    if (width <= 900) return 2;
+    if (width <= 1200) return 3;
+    if (width <= 1400) return 4;
+    if (width <= 1600) return 5;
+    if (width <= 2100) return 6;
+    return 7; // maximum
+  }
+
+  double _getCardHeight(double width) {
+    if (width <= 600) return 380;
+    if (width <= 900) return 380;
+    if (width <= 1200) return 360;
+    return 350;
+  }
+
   @override
   Widget build(BuildContext context) {
     final featured = properties.where((p) => p.isFeatured).toList();
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        double width = constraints.maxWidth;
-        double height = constraints.maxHeight;
-
-        // int crossAxisCount;
-
-        // // if (width < 800) {
-        // //   crossAxisCount = 1;
-
-        // // } else if (width < 1200) {
-        // //   crossAxisCount = 2;
-
-        // // } else {
-        // //   crossAxisCount = 3;
-
-        // // }
-
-        // if (width <= 600) {
-        //   crossAxisCount = 1;
-        // } else if (width <= 800) {
-        //   crossAxisCount = 2;
-        // } else {
-        //   crossAxisCount = 3;
-        // }
-        int crossAxisCount;
-
-        if (width <= 600) {
-          crossAxisCount = 1;
-        } else if (width <= 800) {
-          crossAxisCount = 2;
-        } else if (width <= 1000) {
-          crossAxisCount = 3;
-        } else if (width <= 1200) {
-          crossAxisCount = 3;
-        } else if (width <= 1400) {
-          crossAxisCount = 4;
-        } else if (width <= 1600) {
-          crossAxisCount = 5;
-        } else if (width <= 1800) {
-          crossAxisCount = 6;
-        } else if (width <= 2000) {
-          crossAxisCount = 7;
-        } else if (width <= 2200) {
-          crossAxisCount = 8;
-        } else {
-          crossAxisCount = 10;
-        }
+        final width = constraints.maxWidth;
+        final crossAxisCount = _getCrossAxisCount(width);
+        final cardHeight = _getCardHeight(width);
 
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 48),
@@ -4418,7 +4392,7 @@ class LatestPropertiesGrid extends StatelessWidget {
               crossAxisCount: crossAxisCount,
               crossAxisSpacing: 24,
               mainAxisSpacing: 24,
-              childAspectRatio: width <= 600 ? 1.2 : (width <= 1200 ? 1 : .8),
+              mainAxisExtent: cardHeight,
             ),
             itemCount: featured.length,
             itemBuilder: (context, index) {

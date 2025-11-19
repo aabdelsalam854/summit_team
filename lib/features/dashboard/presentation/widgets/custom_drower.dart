@@ -17,7 +17,7 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: isCompact ? 70 : 250, // ⬅️ عرض ديناميكي
+      // ⚠️ إزالة MediaQuery لتحسين الأداء - العرض بيجي من الـ parent
       decoration: BoxDecoration(
         color: AlessamyColors.cardBackground,
         border: Border(
@@ -120,7 +120,7 @@ class CustomDrawer extends StatelessWidget {
               children: [
                 const Spacer(),
                 const SizedBox(height: 12),
-                
+
                 // Logout
                 MenuItem(
                   icon: Icons.logout,
@@ -220,8 +220,8 @@ class MenuItem extends StatelessWidget {
         child: InkWell(
           onTap: onTap,
           borderRadius: BorderRadius.circular(12),
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
+          child: Container(
+            // استخدام Container عادي بدلاً من AnimatedContainer لتحسين الأداء
             padding: EdgeInsets.symmetric(
               horizontal: isCompact ? 0 : 16,
               vertical: 14,
@@ -264,8 +264,9 @@ class MenuItem extends StatelessWidget {
                           title,
                           style: TextStyle(
                             fontSize: 15,
-                            fontWeight:
-                                isSelected ? FontWeight.bold : FontWeight.w500,
+                            fontWeight: isSelected
+                                ? FontWeight.bold
+                                : FontWeight.w500,
                             color: isSelected
                                 ? AlessamyColors.white
                                 : AlessamyColors.textLight,

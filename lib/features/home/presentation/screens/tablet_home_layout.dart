@@ -1,14 +1,10 @@
-import 'package:summit_team/core/utils/alessamy_colors.dart';
+
 import 'package:summit_team/features/dashboard/presentation/widgets/custom_app_bar_sliever.dart';
 import 'package:summit_team/features/home/presentation/screens/desktop_home_layout.dart';
 import 'package:summit_team/features/home/presentation/screens/search_view.dart';
-
 import 'package:summit_team/features/home/presentation/widgets/footer_widget.dart';
-
 import 'package:summit_team/features/home/presentation/widgets/search_filter_widget.dart';
-
 import 'package:flutter/material.dart';
-
 import 'package:summit_team/config/locale/app_localizations.dart';
 import 'package:summit_team/config/locale/keys_translate.dart';
 
@@ -19,11 +15,7 @@ class TabletHomeLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    return Scaffold(
-      backgroundColor: AlessamyColors.backgroundColor,
-      // appBar: const CustomAppBarWidget(),
-      // endDrawer: const CustomDrawerWidget(),
-      body: SafeArea(
+    return  SafeArea(
         child: CustomScrollView(
           slivers: [
             // Hero Section
@@ -91,7 +83,7 @@ class TabletHomeLayout extends StatelessWidget {
             SliverToBoxAdapter(child: FooterWidget()),
           ],
         ),
-      ),
+   
     );
   }
 }

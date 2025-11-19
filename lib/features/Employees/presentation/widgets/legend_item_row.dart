@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:summit_team/core/utils/app_styles.dart';
 
 class LegendItemRow extends StatelessWidget {
   final String label;
@@ -36,7 +37,9 @@ class LegendItemRow extends StatelessWidget {
 
           child: Text(
             label,
-            style:a,
+            style: AppStyles.styleRegular14(
+              context,
+            ).copyWith(color: Colors.white),
           ),
         ),
         Flexible(child: const SizedBox(width: 12)),

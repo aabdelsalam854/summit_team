@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:summit_team/core/adaptive_layout/adaptive_layout_widget.dart';
 import 'package:summit_team/features/Employees/presentation/models/employee.dart';
 import 'package:summit_team/features/Employees/presentation/pages/employees_mopile.dart';
 import 'package:summit_team/features/Employees/presentation/pages/employees_screen.dart';

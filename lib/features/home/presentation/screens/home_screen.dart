@@ -1,4 +1,3 @@
-import 'package:summit_team/core/adaptive_layout/adaptive_layout_widget.dart';
 import 'package:summit_team/features/home/presentation/screens/desktop_home_layout.dart';
 import 'package:summit_team/features/home/presentation/screens/mobile_home_layout.dart';
 import 'package:summit_team/features/home/presentation/screens/tablet_home_layout.dart';

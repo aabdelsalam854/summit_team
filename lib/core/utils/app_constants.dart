@@ -1,4 +1,3 @@
-import 'package:summit_team/core/extensions/size.dart';
 import 'package:flutter/material.dart';
 
 class AppConstants {

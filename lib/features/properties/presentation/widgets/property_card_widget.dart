@@ -36,10 +36,14 @@ class PropertyCardWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             // الصورة مع AspectRatio
-            PropertyImageWidget(property: property),
+            Flexible(
+              fit: FlexFit.loose,
+              child: PropertyImageWidget(property: property)),
 
             // المحتوى
-            ItemCardDetails(property: property),
+            Flexible(
+              fit: FlexFit.loose,
+              child: ItemCardDetails(property: property)),
           ],
         ),
       ),
@@ -100,42 +104,61 @@ class ItemCardDetails extends StatelessWidget {
 /// ---------------------------------------------------------------------------
 ///  🟩 PropertyImageWidget — ويدجت الصورة
 /// ---------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+///  🟩 PropertyImageWidget — ويدجت الصورة
+/// ---------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+///  🟩 PropertyImageWidget — ويدجت الصورة
+/// ---------------------------------------------------------------------------
 class PropertyImageWidget extends StatelessWidget {
-  const PropertyImageWidget({super.key, required this.property});
+  const PropertyImageWidget({
+    super.key,
+    required this.property,
+    this.isNarrow = false,
+  });
 
   final PropertyModel property;
+  final bool isNarrow;
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(12),
-        topRight: Radius.circular(12),
-      ),
-      child: AspectRatio(
-        aspectRatio: 16 / 9,
-        child: CachedNetworkImage(
-          imageUrl: property.imageUrl,
-          width: double.infinity,
-          fit: BoxFit.cover,
-          placeholder: (context, url) => Container(
-            color: AlessamyColors.lightGray,
-            child: const Center(child: CircularProgressIndicator()),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // الارتفاع يكون نسبة من العرض المتاح
+        final imageHeight = constraints.maxWidth * 0.65;
+        
+        return ClipRRect(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(12),
+            topRight: Radius.circular(12),
           ),
-          errorWidget: (context, url, error) => Container(
-            color: AlessamyColors.lightGray,
-            child: const Icon(
-              Icons.image_not_supported_outlined,
-              size: 48,
-              color: Colors.grey,
+          child: SizedBox(
+            height: imageHeight.clamp(150, 220),
+            width: double.infinity,
+            child: CachedNetworkImage(
+              imageUrl: property.imageUrl,
+              fit: BoxFit.cover,
+              placeholder: (context, url) => Container(
+                color: AlessamyColors.lightGray,
+                child: const Center(
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                ),
+              ),
+              errorWidget: (context, url, error) => Container(
+                color: AlessamyColors.lightGray,
+                child: Icon(
+                  Icons.image_not_supported_outlined,
+                  size: isNarrow ? 32 : 48,
+                  color: Colors.grey,
+                ),
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
-
 /// ---------------------------------------------------------------------------
 ///  🟦 PropertyPriceWidget — ويدجت السعر
 /// ---------------------------------------------------------------------------

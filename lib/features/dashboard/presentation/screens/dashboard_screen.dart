@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:summit_team/core/adaptive_layout/adaptive_layout_widget.dart';
+import 'package:summit_team/core/utils/alessamy_colors.dart';
 import 'package:summit_team/features/dashboard/presentation/screens/desktop_dashboard_layout.dart';
 import 'package:summit_team/features/dashboard/presentation/screens/mobile_dashboard_layout.dart';
 import 'package:summit_team/features/dashboard/presentation/screens/tablet_dashboard_layout.dart';
@@ -12,10 +13,13 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const AdaptiveLayout(
-      mobileLayout: _buildMobileLayout,
-      tabletLayout: _buildTabletLayout,
-      desktopLayout: _buildDesktopLayout,
+    return Scaffold(
+backgroundColor: AlessamyColors.backgroundColor,
+      body: const AdaptiveLayout(
+        mobileLayout: _buildMobileLayout,
+        tabletLayout: _buildTabletLayout,
+        desktopLayout: _buildDesktopLayout,
+      ),
     );
   }
 

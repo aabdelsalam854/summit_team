@@ -172,8 +172,11 @@ class _DesktopDashboardLayoutState extends State<DesktopDashboardLayout> {
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(16),
-                                child: property_stats.PropertyStatsChart(
-                                  propertyData: _propertyData,
+                                child: SizedBox(
+                                  height: 480,
+                                  child: property_stats.PropertyStatsChart(
+                                    propertyData: _propertyData,
+                                  ),
                                 ),
                               ),
                             ),
@@ -222,7 +225,7 @@ class _DesktopDashboardLayoutState extends State<DesktopDashboardLayout> {
                                       Expanded(
                                         child: SizedBox(
                                           height: 400,
-                                          width:  400,
+                                          width: 400,
                                           child: FeaturedPropertiesList(
                                             properties: getDemoProperties(),
                                           ),

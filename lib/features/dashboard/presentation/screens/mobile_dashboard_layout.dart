@@ -147,23 +147,26 @@ class _MobileDashboardLayoutState extends State<MobileDashboardLayout> {
             const SliverToBoxAdapter(child: SizedBox(height: 16)),
 
             // Property Stats Chart
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 14),
-                child: Card(
-                  color: AlessamyColors.cardBackground,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: property_stats.PropertyStatsChart(
-                      propertyData: _propertyData,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+    SliverToBoxAdapter(
+  child: Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 14),
+    child: Card(
+      color: AlessamyColors.cardBackground,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: SizedBox(
+          height: MediaQuery.of(context).size.width < 600 ? 380 : 500,
+          child: property_stats.PropertyStatsChart(
+            propertyData: _propertyData,
+          ),
+        ),
+      ),
+    ),
+  ),
+),
             const SliverToBoxAdapter(child: SizedBox(height: 16)),
 
             // Income Chart
@@ -234,11 +237,11 @@ class _MobileDashboardLayoutState extends State<MobileDashboardLayout> {
                           ],
                         ),
                         const SizedBox(height: 12),
-                        FeaturedPropertiesList(
-                          scrollDirection: Axis.horizontal,
+                        // FeaturedPropertiesList(
+                        //   scrollDirection: Axis.horizontal,
 
-                          properties: getDemoProperties(),
-                        ),
+                        //   properties: getDemoProperties(),
+                        // ),
                       ],
                     ),
                   ),

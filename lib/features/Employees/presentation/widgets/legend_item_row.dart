@@ -23,32 +23,32 @@ class LegendItemRow extends StatelessWidget {
 
     return Row(
       children: [
-        Flexible(
-          fit: FlexFit.tight,
-          child: Container(
-            width: 14,
-            height: 14,
-            decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+        // الدائرة الملونة
+        Container(
+          width: 14,
+          height: 14,
+          decoration: BoxDecoration(
+            color: color,
+            shape: BoxShape.circle,
           ),
         ),
-        Flexible(child: const SizedBox(width: 12)),
+        const SizedBox(width: 12),
+        
+        // النص
         Flexible(
-          fit: FlexFit.tight,
-
           child: Text(
             label,
-            style: AppStyles.styleRegular14(
-              context,
-            ).copyWith(color: Colors.white),
+            style: AppStyles.styleRegular14(context)
+                .copyWith(color: Colors.white),
           ),
         ),
-        Flexible(child: const SizedBox(width: 12)),
-        Flexible(
-          fit: FlexFit.tight,
-          child: Text(
-            '($percentage)',
-            style: const TextStyle(color: Colors.white70),
-          ),
+        
+        const SizedBox(width: 12),
+        
+        // النسبة المئوية
+        Text(
+          '($percentage)',
+          style: const TextStyle(color: Colors.white70),
         ),
       ],
     );

@@ -17,7 +17,7 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // ⚠️ إزالة MediaQuery لتحسين الأداء - العرض بيجي من الـ parent
+      
       decoration: BoxDecoration(
         color: AlessamyColors.cardBackground,
         border: Border(

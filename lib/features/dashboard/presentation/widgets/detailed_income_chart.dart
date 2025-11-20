@@ -10,7 +10,7 @@ class DetailedIncomeChart extends StatefulWidget {
 }
 
 class _DetailedIncomeChartState extends State<DetailedIncomeChart> {
-  int activeIndex = -1;
+  final ValueNotifier<int> activeIndexNotifier = ValueNotifier<int>(-1);
 
   final List<_ChartItem> data = const [
     _ChartItem(label: 'المتاح', value: 40, color: Color(0xFF7BDCB5)),
@@ -19,18 +19,55 @@ class _DetailedIncomeChartState extends State<DetailedIncomeChart> {
   ];
 
   @override
-  Widget build(BuildContext context) {
-    return AspectRatio(aspectRatio: 1, child: PieChart(getChartData()));
+  void dispose() {
+    activeIndexNotifier.dispose();
+    super.dispose();
   }
 
-  PieChartData getChartData() {
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<int>(
+      valueListenable: activeIndexNotifier,
+      builder: (context, activeIndex, _) {
+        return AspectRatio(
+          aspectRatio: 1,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              PieChart(getChartData(activeIndex)),
+              // النص في المنتصف
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    activeIndex >= 0 ? data[activeIndex].label : 'العقارات',
+                    style: AppStyles.styleBold16(context)
+                        .copyWith(color: Colors.white),
+                  ),
+                  if (activeIndex >= 0) ...[
+                    const SizedBox(height: 4),
+                    Text(
+                      '${data[activeIndex].value.toInt()}%',
+                      style: AppStyles.styleBold18(context)
+                          .copyWith(color: data[activeIndex].color),
+                    ),
+                  ],
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  PieChartData getChartData(int activeIndex) {
     return PieChartData(
       pieTouchData: PieTouchData(
         enabled: true,
         touchCallback: (event, pietouchResponse) {
-          activeIndex =
+          activeIndexNotifier.value =
               pietouchResponse?.touchedSection?.touchedSectionIndex ?? -1;
-          setState(() {});
         },
       ),
       sectionsSpace: 0,
@@ -191,7 +228,6 @@ class IncomeSectionBody extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Expanded(child: DetailedIncomeChart()),
-
         Expanded(
           flex: 2,
           child: Padding(padding: EdgeInsets.all(8.0), child: IncomeDetails()),

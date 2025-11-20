@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:summit_team/config/routes/routes.dart';
 import 'package:summit_team/core/utils/alessamy_colors.dart';
+import 'package:summit_team/core/widget/custom_text_button_with_icon.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/dashboard_stats_card.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/detailed_income_chart.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/properties_table_widget.dart';
@@ -75,21 +76,70 @@ class _TabletDashboardLayoutState extends State<TabletDashboardLayout> {
             child: CircleAvatar(
               radius: 18,
               backgroundColor: AlessamyColors.primaryGold,
-              child: Icon(
-                Icons.person,
-                color: AlessamyColors.black,
-                size: 20,
-              ),
+              child: Icon(Icons.person, color: AlessamyColors.black, size: 20),
             ),
           ),
         ],
       ),
-      drawer: _buildDrawer(context),
+      // drawer: _buildDrawer(context),
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
             // Stats Cards
-            SliverToBoxAdapter(child: _buildStatsCards(context)),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.all(14),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'مرحباً بك في لوحة التحكم',
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: AlessamyColors.white,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        CustomButtonWithIcon(
+                          textColor: Colors.white,
+                          height: 60,
+                          width: 180,
+                          text: "Export Excel",
+                          onPressed: () {},
+                          icon: Icons.table_chart_rounded,
+                          buttonType: ButtonType.outlined,
+                          arrowIconLeft: true,
+                          arrowIconRight: false,
+                        ),
+                        SizedBox(width: 16),
+                        CustomButtonWithIcon(
+                          textColor: Colors.white,
+                          height: 60,
+                          width: 180,
+                          text: "إضافة عقار جديد",
+                          onPressed: () {
+                            context.push(Routes.kPropertyForm);
+                          },
+                          icon: Icons.arrow_circle_down_rounded,
+                          buttonType: ButtonType.outlined,
+                          arrowIconLeft: true,
+                          arrowIconRight: false,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.all(14),
+                child: _buildStatsCards(context),
+              ),
+            ),
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -114,8 +164,8 @@ class _TabletDashboardLayoutState extends State<TabletDashboardLayout> {
                                   height: 400,
                                   child: DetailedIncomeChart(),
                                 ),
-                                const SizedBox(height: 16),
-                                      IncomeSectionBody (),
+
+                                // IncomeSectionBody(),
                               ],
                             ),
                           ),
@@ -148,59 +198,57 @@ class _TabletDashboardLayoutState extends State<TabletDashboardLayout> {
             ),
             // SliverToBoxAdapter(child: Expanded(child: _buildPropertiesSection(context))),
             // Properties Table (الكارت الخامس)
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.all(14),
-                child: Expanded(
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    color: AlessamyColors.cardBackground,
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: SizedBox(
-                        height: 480,
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'العقارات المميزة',
-                                  style: TextStyle(
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.bold,
-                                    color: AlessamyColors.white,
-                                  ),
-                                ),
-                                TextButton(
-                                  onPressed: () {},
-                                  child: Text(
-                                    'عرض المزيد',
-                                    style: TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
-                                      color: AlessamyColors.primaryGold,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Expanded(
-                              child: FeaturedPropertiesList(
-                                scrollDirection: Axis.horizontal,
-                                properties: getDemoProperties(),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            // SliverToBoxAdapter(
+            //   child: Padding(
+            //     padding: const EdgeInsets.all(14),
+            //     child: Card(
+            //       shape: RoundedRectangleBorder(
+            //         borderRadius: BorderRadius.circular(12),
+            //       ),
+            //       color: AlessamyColors.cardBackground,
+            //       child: Padding(
+            //         padding: const EdgeInsets.all(16),
+            //         child: SizedBox(
+            //           height: 480, // مهم جداً لتحديد constraints
+            //           child: Column(
+            //             children: [
+            //               Row(
+            //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //                 children: [
+            //                   Text(
+            //                     'العقارات المميزة',
+            //                     style: TextStyle(
+            //                       fontSize: 22,
+            //                       fontWeight: FontWeight.bold,
+            //                       color: AlessamyColors.white,
+            //                     ),
+            //                   ),
+            //                   TextButton(
+            //                     onPressed: () {},
+            //                     child: Text(
+            //                       'عرض المزيد',
+            //                       style: TextStyle(
+            //                         fontSize: 22,
+            //                         fontWeight: FontWeight.bold,
+            //                         color: AlessamyColors.primaryGold,
+            //                       ),
+            //                     ),
+            //                   ),
+            //                 ],
+            //               ),
+            //               Expanded(
+            //                 child: FeaturedPropertiesList(
+            //                   scrollDirection: Axis.horizontal,
+            //                   properties: getDemoProperties(),
+            //                 ),
+            //               ),
+            //             ],
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
@@ -217,127 +265,134 @@ class _TabletDashboardLayoutState extends State<TabletDashboardLayout> {
     );
   }
 
-  Widget _buildDrawer(BuildContext context) {
-    return Drawer(
-      backgroundColor: AlessamyColors.cardBackground,
-      child: Column(
-        children: [
-          SizedBox(height: 48),
-          Container(
-            padding: EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              gradient: AlessamyColors.goldToBlackGradient,
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              Icons.dashboard,
-              size: 40,
-              color: AlessamyColors.white,
-            ),
-          ),
-          SizedBox(height: 12),
-          Text(
-            'لوحة التحكم',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: AlessamyColors.white,
-            ),
-          ),
-          SizedBox(height: 32),
-          ListTile(
-            leading: Icon(Icons.home, color: AlessamyColors.textLight),
-            title: Text(
-              'الرئيسية',
-              style: TextStyle(color: AlessamyColors.textLight),
-            ),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.dashboard_customize,
-              color: AlessamyColors.primaryGold,
-            ),
-            title: Text(
-              'الداشبورد',
-              style: TextStyle(color: AlessamyColors.white),
-            ),
-            selected: true,
-            selectedTileColor: AlessamyColors.primaryGold.withValues(
-              alpha: 0.1,
-            ),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.real_estate_agent,
-              color: AlessamyColors.textLight,
-            ),
-            title: Text(
-              'العقارات',
-              style: TextStyle(color: AlessamyColors.textLight),
-            ),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: Icon(Icons.settings, color: AlessamyColors.textLight),
-            title: Text(
-              'الإعدادات',
-              style: TextStyle(color: AlessamyColors.textLight),
-            ),
-            onTap: () {},
-          ),
-          const Spacer(),
-          ListTile(
-            leading: Icon(Icons.logout, color: AlessamyColors.textLight),
-            title: Text(
-              'تسجيل الخروج',
-              style: TextStyle(color: AlessamyColors.textLight),
-            ),
-            onTap: () {},
-          ),
-          SizedBox(height: 24),
-        ],
-      ),
-    );
-  }
+  // Widget _buildDrawer(BuildContext context) {
+  //   return Drawer(
+  //     backgroundColor: AlessamyColors.cardBackground,
+  //     child: Column(
+  //       children: [
+  //         SizedBox(height: 48),
+  //         Container(
+  //           padding: EdgeInsets.all(16),
+  //           decoration: BoxDecoration(
+  //             gradient: AlessamyColors.goldToBlackGradient,
+  //             shape: BoxShape.circle,
+  //           ),
+  //           child: Icon(Icons.dashboard, size: 40, color: AlessamyColors.white),
+  //         ),
+  //         SizedBox(height: 12),
+  //         Text(
+  //           'لوحة التحكم',
+  //           style: TextStyle(
+  //             fontSize: 20,
+  //             fontWeight: FontWeight.bold,
+  //             color: AlessamyColors.white,
+  //           ),
+  //         ),
+  //         SizedBox(height: 32),
+  //         ListTile(
+  //           leading: Icon(Icons.home, color: AlessamyColors.textLight),
+  //           title: Text(
+  //             'الرئيسية',
+  //             style: TextStyle(color: AlessamyColors.textLight),
+  //           ),
+  //           onTap: () {},
+  //         ),
+  //         ListTile(
+  //           leading: Icon(
+  //             Icons.dashboard_customize,
+  //             color: AlessamyColors.primaryGold,
+  //           ),
+  //           title: Text(
+  //             'الداشبورد',
+  //             style: TextStyle(color: AlessamyColors.white),
+  //           ),
+  //           selected: true,
+  //           selectedTileColor: AlessamyColors.primaryGold.withValues(
+  //             alpha: 0.1,
+  //           ),
+  //           onTap: () {},
+  //         ),
+  //         ListTile(
+  //           leading: Icon(
+  //             Icons.real_estate_agent,
+  //             color: AlessamyColors.textLight,
+  //           ),
+  //           title: Text(
+  //             'العقارات',
+  //             style: TextStyle(color: AlessamyColors.textLight),
+  //           ),
+  //           onTap: () {},
+  //         ),
+  //         ListTile(
+  //           leading: Icon(Icons.settings, color: AlessamyColors.textLight),
+  //           title: Text(
+  //             'الإعدادات',
+  //             style: TextStyle(color: AlessamyColors.textLight),
+  //           ),
+  //           onTap: () {},
+  //         ),
+  //         const Spacer(),
+  //         ListTile(
+  //           leading: Icon(Icons.logout, color: AlessamyColors.textLight),
+  //           title: Text(
+  //             'تسجيل الخروج',
+  //             style: TextStyle(color: AlessamyColors.textLight),
+  //           ),
+  //           onTap: () {},
+  //         ),
+  //         SizedBox(height: 24),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget _buildStatsCards(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 24),
-      child: GridView.count(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        crossAxisCount: 2,
-        mainAxisSpacing: 16,
-        crossAxisSpacing: 16,
-        childAspectRatio: 1.5,
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Row(
         children: [
-          DashboardStatsCard(
-            title: 'إجمالي العقارات',
-            value: '${_properties.length}',
-            icon: Icons.home_work,
-            color: Colors.blue,
+          Expanded(
+            child: DashboardStatsCard(
+              title: 'إجمالي العقارات',
+              value: '${_properties.length}',
+              icon: Icons.home_work,
+              color: Colors.blue,
+            ),
           ),
-          DashboardStatsCard(
-            title: 'عقارات للبيع',
-            value:
-                '${_properties.where((p) => p.purpose == PropertyPurpose.sale).length}',
-            icon: Icons.sell,
-            color: Colors.green,
+
+          SizedBox(width: 16),
+
+          Expanded(
+            child: DashboardStatsCard(
+              title: 'عقارات للبيع',
+              value:
+                  '${_properties.where((p) => p.purpose == PropertyPurpose.sale).length}',
+              icon: Icons.sell,
+              color: Colors.green,
+            ),
           ),
-          DashboardStatsCard(
-            title: 'عقارات للإيجار',
-            value:
-                '${_properties.where((p) => p.purpose == PropertyPurpose.rent).length}',
-            icon: Icons.key,
-            color: Colors.orange,
+
+          SizedBox(width: 16),
+
+          Expanded(
+            child: DashboardStatsCard(
+              title: 'عقارات للإيجار',
+              value:
+                  '${_properties.where((p) => p.purpose == PropertyPurpose.rent).length}',
+              icon: Icons.key,
+              color: Colors.orange,
+            ),
           ),
-          DashboardStatsCard(
-            title: 'عقارات مميزة',
-            value: '${_properties.where((p) => p.isFeatured).length}',
-            icon: Icons.star,
-            color: Colors.amber,
+
+          SizedBox(width: 16),
+
+          Expanded(
+            child: DashboardStatsCard(
+              title: 'عقارات مميزة',
+              value: '${_properties.where((p) => p.isFeatured).length}',
+              icon: Icons.star,
+              color: Colors.amber,
+            ),
           ),
         ],
       ),

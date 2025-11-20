@@ -59,39 +59,48 @@ class _PropertyStatsChartState extends State<PropertyStatsChart> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AlessamyColors.cardBackground,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withValues(alpha: 0.1),
-            spreadRadius: 2,
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildHeader(),
-          const SizedBox(height: 24),
-          _buildTypeSelector(),
-          const SizedBox(height: 32),
-          AspectRatio(
-            aspectRatio: 1.5,
-            child: _buildChart(),
-          ),
-          const SizedBox(height: 24),
-          _buildLegend(),
-        ],
-      ),
-    );
-  }
+ Widget build(BuildContext context) {
+  return Container(
+    padding: const EdgeInsets.all(16),
+    decoration: BoxDecoration(
+      color: AlessamyColors.cardBackground,
+      borderRadius: BorderRadius.circular(16),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withValues(alpha: 0.1),
+          spreadRadius: 2,
+          blurRadius: 8,
+          offset: const Offset(0, 2),
+        ),
+      ],
+    ),
+    child: LayoutBuilder(
+      builder: (context, constraints) {
+        // حساب الارتفاع المتاح
+        final availableHeight = constraints.maxHeight;
+        
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildHeader(),
+            SizedBox(height: availableHeight * 0.04),
+            _buildTypeSelector(),
+            SizedBox(height: availableHeight * 0.05),
+            Expanded(
+              child: AspectRatio(
+                aspectRatio: 1.5,
+                child: _buildChart(),
+              ),
+            ),
+            SizedBox(height: availableHeight * 0.04),
+            _buildLegend(),
+          ],
+        );
+      },
+    ),
+  );
 
+  }
   Widget _buildHeader() {
     return ValueListenableBuilder<PropertyType>(
       valueListenable: selectedTypeNotifier,

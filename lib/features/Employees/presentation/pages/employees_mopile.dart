@@ -66,19 +66,13 @@ class EmployeesMopile extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Card(
-                        color: AlessamyColors.cardBackground,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: EmployeesStatesRowWidget(
-                            totalEmployees: _totalEmployees,
-                            admins: _admins,
-                            accountants: _accountants,
-                            employees: _regularEmployees,
-                          ),
+                      Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: EmployeesStatesRowWidget(
+                          totalEmployees: _totalEmployees,
+                          admins: _admins,
+                          accountants: _accountants,
+                          employees: _regularEmployees,
                         ),
                       ),
                       const SizedBox(height: 16),

@@ -38,7 +38,6 @@ class EmployeesTablet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double h = MediaQuery.sizeOf(context).height;
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
@@ -51,65 +50,57 @@ class EmployeesTablet extends StatelessWidget {
                 lastUpdated: DateTime.now(),
                 onAddPressed: () => showDialog(
                   context: context,
-                  builder: (context) => EmployeeFormDialog(employee: null),
+                  builder: (context) =>
+                      const EmployeeFormDialog(employee: null),
                 ),
               ),
             ),
 
             // Main Content
             SliverPadding(
-              padding: const EdgeInsets.all(24),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
               sliver: SliverList(
                 delegate: SliverChildListDelegate([
-                  const SizedBox(height: 24),
-
-                  // Statistics Cards - Mobile Column
-                  SizedBox(
-                    height: h * 0.4,
-                    width: double.infinity,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Expanded(
-                          child: Card(
-                            color: AlessamyColors.cardBackground,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: EmployeesStatesRowWidget(
-                                totalEmployees: _totalEmployees,
-                                admins: _admins,
-                                accountants: _accountants,
-                                employees: _regularEmployees,
-                              ),
-                            ),
-                          ),
-                        ),
-                        // const SizedBox(height: 16),
-                        Expanded(
-                          child: Card(
-                            color: AlessamyColors.cardBackground,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: RoleDistributionCard(
-                                totalEmployees: _totalEmployees,
-                                admins: _admins,
-                                accountants: _accountants,
-                                employees: _regularEmployees,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                  // Statistics Cards
+                  // Statistics Cards
+                  Column(
+                    children: [
+                      _buildStatsCard(),
+                      const SizedBox(height: 16),
+                      _buildRoleDistributionCard(),
+                    ],
                   ),
 
-                  const SizedBox(height: 32),
+                  // LayoutBuilder(
+                  //   builder: (context, constraints) {
+                  //     final width = constraints.maxWidth;
+
+                  //     if (width < 700) {
+                  //       // Mobile/Small Tablet - Stack vertically
+                  //       return Column(
+                  //         children: [
+                  //           _buildStatsCard(),
+                  //           const SizedBox(height: 16),
+                  //           _buildRoleDistributionCard(),
+                  //         ],
+                  //       );
+                  //     }
+
+                  //     // Large Tablet/Desktop - Side by side
+                  //     return Row(
+                  //       crossAxisAlignment: CrossAxisAlignment.start,
+                  //       children: [
+                  //         Expanded(flex:1 , child: _buildStatsCard()),
+                  //         const SizedBox(width: 16),
+                  //         Expanded(
+                  //           flex: 1,
+                  //           child: _buildRoleDistributionCard(),
+                  //         ),
+                  //       ],
+                  //     );
+                  //   },
+                  // ),
+                  const SizedBox(height: 24),
 
                   // Filters Section
                   FiltersSection(
@@ -138,6 +129,34 @@ class EmployeesTablet extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStatsCard() {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: EmployeesStatesRowWidget(
+        totalEmployees: _totalEmployees,
+        admins: _admins,
+        accountants: _accountants,
+        employees: _regularEmployees,
+      ),
+    );
+  }
+
+  Widget _buildRoleDistributionCard() {
+    return Card(
+      color: AlessamyColors.cardBackground,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: RoleDistributionCard(
+          totalEmployees: _totalEmployees,
+          admins: _admins,
+          accountants: _accountants,
+          employees: _regularEmployees,
         ),
       ),
     );

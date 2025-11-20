@@ -166,7 +166,14 @@ class EmployeesDeskTop extends StatelessWidget {
                       ),
                     ),
                   ),
-
+   SliverToBoxAdapter(
+                    child: EmployeesStatesRowWidget(
+                                  totalEmployees: _totalEmployees,
+                                  admins: _admins,
+                                  accountants: _accountants,
+                                  employees: _regularEmployees,
+                                ),
+                  ),
                   SliverPadding(
                     padding: const EdgeInsets.all(24),
                     sliver: SliverList(
@@ -178,23 +185,17 @@ class EmployeesDeskTop extends StatelessWidget {
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Expanded(
-                              child: Card(
-                                color: AlessamyColors.cardBackground,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16),
-                                  child: EmployeesStatesRowWidget(
-                                    totalEmployees: _totalEmployees,
-                                    admins: _admins,
-                                    accountants: _accountants,
-                                    employees: _regularEmployees,
-                                  ),
-                                ),
-                              ),
-                            ),
+                            // Expanded(
+                            //   child: Padding(
+                            //     padding: const EdgeInsets.all(16),
+                            //     child: EmployeesStatesRowWidget(
+                            //       totalEmployees: _totalEmployees,
+                            //       admins: _admins,
+                            //       accountants: _accountants,
+                            //       employees: _regularEmployees,
+                            //     ),
+                            //   ),
+                            // ),
                             const SizedBox(width: 40),
                             // Pie Chart - توزيع الموظفين
                             Expanded(

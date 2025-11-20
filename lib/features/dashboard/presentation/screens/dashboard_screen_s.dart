@@ -7,6 +7,15 @@ import 'package:summit_team/features/dashboard/presentation/screens/dashboard_sc
 import 'package:summit_team/features/dashboard/presentation/widgets/custom_app_bar.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/custom_drower.dart';
 import 'package:summit_team/features/home/presentation/screens/home_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:summit_team/core/adaptive_layout/adaptive_layout_widget.dart';
+import 'package:summit_team/core/utils/alessamy_colors.dart';
+import 'package:summit_team/features/Employees/presentation/pages/employees_layout.dart';
+
+import 'package:summit_team/features/dashboard/presentation/screens/dashboard_screen.dart';
+import 'package:summit_team/features/dashboard/presentation/widgets/custom_app_bar.dart';
+import 'package:summit_team/features/dashboard/presentation/widgets/custom_drower.dart';
+import 'package:summit_team/features/home/presentation/screens/home_screen.dart';
 
 class PureFlutterDashboard extends StatefulWidget {
   const PureFlutterDashboard({super.key});
@@ -46,112 +55,203 @@ class _PureFlutterDashboardState extends State<PureFlutterDashboard> {
         // ════════════════════════════════════════
         // 📱 Mobile Layout - Drawer منزلق
         // ════════════════════════════════════════
-        mobileLayout: (context) => Scaffold(
-          key: _scaffoldKey,
-          // backgroundColor: AlessamyColors.cardBackground,
-          drawer: Drawer(
-            child: RepaintBoundary(
-              child: CustomDrawer(
-                onPageSelected: _onItemTapped,
-                selectedIndex: _selectedIndex,
-              ),
-            ),
-          ),
-          body: Column(
-            children: [
-              RepaintBoundary(
-                child: CustomAppBar(
-                  title: "Dashboard",
-                  userName: "userName",
-                  userRole: "userRole",
-                ),
-              ),
-              Expanded(child: RepaintBoundary(child: _buildContent())),
-            ],
-          ),
+        mobileLayout: (context) => _MobileLayout(
+          scaffoldKey: _scaffoldKey,
+          selectedIndex: _selectedIndex,
+          visitedPages: _visitedPages,
+          onItemTapped: _onItemTapped,
         ),
 
         // ════════════════════════════════════════
         // 📱 Tablet Layout - Sidebar مصغر (Icons فقط)
         // ════════════════════════════════════════
-        tabletLayout: (context) => Scaffold(
-          // backgroundColor: AlessamyColors.cardBackground,
-          body: Row(
-            children: [
-              // Sidebar مصغر - عرض 70
-              RepaintBoundary(
-                child: SizedBox(
-                  width: 70,
-                  child: CustomDrawer(
-                    onPageSelected: _onItemTapped,
-                    selectedIndex: _selectedIndex,
-                    isCompact: true,
-                  ),
-                ),
-              ),
-              // Content
-              Expanded(child: RepaintBoundary(child: _buildContent())),
-            ],
-          ),
+        tabletLayout: (context) => _TabletLayout(
+          selectedIndex: _selectedIndex,
+          visitedPages: _visitedPages,
+          onItemTapped: _onItemTapped,
         ),
 
         // ════════════════════════════════════════
         // 🖥️ Desktop Layout - Sidebar كامل
         // ════════════════════════════════════════
-        desktopLayout: (context) => Scaffold(
-          // backgroundColor: AlessamyColors.cardBackground,
-          body: Row(
-            children: [
-              // Sidebar كامل - عرض 250
-              RepaintBoundary(
-                child: SizedBox(
-                  width: 250,
-                  child: CustomDrawer(
-                    onPageSelected: _onItemTapped,
-                    selectedIndex: _selectedIndex,
-                  ),
-                ),
-              ),
-              // Content
-              Expanded(child: RepaintBoundary(child: _buildContent())),
-            ],
-          ),
+        desktopLayout: (context) => _DesktopLayout(
+          selectedIndex: _selectedIndex,
+          visitedPages: _visitedPages,
+          onItemTapped: _onItemTapped,
         ),
       ),
     );
   }
+}
 
-  // ════════════════════════════════════════
-  // Content Area مع Lazy Loading و Optimized Performance
-  // ════════════════════════════════════════
-  Widget _buildContent() {
+// ════════════════════════════════════════
+// 📱 Mobile Layout Widget
+// ════════════════════════════════════════
+class _MobileLayout extends StatelessWidget {
+  const _MobileLayout({
+    required this.scaffoldKey,
+    required this.selectedIndex,
+    required this.visitedPages,
+    required this.onItemTapped,
+  });
+
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  final int selectedIndex;
+  final Set<int> visitedPages;
+  final Function(int) onItemTapped;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AlessamyColors.backgroundColor,
+      key: scaffoldKey,
+      drawer: Drawer(
+        child: CustomDrawer(
+          onPageSelected: onItemTapped,
+          selectedIndex: selectedIndex,
+        ),
+      ),
+      body: Column(
+        children: [
+          CustomAppBar(
+            title: "Dashboard",
+            userName: "userName",
+            userRole: "userRole",
+          ),
+          Expanded(
+            child: _ContentArea(
+              selectedIndex: selectedIndex,
+              visitedPages: visitedPages,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ════════════════════════════════════════
+// 📱 Tablet Layout Widget
+// ════════════════════════════════════════
+class _TabletLayout extends StatelessWidget {
+  const _TabletLayout({
+    required this.selectedIndex,
+    required this.visitedPages,
+    required this.onItemTapped,
+  });
+
+  final int selectedIndex;
+  final Set<int> visitedPages;
+  final Function(int) onItemTapped;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AlessamyColors.backgroundColor,
+      body: Row(
+        children: [
+          // Sidebar مصغر - عرض 70
+          SizedBox(
+            width: 70,
+            child: CustomDrawer(
+              onPageSelected: onItemTapped,
+              selectedIndex: selectedIndex,
+              isCompact: true,
+            ),
+          ),
+          // Content
+          Expanded(
+            child: _ContentArea(
+              selectedIndex: selectedIndex,
+              visitedPages: visitedPages,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ════════════════════════════════════════
+// 🖥️ Desktop Layout Widget
+// ════════════════════════════════════════
+class _DesktopLayout extends StatelessWidget {
+  const _DesktopLayout({
+    required this.selectedIndex,
+    required this.visitedPages,
+    required this.onItemTapped,
+  });
+
+  final int selectedIndex;
+  final Set<int> visitedPages;
+  final Function(int) onItemTapped;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AlessamyColors.backgroundColor,
+      body: Row(
+        children: [
+          // Sidebar كامل - عرض 250
+          Expanded(
+            flex: 1,
+            child: CustomDrawer(
+              onPageSelected: onItemTapped,
+              selectedIndex: selectedIndex,
+            ),
+          ),
+          // Content
+          Expanded(
+            flex: 5,
+            child: _ContentArea(
+              selectedIndex: selectedIndex,
+              visitedPages: visitedPages,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ════════════════════════════════════════
+// Content Area - الجزء الوحيد اللي بيتغير
+// ════════════════════════════════════════
+class _ContentArea extends StatelessWidget {
+  const _ContentArea({required this.selectedIndex, required this.visitedPages});
+
+  final int selectedIndex;
+  final Set<int> visitedPages;
+
+  @override
+  Widget build(BuildContext context) {
     return IndexedStack(
-      index: _selectedIndex,
-      sizing: StackFit.expand, // تحسين الأداء
+      index: selectedIndex,
+      sizing: StackFit.expand,
       children: [
         // Page 0: Home
-        _visitedPages.contains(0)
+        visitedPages.contains(0)
             ? const HomeScreen(key: ValueKey('home_screen'))
             : const SizedBox.shrink(key: ValueKey('home_empty')),
 
         // Page 1: Dashboard
-        _visitedPages.contains(1)
+        visitedPages.contains(1)
             ? const DashboardScreen(key: ValueKey('dashboard_screen'))
             : const SizedBox.shrink(key: ValueKey('dashboard_empty')),
 
         // Page 2: Employees
-        _visitedPages.contains(2)
+        visitedPages.contains(2)
             ? const EmployeesLayout(key: ValueKey('employees_screen'))
             : const SizedBox.shrink(key: ValueKey('employees_empty')),
 
         // Page 3: Settings
-        _visitedPages.contains(3)
+        visitedPages.contains(3)
             ? const DashboardScreen(key: ValueKey('settings_screen'))
             : const SizedBox.shrink(key: ValueKey('settings_empty')),
       ],
     );
   }
-
+}
   // ════════════════════════════════════════
   // Mobile AppBar مع Hamburger Menu
   // ════════════════════════════════════════
@@ -201,4 +301,4 @@ class _PureFlutterDashboardState extends State<PureFlutterDashboard> {
   //     ),
   //   );
   // }
-}
+

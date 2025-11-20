@@ -30,7 +30,7 @@ class EmployeesListSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
+    final width = MediaQuery.sizeOf(context).width;
     final crossAxisCount = _getCrossAxisCount(width);
 
     return Card(
@@ -148,7 +148,7 @@ class EmployeesListSection extends StatelessWidget {
         crossAxisCount: crossAxisCount,
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
-        childAspectRatio: .90,
+        mainAxisExtent: 300,
       ),
       itemBuilder: (context, index) {
         final employee = employees[index];
@@ -161,8 +161,8 @@ class EmployeesListSection extends StatelessWidget {
             child: EmployeeCard(
               employee: employee,
 
-              // onEdit: () {},
-              // onDelete: () {},
+              onEdit: () {},
+              onDelete: () {},
             ),
           ),
         );
@@ -180,7 +180,7 @@ class EmployeesListSection extends StatelessWidget {
         crossAxisCount: crossAxisCount,
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
-        childAspectRatio: 1.5,
+        mainAxisExtent: 300,
       ),
       itemBuilder: (context, index) {
         return Container(

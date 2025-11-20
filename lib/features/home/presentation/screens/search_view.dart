@@ -1,10 +1,9 @@
-
-import 'dart:ui';
 import 'package:summit_team/core/utils/alessamy_colors.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/custom_app_bar_sliever.dart';
 
 import 'package:summit_team/features/home/presentation/widgets/footer_widget.dart';
 import 'package:summit_team/features/home/presentation/widgets/search.dart';
+import 'package:summit_team/features/home/presentation/widgets/section_header.dart';
 
 import 'package:summit_team/features/properties/data/models/property_model.dart';
 import 'package:summit_team/features/properties/presentation/widgets/property_card_widget.dart';
@@ -4242,114 +4241,6 @@ class DesktopHomes extends StatelessWidget {
   }
 }
 
-class FeaturedPropertiesWidget extends StatelessWidget {
-  final List<PropertyModel> properties;
-
-  const FeaturedPropertiesWidget({super.key, required this.properties});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 360,
-      child: ScrollConfiguration(
-        behavior: const MaterialScrollBehavior().copyWith(
-          scrollbars: false,
-          dragDevices: {
-            PointerDeviceKind.mouse,
-            PointerDeviceKind.touch,
-            PointerDeviceKind.trackpad,
-          },
-        ),
-        child: ListView.separated(
-          physics: const BouncingScrollPhysics(),
-          cacheExtent: 1200,
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          scrollDirection: Axis.horizontal,
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          itemCount: properties.length,
-          separatorBuilder: (_, __) => const SizedBox(width: 24),
-          itemBuilder: (context, index) {
-            return SizedBox(
-              width: 340,
-              child: PropertyCardWidget(
-                property: properties[index],
-                onTap: () {},
-              ),
-            );
-          },
-        ),
-      ),
-    );
-  }
-}
-
-class SectionHeaderWidget extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final VoidCallback onViewAll;
-
-  const SectionHeaderWidget({
-    super.key,
-    required this.title,
-    required this.subtitle,
-    required this.onViewAll,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    // لو عندك Localization جاهزة
-    // final l10n = AppLocalizations.of(context)!;
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 48),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          // عنوان و Subtitle
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white, // AlessamyColors.textOnBlack
-                ),
-              ),
-              const SizedBox(height: 6),
-              Text(
-                subtitle,
-                style: const TextStyle(
-                  fontSize: 15,
-                  color: Colors.grey, // AlessamyColors.textLight
-                ),
-              ),
-            ],
-          ),
-
-          // زر View All
-          ElevatedButton.icon(
-            onPressed: onViewAll,
-            icon: const Icon(Icons.arrow_forward, size: 20),
-            label: const Text(
-              'View All', // لو عندك Localization استخدم l10n
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-            ),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.amber, // AlessamyColors.primaryGold
-              foregroundColor: Colors.black,
-              padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(14),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 class LatestPropertiesGrid extends StatelessWidget {
   final List<PropertyModel> properties;

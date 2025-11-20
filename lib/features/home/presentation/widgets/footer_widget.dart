@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:summit_team/config/locale/app_localizations.dart';
 import 'package:summit_team/config/locale/keys_translate.dart';
@@ -10,29 +9,34 @@ class FooterWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 48, vertical: 40),
+      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
       color: AlessamyColors.black,
       child: Column(
         children: [
           Row(
+            mainAxisSize: MainAxisSize.min,
+            spacing: 20,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _buildFooterIcon(Icons.facebook),
-              SizedBox(width: 28),
+              // SizedBox(width: 28),
               _buildFooterIcon(Icons.chat),
-              SizedBox(width: 28),
+              // SizedBox(width: 28),
               _buildFooterIcon(Icons.phone),
-              SizedBox(width: 28),
+              // SizedBox(width: 28),
               _buildFooterIcon(Icons.email),
             ],
           ),
-          SizedBox(height: 28),
-          Container(
-            height: 1,
-            width: 220,
-            color: AlessamyColors.primaryGold.withValues(alpha: 0.3),
+          // SizedBox(height: 28),
+          Padding(
+            padding: const EdgeInsets.all(12),
+            child: Container(
+              height: 1,
+              width: 220,
+              color: AlessamyColors.primaryGold.withValues(alpha: 0.3),
+            ),
           ),
-          SizedBox(height: 28),
+          // SizedBox(height: 28),
           Text(
             AppLocalizations.of(
               context,

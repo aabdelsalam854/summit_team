@@ -4,7 +4,7 @@
   "app_language": "ar",
 
   "view_all": "عرض الكل",
-  "rights_reserved": "© 2024 العصامي جروب - جميع الحقوق محفوظة",
+  "rights_reserved": "© 2024 SummitTeam - جميع الحقوق محفوظة",
 
   "menu_home": "الرئيسية",
   "menu_featured": "العقارات المميزة",
@@ -15,15 +15,15 @@
   "menu_about": "عن الشركة",
   "menu_settings": "الإعدادات",
 
-  "hero_title": "العصامي جروب",
+  "hero_title": "SummitTeam",
   "hero_subtitle": "اكتشف منزل أحلامك معنا",
   "hero_action_request": "أطلب عقارك",
   "hero_action_list": "أعرض عقارك",
 
   "section_featured": "العقارات المميزة",
-  "section_featured_subtitle": "اكتشف أفضل العقارات المتاحة",
+  "section_featured_subtitle": "اكتشف أفضل العقارات ",
   "section_latest": "أحدث العروض",
-  "section_latest_subtitle": "آخر الإضافات إلى قاعدة بياناتنا",
+  "section_latest_subtitle":"احدث العقارات المضافة",
 
   "quick_stats_title": "إحصائيات سريعة",
   "stats_properties": "عقار",

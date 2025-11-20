@@ -8,7 +8,6 @@ import 'package:summit_team/features/dashboard/presentation/widgets/dashboard_st
 import 'package:summit_team/features/dashboard/presentation/widgets/detailed_income_chart.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/properties_table_widget.dart';
 import 'package:summit_team/features/home/presentation/screens/desktop_home_layout.dart';
-import 'package:summit_team/features/home/presentation/screens/mobile_home_layout.dart';
 import 'package:summit_team/features/properties/data/models/property_model.dart';
 import 'dr.dart' as property_stats;
 

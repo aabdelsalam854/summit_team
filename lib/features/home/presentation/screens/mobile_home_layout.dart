@@ -8,12 +8,14 @@ import 'package:summit_team/config/locale/keys_translate.dart';
 import 'package:summit_team/config/routes/routes.dart';
 
 import 'package:summit_team/core/utils/alessamy_colors.dart';
-import 'package:summit_team/features/dashboard/presentation/widgets/custom_app_bar_sliever.dart';
+
 import 'package:summit_team/features/home/presentation/screens/search_view.dart';
-import 'package:summit_team/features/home/presentation/widgets/custom_app_bar_widget.dart';
+import 'package:summit_team/features/home/presentation/widgets/featured_properties_widget.dart';
+
 import 'package:summit_team/features/home/presentation/widgets/footer_widget.dart';
 
 import 'package:summit_team/features/home/presentation/widgets/search_filter_widget.dart';
+import 'package:summit_team/features/home/presentation/widgets/section_header.dart';
 import 'package:summit_team/features/properties/data/models/property_model.dart';
 import 'package:summit_team/features/properties/presentation/widgets/property_card_widget.dart';
 
@@ -29,12 +31,12 @@ class MobileHomeLayout extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AlessamyColors.backgroundColor,
-      appBar: const CustomAppBarWidget(),
-      endDrawer: const CustomDrawerWidget(),
+      // appBar: const CustomAppBarWidget(),
+      // endDrawer: const CustomDrawerWidget(),
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            CustomAppBarSliever(),
+            // CustomAppBarSliever(),
             SliverToBoxAdapter(child: SizedBox(height: 40)),
 
             // Search Filter + Quick Stats

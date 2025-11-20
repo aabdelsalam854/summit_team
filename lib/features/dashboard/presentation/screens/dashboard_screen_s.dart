@@ -7,15 +7,6 @@ import 'package:summit_team/features/dashboard/presentation/screens/dashboard_sc
 import 'package:summit_team/features/dashboard/presentation/widgets/custom_app_bar.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/custom_drower.dart';
 import 'package:summit_team/features/home/presentation/screens/home_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:summit_team/core/adaptive_layout/adaptive_layout_widget.dart';
-import 'package:summit_team/core/utils/alessamy_colors.dart';
-import 'package:summit_team/features/Employees/presentation/pages/employees_layout.dart';
-
-import 'package:summit_team/features/dashboard/presentation/screens/dashboard_screen.dart';
-import 'package:summit_team/features/dashboard/presentation/widgets/custom_app_bar.dart';
-import 'package:summit_team/features/dashboard/presentation/widgets/custom_drower.dart';
-import 'package:summit_team/features/home/presentation/screens/home_screen.dart';
 
 class PureFlutterDashboard extends StatefulWidget {
   const PureFlutterDashboard({super.key});
@@ -202,7 +193,7 @@ class _DesktopLayout extends StatelessWidget {
           ),
           // Content
           Expanded(
-            flex: 5,
+            flex: 7,
             child: _ContentArea(
               selectedIndex: selectedIndex,
               visitedPages: visitedPages,

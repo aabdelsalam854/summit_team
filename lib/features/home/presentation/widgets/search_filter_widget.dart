@@ -3,7 +3,6 @@ import 'package:summit_team/core/widget/custom_drop_down.dart';
 import 'package:summit_team/features/properties/data/models/property_model.dart';
 import 'package:flutter/material.dart';
 
-
 class SearchFilterWidget extends StatefulWidget {
   const SearchFilterWidget({super.key, this.onSearch});
 
@@ -68,6 +67,8 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = MediaQuery.of(context).size.width < 600;
+
     return Container(
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -77,286 +78,100 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 20,
-            offset: const Offset(0, 4),
+            offset: Offset(0, 4),
           ),
         ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          /// العنوان
-          Row(
-            children: [
-              Icon(
-                Icons.home_work,
-                color: AlessamyColors.primaryGold,
-                size: 24,
-              ),
-              SizedBox(width: 8),
-              Text(
-                'ابحث عن عقارك',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: AlessamyColors.white,
+          /// العنوان أو حقل البحث للموبايل
+          if (isMobile)
+            Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _propertyCodeController,
+                    decoration: InputDecoration(
+                      hintText: 'ابحث عن عقارك...',
+                      hintStyle: TextStyle(
+                        fontSize: 14,
+                        color: AlessamyColors.textLight,
+                      ),
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: AlessamyColors.primaryGold,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: AlessamyColors.borderLight),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: AlessamyColors.borderLight),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: AlessamyColors.primaryGold, width: 2),
+                      ),
+                      filled: true,
+                      fillColor: AlessamyColors.cardBackground,
+                      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    ),
+                    style: TextStyle(color: AlessamyColors.white),
+                    onSubmitted: (value) => _performSearch(),
+                  ),
                 ),
-              ),
-              Spacer(),
-              IconButton(
-                onPressed: () {
-                  showFilters.value = !showFilters.value;
-                },
-                icon: Icon(
-                  Icons.filter_list,
-                  color: AlessamyColors.primaryGold,
-                  size: 24,
+                SizedBox(width: 8),
+                IconButton(
+                  onPressed: () => _openMobileFilter(),
+                  icon: Icon(
+                    Icons.filter_list,
+                    color: AlessamyColors.primaryGold,
+                    size: 24,
+                  ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            )
+          else
+            Row(
+              children: [
+                Icon(Icons.home_work,
+                    color: AlessamyColors.primaryGold, size: 24),
+                SizedBox(width: 8),
+                Text(
+                  'ابحث عن عقارك',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: AlessamyColors.white,
+                  ),
+                ),
+                Spacer(),
+
+                /// زر الفلتر
+                IconButton(
+                  onPressed: () {
+                    showFilters.value = !showFilters.value;
+                  },
+                  icon: Icon(
+                    Icons.filter_list,
+                    color: AlessamyColors.primaryGold,
+                    size: 24,
+                  ),
+                ),
+              ],
+            ),
 
           SizedBox(height: 20),
 
-          /// الفلاتر
+          /// الفلاتر في الويب
           ValueListenableBuilder(
             valueListenable: showFilters,
             builder: (context, value, child) {
-              if (!value) return SizedBox.shrink();
+              if (!value || isMobile) return SizedBox.shrink();
 
-              return LayoutBuilder(
-                builder: (context, constraints) {
-                  bool isWeb = constraints.maxWidth > 900;
-                  int columns = isWeb ? 3 : 1;
-
-                  return Wrap(
-                    spacing: 20,
-                    runSpacing: 20,
-                    children: [
-                      SizedBox(
-                        width: _fieldWidth(columns, constraints.maxWidth),
-                        child: _buildTextField(
-                          label: 'ابحث بكود العقار',
-                          controller: _propertyCodeController,
-                          hint: 'أدخل كود العقار',
-                        ),
-                      ),
-
-                      /// المدينة
-                      SizedBox(
-                        width: _fieldWidth(columns, constraints.maxWidth),
-                        child: CustomDropdown<String>(
-                          label: 'المدينة',
-                          value: selectedCity,
-                          items: cities,
-                          onChanged: (value) =>
-                              setState(() => selectedCity = value),
-                          itemBuilder: (city) => city,
-                        ),
-                      ),
-
-                      /// المرحلة
-                      SizedBox(
-                        width: _fieldWidth(columns, constraints.maxWidth),
-                        child: CustomDropdown<String>(
-                          label: 'المرحلة',
-                          value: selectedPhase,
-                          items: phases,
-                          onChanged: (value) =>
-                              setState(() => selectedPhase = value),
-                          itemBuilder: (phase) => phase,
-                        ),
-                      ),
-
-                      /// النموذج
-                      SizedBox(
-                        width: _fieldWidth(columns, constraints.maxWidth),
-                        child: CustomDropdown<String>(
-                          label: 'النموذج',
-                          value: selectedModel,
-                          items: models,
-                          onChanged: (value) =>
-                              setState(() => selectedModel = value),
-                          itemBuilder: (model) => model,
-                        ),
-                      ),
-
-                      /// نوع العقار
-                      SizedBox(
-                        width: _fieldWidth(columns, constraints.maxWidth),
-                        child: CustomDropdown<PropertyType>(
-                          label: 'نوع العقار',
-                          value: selectedType,
-                          items: PropertyType.values,
-                          onChanged: (value) =>
-                              setState(() => selectedType = value),
-                          itemBuilder: (type) => type.arabicName,
-                        ),
-                      ),
-
-                      /// الغرض
-                      SizedBox(
-                        width: _fieldWidth(columns, constraints.maxWidth),
-                        child: CustomDropdown<PropertyPurpose>(
-                          label: 'الغرض',
-                          value: selectedPurpose,
-                          items: PropertyPurpose.values,
-                          onChanged: (value) =>
-                              setState(() => selectedPurpose = value),
-                          itemBuilder: (purpose) => purpose.arabicName,
-                        ),
-                      ),
-
-                      /// نظام الدفع
-                      SizedBox(
-                        width: _fieldWidth(columns, constraints.maxWidth),
-                        child: CustomDropdown<String>(
-                          label: 'نظام الدفع',
-                          value: selectedPaymentSystem,
-                          items: paymentSystems,
-                          onChanged: (value) =>
-                              setState(() => selectedPaymentSystem = value),
-                          itemBuilder: (payment) => payment,
-                        ),
-                      ),
-
-                      /// التشطيب
-                      SizedBox(
-                        width: _fieldWidth(columns, constraints.maxWidth),
-                        child: CustomDropdown<String>(
-                          label: 'نوع التشطيب',
-                          value: selectedFinishingType,
-                          items: finishingTypes,
-                          onChanged: (value) =>
-                              setState(() => selectedFinishingType = value),
-                          itemBuilder: (finishing) => finishing,
-                        ),
-                      ),
-
-                      /// عدد الغرف
-                      SizedBox(
-                        width: _fieldWidth(columns, constraints.maxWidth),
-                        child: CustomDropdown<String>(
-                          label: 'عدد الغرف',
-                          value: selectedRoomsCount,
-                          items: roomsCounts,
-                          onChanged: (value) =>
-                              setState(() => selectedRoomsCount = value),
-                          itemBuilder: (rooms) => rooms,
-                        ),
-                      ),
-
-                      /// المساحة
-                      SizedBox(
-                        width: _fieldWidth(columns, constraints.maxWidth),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'المساحة',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                                color: AlessamyColors.textSecondary,
-                              ),
-                            ),
-                            SizedBox(height: 8),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: _buildTextField(
-                                    label: 'من',
-                                    controller: _minAreaController,
-                                    hint: 'من',
-                                    keyboardType: TextInputType.number,
-                                  ),
-                                ),
-                                SizedBox(width: 12),
-                                Expanded(
-                                  child: _buildTextField(
-                                    label: 'إلى',
-                                    controller: _maxAreaController,
-                                    hint: 'إلى',
-                                    keyboardType: TextInputType.number,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      /// السعر
-                      SizedBox(
-                        width: _fieldWidth(columns, constraints.maxWidth),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'السعر',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                                color: AlessamyColors.textSecondary,
-                              ),
-                            ),
-                            SizedBox(height: 8),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: _buildTextField(
-                                    label: 'من',
-                                    controller: _minPriceController,
-                                    hint: 'من',
-                                    keyboardType: TextInputType.number,
-                                  ),
-                                ),
-                                SizedBox(width: 12),
-                                Expanded(
-                                  child: _buildTextField(
-                                    label: 'إلى',
-                                    controller: _maxPriceController,
-                                    hint: 'إلى',
-                                    keyboardType: TextInputType.number,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      /// زر البحث
-                      SizedBox(
-                        width: isWeb ? 250 : double.infinity,
-                        child: ElevatedButton(
-                          onPressed: _performSearch,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AlessamyColors.primaryGold,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.search, color: AlessamyColors.black),
-                              SizedBox(width: 8),
-                              Text(
-                                'بحث',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: AlessamyColors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              );
+              return _buildWebFilters(context);
             },
           ),
         ],
@@ -364,29 +179,314 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
     );
   }
 
-  /// حقل نص
-  Widget _buildTextField({
+  /// ---------------------------
+  ///  ويب: Grid Filters Layout
+  /// ---------------------------
+
+  Widget _buildWebFilters(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        int columns = constraints.maxWidth > 900 ? 3 : 1;
+        return Wrap(
+          spacing: 20,
+          runSpacing: 20,
+          children: [
+            _wrapField(_buildTextField('ابحث بكود العقار', _propertyCodeController, 'أدخل كود العقار'), columns, constraints.maxWidth),
+
+            _wrapField(_dropdown(
+              label: 'المدينة',
+              value: selectedCity,
+              items: cities,
+              onChanged: (v) => setState(() => selectedCity = v),
+            ), columns, constraints.maxWidth),
+
+            _wrapField(_dropdown(
+              label: 'المرحلة',
+              value: selectedPhase,
+              items: phases,
+              onChanged: (v) => setState(() => selectedPhase = v),
+            ), columns, constraints.maxWidth),
+
+            _wrapField(_dropdown(
+              label: 'النموذج',
+              value: selectedModel,
+              items: models,
+              onChanged: (v) => setState(() => selectedModel = v),
+            ), columns, constraints.maxWidth),
+
+            _wrapField(_dropdown(
+              label: 'نوع العقار',
+              value: selectedType,
+              items: PropertyType.values,
+              itemBuilder: (t) => t.arabicName,
+              onChanged: (v) => setState(() => selectedType = v),
+            ), columns, constraints.maxWidth),
+
+            _wrapField(_dropdown(
+              label: 'الغرض',
+              value: selectedPurpose,
+              items: PropertyPurpose.values,
+              itemBuilder: (t) => t.arabicName,
+              onChanged: (v) => setState(() => selectedPurpose = v),
+            ), columns, constraints.maxWidth),
+
+            _wrapField(_dropdown(
+              label: 'نظام الدفع',
+              value: selectedPaymentSystem,
+              items: paymentSystems,
+              onChanged: (v) => setState(() => selectedPaymentSystem = v),
+            ), columns, constraints.maxWidth),
+
+            _wrapField(_dropdown(
+              label: 'نوع التشطيب',
+              value: selectedFinishingType,
+              items: finishingTypes,
+              onChanged: (v) => setState(() => selectedFinishingType = v),
+            ), columns, constraints.maxWidth),
+
+            _wrapField(_dropdown(
+              label: 'عدد الغرف',
+              value: selectedRoomsCount,
+              items: roomsCounts,
+              onChanged: (v) => setState(() => selectedRoomsCount = v),
+            ), columns, constraints.maxWidth),
+
+            /// المساحة
+            _wrapField(
+              _rangeFields('المساحة', _minAreaController, _maxAreaController),
+              columns,
+              constraints.maxWidth,
+            ),
+
+            /// السعر
+            _wrapField(
+              _rangeFields('السعر', _minPriceController, _maxPriceController),
+              columns,
+              constraints.maxWidth,
+            ),
+
+            /// زر البحث
+            SizedBox(
+              width: 250,
+              child: ElevatedButton(
+                onPressed: _performSearch,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AlessamyColors.primaryGold,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.search, color: AlessamyColors.black),
+                    SizedBox(width: 8),
+                    Text('بحث',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: AlessamyColors.white)),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _wrapField(Widget child, int columns, double width) {
+    if (columns == 1) return child;
+    return SizedBox(width: (width / columns) - 30, child: child);
+  }
+
+  /// ---------------------------
+  ///  Mobile Bottom Sheet
+  /// ---------------------------
+
+  void _openMobileFilter() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return DraggableScrollableSheet(
+          initialChildSize: 0.85,
+          maxChildSize: 0.95,
+          minChildSize: 0.4,
+          builder: (_, controller) {
+            return Container(
+              padding: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: AlessamyColors.cardBackground,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+              ),
+              child: SingleChildScrollView(
+                controller: controller,
+                child: Column(
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 5,
+                      margin: EdgeInsets.only(bottom: 20),
+                      decoration: BoxDecoration(
+                        color: Colors.white24,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+
+                    /// الفلاتر
+                    _buildMobileFilters(),
+
+                    SizedBox(height: 20),
+
+                    /// زر البحث
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        _performSearch();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AlessamyColors.primaryGold,
+                        padding: EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.search, color: Colors.black),
+                          SizedBox(width: 8),
+                          Text(
+                            'بحث',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  /// ---------------------------
+  ///  Mobile Filters Content
+  /// ---------------------------
+
+  Widget _buildMobileFilters() {
+    return Column(
+      children: [
+        _buildTextField('ابحث بكود العقار', _propertyCodeController, 'أدخل كود العقار'),
+        SizedBox(height: 15),
+        _dropdown(
+          label: 'المدينة',
+          value: selectedCity,
+          items: cities,
+          onChanged: (v) => setState(() => selectedCity = v),
+        ),
+        SizedBox(height: 15),
+        _dropdown(
+          label: 'المرحلة',
+          value: selectedPhase,
+          items: phases,
+          onChanged: (v) => setState(() => selectedPhase = v),
+        ),
+        SizedBox(height: 15),
+        _dropdown(
+          label: 'النموذج',
+          value: selectedModel,
+          items: models,
+          onChanged: (v) => setState(() => selectedModel = v),
+        ),
+        SizedBox(height: 15),
+        _dropdown(
+          label: 'نوع العقار',
+          value: selectedType,
+          items: PropertyType.values,
+          itemBuilder: (t) => t.arabicName,
+          onChanged: (v) => setState(() => selectedType = v),
+        ),
+        SizedBox(height: 15),
+        _dropdown(
+          label: 'الغرض',
+          value: selectedPurpose,
+          items: PropertyPurpose.values,
+          itemBuilder: (t) => t.arabicName,
+          onChanged: (v) => setState(() => selectedPurpose = v),
+        ),
+        SizedBox(height: 15),
+        _dropdown(
+          label: 'نظام الدفع',
+          value: selectedPaymentSystem,
+          items: paymentSystems,
+          onChanged: (v) => setState(() => selectedPaymentSystem = v),
+        ),
+        SizedBox(height: 15),
+        _dropdown(
+          label: 'نوع التشطيب',
+          value: selectedFinishingType,
+          items: finishingTypes,
+          onChanged: (v) => setState(() => selectedFinishingType = v),
+        ),
+        SizedBox(height: 15),
+        _dropdown(
+          label: 'عدد الغرف',
+          value: selectedRoomsCount,
+          items: roomsCounts,
+          onChanged: (v) => setState(() => selectedRoomsCount = v),
+        ),
+        SizedBox(height: 20),
+        _rangeFields('المساحة', _minAreaController, _maxAreaController),
+        SizedBox(height: 20),
+        _rangeFields('السعر', _minPriceController, _maxPriceController),
+      ],
+    );
+  }
+
+  /// ---------------------------
+  ///  Widgets
+  /// ---------------------------
+
+  Widget _dropdown<T>({
     required String label,
-    required TextEditingController controller,
-    required String hint,
-    TextInputType keyboardType = TextInputType.text,
+    required T? value,
+    required List<T> items,
+    required ValueChanged<T?> onChanged,
+    String Function(T item)? itemBuilder,
   }) {
+    return CustomDropdown<T>(
+      label: label,
+      value: value,
+      items: items,
+      onChanged: onChanged,
+      itemBuilder: itemBuilder ?? (item) => item.toString(),
+    );
+  }
+
+  Widget _buildTextField(String label, TextEditingController controller, String hint) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (label != 'من' && label != 'إلى')
-          Text(
-            label,
+        Text(label,
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
               color: AlessamyColors.textSecondary,
-            ),
-          ),
-        if (label != 'من' && label != 'إلى') SizedBox(height: 8),
+            )),
+        SizedBox(height: 8),
         TextField(
           controller: controller,
-          keyboardType: keyboardType,
           decoration: InputDecoration(
             hintText: hint,
             hintStyle: TextStyle(fontSize: 14, color: AlessamyColors.textLight),
@@ -402,18 +502,41 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(color: AlessamyColors.primaryGold),
             ),
-            contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
           ),
         ),
       ],
     );
   }
 
-  /// حساب عرض كل عنصر حسب عدد الأعمدة
-  double _fieldWidth(int columns, double maxWidth) {
-    if (columns == 1) return maxWidth;
-    return (maxWidth / columns) - 30;
+  Widget _rangeFields(String label, TextEditingController minCtrl, TextEditingController maxCtrl) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label,
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: AlessamyColors.textSecondary,
+            )),
+        SizedBox(height: 8),
+        Row(
+          children: [
+            Expanded(
+              child: _buildTextField('من', minCtrl, 'من'),
+            ),
+            SizedBox(width: 12),
+            Expanded(
+              child: _buildTextField('إلى', maxCtrl, 'إلى'),
+            ),
+          ],
+        ),
+      ],
+    );
   }
+
+  /// ---------------------------
+  ///  Perform Search
+  /// ---------------------------
 
   void _performSearch() {
     final filter = SearchFilter(
@@ -446,7 +569,6 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
   }
 }
 
-/// فلتر البحث
 class SearchFilter {
   final String? propertyCode;
   final String? city;

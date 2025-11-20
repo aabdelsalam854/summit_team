@@ -7,8 +7,6 @@ import 'package:summit_team/core/widget/custom_text_button_with_icon.dart';
 
 import 'package:summit_team/features/dashboard/presentation/widgets/dashboard_stats_card.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/detailed_income_chart.dart';
-import 'package:summit_team/features/home/presentation/screens/desktop_home_layout.dart';
-import 'package:summit_team/features/home/presentation/screens/mobile_home_layout.dart';
 import 'package:summit_team/features/properties/data/models/property_model.dart';
 
 import 'dr.dart' as property_stats;
@@ -52,28 +50,28 @@ class _MobileDashboardLayoutState extends State<MobileDashboardLayout> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AlessamyColors.backgroundColor,
-      appBar: AppBar(
-        backgroundColor: AlessamyColors.cardBackground,
-        elevation: 0,
-        title: Text(
-          'لوحة التحكم',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: AlessamyColors.white,
-          ),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.notifications_outlined,
-              color: AlessamyColors.primaryGold,
-            ),
-          ),
-        ],
-      ),
-      drawer: _buildDrawer(context),
+      // appBar: AppBar(
+      //   backgroundColor: AlessamyColors.cardBackground,
+      //   elevation: 0,
+      //   title: Text(
+      //     'لوحة التحكم',
+      //     style: TextStyle(
+      //       fontSize: 18,
+      //       fontWeight: FontWeight.bold,
+      //       color: AlessamyColors.white,
+      //     ),
+      //   ),
+      //   actions: [
+      //     IconButton(
+      //       onPressed: () {},
+      //       icon: Icon(
+      //         Icons.notifications_outlined,
+      //         color: AlessamyColors.primaryGold,
+      //       ),
+      //     ),
+      //   ],
+      // ),
+      // drawer: _buildDrawer(context),
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
@@ -147,26 +145,28 @@ class _MobileDashboardLayoutState extends State<MobileDashboardLayout> {
             const SliverToBoxAdapter(child: SizedBox(height: 16)),
 
             // Property Stats Chart
-    SliverToBoxAdapter(
-  child: Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 14),
-    child: Card(
-      color: AlessamyColors.cardBackground,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: SizedBox(
-          height: MediaQuery.of(context).size.width < 600 ? 380 : 500,
-          child: property_stats.PropertyStatsChart(
-            propertyData: _propertyData,
-          ),
-        ),
-      ),
-    ),
-  ),
-),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 14),
+                child: Card(
+                  color: AlessamyColors.cardBackground,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.width < 600
+                          ? 380
+                          : 500,
+                      child: property_stats.PropertyStatsChart(
+                        propertyData: _propertyData,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
             const SliverToBoxAdapter(child: SizedBox(height: 16)),
 
             // Income Chart

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:summit_team/config/locale/app_localizations.dart';
 import 'package:summit_team/config/locale/keys_translate.dart';
 
-
 class CustomAppBarWidget extends StatelessWidget
     implements PreferredSizeWidget {
   const CustomAppBarWidget({super.key});

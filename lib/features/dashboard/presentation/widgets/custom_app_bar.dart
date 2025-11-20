@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:summit_team/core/utils/alessamy_colors.dart';
 
@@ -25,9 +24,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: AlessamyColors.primaryGold,
+      // backgroundColor: AlessamyColors.primaryGold,
       elevation: 0,
-      toolbarHeight: 80,
+      // toolbarHeight: 80,
+        leading: IconButton(
+        icon: const Icon(Icons.menu, color: Colors.white), // 👈 غير اللون هنا
+        onPressed: () => Scaffold.of(context).openDrawer(),
+      ),
+
       title: Row(
         children: [
           Expanded(
@@ -43,30 +47,30 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
           const SizedBox(width: 16),
-          Expanded(
-            flex: 3,
-            child: SizedBox(
-              height: 40,
-              child: TextField(
-                controller: searchController,
-                onChanged: onSearchChanged,
-                decoration: InputDecoration(
-                  hintText: searchHint,
-                  prefixIcon: const Icon(Icons.search),
-                  filled: true,
-                  fillColor: Colors.white,
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 0,
-                    horizontal: 12,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-              ),
-            ),
-          ),
+          // Expanded(
+          //   flex: 3,
+          //   child: SizedBox(
+          //     height: 40,
+          //     child: TextField(
+          //       controller: searchController,
+          //       onChanged: onSearchChanged,
+          //       decoration: InputDecoration(
+          //         hintText: searchHint,
+          //         prefixIcon: const Icon(Icons.search),
+          //         filled: true,
+          //         fillColor: Colors.white,
+          //         contentPadding: const EdgeInsets.symmetric(
+          //           vertical: 0,
+          //           horizontal: 12,
+          //         ),
+          //         border: OutlineInputBorder(
+          //           borderRadius: BorderRadius.circular(12),
+          //           borderSide: BorderSide.none,
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
           const SizedBox(width: 16),
           Expanded(
             flex: 2,
@@ -121,6 +125,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(80);
+  Size get preferredSize => const Size.fromHeight(60);
 }
-

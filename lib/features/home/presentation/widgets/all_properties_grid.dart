@@ -1,6 +1,5 @@
-
+import 'dart:developer';
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:summit_team/features/properties/data/models/property_model.dart';
 import 'package:summit_team/features/properties/presentation/widgets/property_card_widget.dart';
@@ -17,6 +16,7 @@ class LatestPropertiesGrid extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final width = constraints.maxWidth;
+        log(width.toString());
 
         // ---- حسابات الريسبونسيف ----
         final targetCardWidth = 360;

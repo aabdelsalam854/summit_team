@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
 // import 'package:summit_team/features/app/presentation/cubits/app/app_cubit.dart';
 // import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
-//
+
 
 // void main() async {
 //   WidgetsFlutterBinding.ensureInitialized();
@@ -69,11 +69,7 @@ class MyApp extends StatelessWidget {
 
 //   @override
 //   Widget build(BuildContext context) {
-//     return ScreenUtilInit(
-//       designSize: const Size(375, 812),
-//       minTextAdapt: true,
-//       splitScreenMode: true,
-//       builder: (context, child) {
+   
 //         return BlocProvider(
 //           create: (context) => sl<AppCubit>()
 //             ..getSavedLang()
@@ -97,7 +93,7 @@ class MyApp extends StatelessWidget {
 //             },
 //           ),
 //         );
-//       },
-//     );
+   
+  
 //   }
 // }

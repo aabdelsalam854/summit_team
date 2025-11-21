@@ -66,12 +66,15 @@ class DashboardStatsCard extends StatelessWidget {
           const SizedBox(height: 8),
 
           /// TITLE
-          Text(
-            title,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: AppStyles.styleRegular14(context)
-                .copyWith(color: AlessamyColors.textLight),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              title,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: AppStyles.styleRegular14(context)
+                  .copyWith(color: AlessamyColors.textLight),
+            ),
           ),
         ],
       ),

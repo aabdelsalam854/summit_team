@@ -40,6 +40,7 @@ class CustomDropdown<T> extends StatelessWidget {
           ),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<T>(
+              dropdownColor: AlessamyColors.charcoalBlack,
               value: value,
               isExpanded: true,
               hint: Text(
@@ -48,12 +49,13 @@ class CustomDropdown<T> extends StatelessWidget {
               ),
               items: items.map((item) {
                 return DropdownMenuItem<T>(
+
                   value: item,
                   child: Text(
                     itemBuilder(item),
                     style: TextStyle(
                       fontSize: 14,
-                      color: AlessamyColors.textPrimary,
+                      color: AlessamyColors.white,
                     ),
                   ),
                 );

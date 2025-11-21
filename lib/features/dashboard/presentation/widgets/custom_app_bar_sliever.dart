@@ -8,14 +8,16 @@ class CustomAppBarSliever extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isMobile = MediaQuery.of(context).size.width < 900;
-    final isTablet = MediaQuery.of(context).size.width >= 900 && 
-                     MediaQuery.of(context).size.width < 1200;
+    final isTablet =
+        MediaQuery.of(context).size.width >= 900 &&
+        MediaQuery.of(context).size.width < 1200;
 
     return SliverAppBar(
       backgroundColor: AlessamyColors.cardBackground,
       pinned: true,
       expandedHeight: isMobile ? 80 : 100,
       toolbarHeight: isMobile ? 60 : 80,
+
       flexibleSpace: FlexibleSpaceBar(
         titlePadding: EdgeInsets.symmetric(
           horizontal: isMobile ? 12 : 24,
@@ -24,8 +26,8 @@ class CustomAppBarSliever extends StatelessWidget {
         title: isMobile
             ? _buildMobileLayout(context)
             : isTablet
-                ? _buildTabletLayout(context)
-                : _buildDesktopLayout(context),
+            ? _buildTabletLayout(context)
+            : _buildDesktopLayout(context),
       ),
     );
   }
@@ -37,10 +39,9 @@ class CustomAppBarSliever extends StatelessWidget {
         Expanded(
           child: Text(
             "SUMMIT TEAM",
-            style: AppStyles.styleBold18(context).copyWith(
-              color: Colors.white,
-              fontSize: 16,
-            ),
+            style: AppStyles.styleBold18(
+              context,
+            ).copyWith(color: Colors.white, fontSize: 16),
             overflow: TextOverflow.ellipsis,
           ),
         ),
@@ -51,11 +52,7 @@ class CustomAppBarSliever extends StatelessWidget {
           child: IconButton(
             padding: EdgeInsets.zero,
             onPressed: () {},
-            icon: const Icon(
-              Icons.person,
-              color: Colors.white,
-              size: 18,
-            ),
+            icon: const Icon(Icons.person, color: Colors.white, size: 18),
           ),
         ),
       ],
@@ -70,9 +67,7 @@ class CustomAppBarSliever extends StatelessWidget {
           flex: 2,
           child: Text(
             "SUMMIT TEAM",
-            style: AppStyles.styleBold18(context).copyWith(
-              color: Colors.white,
-            ),
+            style: AppStyles.styleBold18(context).copyWith(color: Colors.white),
             overflow: TextOverflow.ellipsis,
           ),
         ),
@@ -107,11 +102,7 @@ class CustomAppBarSliever extends StatelessWidget {
           child: IconButton(
             padding: EdgeInsets.zero,
             onPressed: () {},
-            icon: const Icon(
-              Icons.person,
-              color: Colors.white,
-              size: 18,
-            ),
+            icon: const Icon(Icons.person, color: Colors.white, size: 18),
           ),
         ),
       ],
@@ -121,18 +112,17 @@ class CustomAppBarSliever extends StatelessWidget {
   /// ديسكتوب: كل شيء (العنوان + بحث + معلومات المستخدم كاملة)
   Widget _buildDesktopLayout(BuildContext context) {
     return Row(
+      spacing: 12,
       children: [
         Flexible(
           flex: 3,
           child: Text(
             "SUMMIT TEAM",
-            style: AppStyles.styleBold18(context).copyWith(
-              color: Colors.white,
-            ),
+            style: AppStyles.styleBold18(context).copyWith(color: Colors.white),
             overflow: TextOverflow.ellipsis,
           ),
         ),
-        const SizedBox(width: 16),
+
         Flexible(
           flex: 3,
           child: SizedBox(
@@ -155,7 +145,7 @@ class CustomAppBarSliever extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: 16),
+
         Flexible(
           flex: 2,
           child: Row(
@@ -165,11 +155,7 @@ class CustomAppBarSliever extends StatelessWidget {
                 backgroundColor: AlessamyColors.primaryGold,
                 child: IconButton(
                   onPressed: () {},
-                  icon: const Icon(
-                    Icons.person,
-                    color: Colors.white,
-                    size: 20,
-                  ),
+                  icon: const Icon(Icons.person, color: Colors.white, size: 20),
                 ),
               ),
               const SizedBox(width: 8),
@@ -187,10 +173,7 @@ class CustomAppBarSliever extends StatelessWidget {
                       ),
                       Text(
                         'دور المستخدم',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.white70,
-                        ),
+                        style: TextStyle(fontSize: 12, color: Colors.white70),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ],

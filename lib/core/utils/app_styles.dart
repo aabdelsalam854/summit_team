@@ -87,7 +87,7 @@ abstract class AppStyles {
   static TextStyle styleSemiBold18(BuildContext context) {
     return TextStyle(
       color: const Color(0xFFFFFFFF),
-      fontSize: getResponsiveFontSize(context, fontSize: 18),
+      fontSize: getResponsiveFontSize(context, fontSize: 14),
       fontFamily: 'NotoKufiArabic',
       fontWeight: FontWeight.w600,
     );

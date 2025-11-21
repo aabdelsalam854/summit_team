@@ -50,21 +50,43 @@ class EmployeesStatesRowWidget extends StatelessWidget {
 
         double widthFactor = width < 600 ? 0.48 : 0.24;
 
-        return Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Wrap(
-            spacing: 12,
-            runSpacing: 12,
-            children: cards
-                .map(
-                  (card) => FractionallySizedBox(
-                    widthFactor: widthFactor,
-                    child: card,
-                  ),
-                )
-                .toList(),
-          ),
-        );
+        if (width < 800) {
+          return Column(
+            children: [
+              Row(
+                children: [
+                  Expanded(child: cards[0]),
+                  const SizedBox(width: 12),
+                  Expanded(child: cards[1]),
+                ],
+              ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  Expanded(child: cards[2]),
+                  const SizedBox(width: 12),
+                  Expanded(child: cards[3]),
+                ],
+              ),
+            ],
+          );
+        } else {
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Wrap(
+              spacing: 12,
+              runSpacing: 12,
+              children: cards
+                  .map(
+                    (card) => FractionallySizedBox(
+                      widthFactor: widthFactor,
+                      child: card,
+                    ),
+                  )
+                  .toList(),
+            ),
+          );
+        }
       },
     );
   }

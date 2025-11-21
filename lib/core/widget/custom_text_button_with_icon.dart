@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:summit_team/core/utils/app_colors.dart';
+import 'package:summit_team/core/utils/app_styles.dart';
 
 enum ButtonType { text, outlined, filled }
 
@@ -39,15 +40,19 @@ class CustomButtonWithIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: width,
+      // width: width,
       height: height,
       child: TextButton(
         onPressed: onPressed,
         style: _buildButtonStyle(),
         child: Row(
-          // mainAxisSize: MainAxisSize.min,
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [Text(text), Icon(icon)],
+          children: [Flexible(child: Text(text,
+          style: AppStyles.styleBold16(context).copyWith(
+            color: textColor ?? Colors.white,
+          ),
+          )), Icon(icon)],
         ),
       ),
     );

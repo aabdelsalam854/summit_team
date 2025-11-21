@@ -193,7 +193,7 @@ class _DesktopLayout extends StatelessWidget {
           ),
           // Content
           Expanded(
-            flex: 7,
+            flex: 6,
             child: _ContentArea(
               selectedIndex: selectedIndex,
               visitedPages: visitedPages,

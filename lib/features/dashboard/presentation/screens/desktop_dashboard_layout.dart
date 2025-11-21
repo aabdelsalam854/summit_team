@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:summit_team/config/routes/routes.dart';
 import 'package:summit_team/core/utils/alessamy_colors.dart';
 import 'package:summit_team/core/widget/custom_text_button_with_icon.dart';
+import 'package:summit_team/features/dashboard/presentation/screens/tablet_dashboard_layout.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/custom_app_bar_sliever.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/dashboard_stats_card.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/detailed_income_chart.dart';
@@ -64,51 +65,52 @@ class _DesktopDashboardLayoutState extends State<DesktopDashboardLayout> {
                   CustomAppBarSliever(),
 
                   SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.all(14),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'مرحباً بك في لوحة التحكم',
-                            style: TextStyle(
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                              color: AlessamyColors.white,
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              CustomButtonWithIcon(
-                                textColor: Colors.white,
-                                height: 60,
-                                width: 180,
-                                text: "Export Excel",
-                                onPressed: () {},
-                                icon: Icons.table_chart_rounded,
-                                buttonType: ButtonType.outlined,
-                                arrowIconLeft: true,
-                                arrowIconRight: false,
-                              ),
-                              SizedBox(width: 16),
-                              CustomButtonWithIcon(
-                                textColor: Colors.white,
-                                height: 60,
-                                width: 180,
-                                text: "إضافة عقار جديد",
-                                onPressed: () {
-                                  context.push(Routes.kPropertyForm);
-                                },
-                                icon: Icons.arrow_circle_down_rounded,
-                                buttonType: ButtonType.outlined,
-                                arrowIconLeft: true,
-                                arrowIconRight: false,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
+                    child:HederSiction(),
+                    //  Padding(
+                    //   padding: const EdgeInsets.all(14),
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //     children: [
+                    //       Text(
+                    //         'مرحباً بك في لوحة التحكم',
+                    //         style: TextStyle(
+                    //           fontSize: 28,
+                    //           fontWeight: FontWeight.bold,
+                    //           color: AlessamyColors.white,
+                    //         ),
+                    //       ),
+                    //       Row(
+                    //         children: [
+                    //           CustomButtonWithIcon(
+                    //             textColor: Colors.white,
+                    //             height: 60,
+                    //             width: 180,
+                    //             text: "Export Excel",
+                    //             onPressed: () {},
+                    //             icon: Icons.table_chart_rounded,
+                    //             buttonType: ButtonType.outlined,
+                    //             arrowIconLeft: true,
+                    //             arrowIconRight: false,
+                    //           ),
+                    //           SizedBox(width: 16),
+                    //           CustomButtonWithIcon(
+                    //             textColor: Colors.white,
+                    //             height: 60,
+                    //             width: 180,
+                    //             text: "إضافة عقار جديد",
+                    //             onPressed: () {
+                    //               context.push(Routes.kPropertyForm);
+                    //             },
+                    //             icon: Icons.arrow_circle_down_rounded,
+                    //             buttonType: ButtonType.outlined,
+                    //             arrowIconLeft: true,
+                    //             arrowIconRight: false,
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                   ),
 
                   // Stats Cards - الصف الأول

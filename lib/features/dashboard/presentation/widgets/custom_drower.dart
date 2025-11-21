@@ -226,17 +226,17 @@ class MenuItem extends StatelessWidget {
               horizontal: isCompact ? 0 : 16,
               vertical: 14,
             ),
-            decoration: BoxDecoration(
-              gradient: isSelected ? AlessamyColors.goldToBlackGradient : null,
-              color: isSelected ? null : Colors.transparent,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                color: isSelected
-                    ? AlessamyColors.primaryGold.withOpacity(0.3)
-                    : Colors.transparent,
-                width: 1,
-              ),
-            ),
+            // decoration: BoxDecoration(
+            //   gradient: isSelected ? AlessamyColors.goldToBlackGradient : null,
+            //   color: isSelected ? null : Colors.transparent,
+            //   borderRadius: BorderRadius.circular(12),
+            //   border: Border.all(
+            //     color: isSelected
+            //         ? AlessamyColors.primaryGold.withOpacity(0.3)
+            //         : Colors.transparent,
+            //     width: 1,
+            //   ),
+            // ),
             child: isCompact
                 ? Center(
                     // ⬅️ Compact Mode - Icon فقط
@@ -255,8 +255,8 @@ class MenuItem extends StatelessWidget {
                         icon,
                         size: 22,
                         color: isSelected
-                            ? AlessamyColors.white
-                            : AlessamyColors.textLight,
+                    ? AlessamyColors.primaryGold
+                    : AlessamyColors.textLight,
                       ),
                       const SizedBox(width: 14),
                       Expanded(
@@ -278,7 +278,9 @@ class MenuItem extends StatelessWidget {
                           width: 4,
                           height: 20,
                           decoration: BoxDecoration(
-                            color: AlessamyColors.white,
+                                 color: isSelected
+                    ? AlessamyColors.primaryGold
+                    : Colors.transparent,
                             borderRadius: BorderRadius.circular(2),
                           ),
                         ),

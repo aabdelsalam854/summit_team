@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:summit_team/core/utils/alessamy_colors.dart';
+import 'package:summit_team/core/utils/app_styles.dart';
 
 class EmployeeDashboardAppBar extends StatelessWidget {
   final VoidCallback onAddPressed;
@@ -22,13 +24,10 @@ class EmployeeDashboardAppBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+               Text(
                 'لوحة تحكم الموظفين',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
+                style:  AppStyles.styleBold16(context)
+                      .copyWith(color: AlessamyColors.white),
               ),
 
               const SizedBox(height: 8),
@@ -53,9 +52,10 @@ class EmployeeDashboardAppBar extends StatelessWidget {
           ElevatedButton.icon(
             onPressed: onAddPressed,
             icon: const Icon(Icons.add, size: 20),
-            label: const Text(
+            label:  Text(
               'إضافة موظف',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: AppStyles.styleBold16(context)
+                      .copyWith(color: AlessamyColors.black),
             ),
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFFF1C40F),

@@ -36,14 +36,18 @@ class PropertyCardWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             // الصورة مع AspectRatio
-            Flexible(
-              fit: FlexFit.loose,
-              child: PropertyImageWidget(property: property)),
+            Expanded(
+              // fit: FlexFit.loose,
+              flex: 2,
+              child: PropertyImageWidget(property: property),
+            ),
 
             // المحتوى
             Flexible(
+              flex: 1,
               fit: FlexFit.loose,
-              child: ItemCardDetails(property: property)),
+              child: ItemCardDetails(property: property),
+            ),
           ],
         ),
       ),
@@ -64,15 +68,26 @@ class ItemCardDetails extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          PropertyPriceWidget(price: property.price),
-          const SizedBox(height: 8),
+          // PropertyPriceWidget(price: property.price),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            // fit: BoxFit.fitHeight,
+            child: Text(
+              "${property.title} ${property.description}",
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              style: AppStyles.styleSemiBold18(context),
+            ),
+          ),         Flexible(
+            fit: FlexFit.loose,
+            child: const SizedBox(height: 8)),
           Text(
-            property.title,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: AppStyles.styleSemiBold18(context),
+            _formatPrice(property.price),
+            style: AppStyles.styleBold18(context),
           ),
-          const SizedBox(height: 4),
+          Flexible(
+            fit: FlexFit.loose,
+            child: const SizedBox(height: 8)),
           Row(
             children: [
               Icon(
@@ -81,9 +96,10 @@ class ItemCardDetails extends StatelessWidget {
                 color: AlessamyColors.mediumGray,
               ),
               const SizedBox(width: 4),
-              Expanded(
+              Flexible(
+                fit: FlexFit.loose,
                 child: Text(
-                  '${property.location}, ${property.city}',
+                  '${property.location}',
                   style: AppStyles.styleRegular14(
                     context,
                   ).copyWith(color: AlessamyColors.textLight),
@@ -91,13 +107,26 @@ class ItemCardDetails extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
+              Spacer(),
+              Flexible(
+                fit: FlexFit.loose,
+                child: PropertySpecificationsWidget(property: property),
+              ),
             ],
           ),
-          const SizedBox(height: 8),
-          PropertySpecificationsWidget(property: property),
         ],
       ),
     );
+  }
+
+  String _formatPrice(double price) {
+    if (price >= 1000000) {
+      return '${(price / 1000000).toStringAsFixed(1)} مليون جنيه';
+    } else if (price >= 1000) {
+      return '${(price / 1000).toStringAsFixed(0)} ألف جنيه';
+    } else {
+      return '${price.toStringAsFixed(0)} جنيه';
+    }
   }
 }
 
@@ -126,14 +155,14 @@ class PropertyImageWidget extends StatelessWidget {
       builder: (context, constraints) {
         // الارتفاع يكون نسبة من العرض المتاح
         final imageHeight = constraints.maxWidth * 0.65;
-        
+
         return ClipRRect(
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(12),
             topRight: Radius.circular(12),
           ),
           child: SizedBox(
-            height: imageHeight.clamp(150, 220),
+            // height: imageHeight.clamp(150, 220),
             width: double.infinity,
             child: CachedNetworkImage(
               imageUrl: property.imageUrl,
@@ -159,6 +188,7 @@ class PropertyImageWidget extends StatelessWidget {
     );
   }
 }
+
 /// ---------------------------------------------------------------------------
 ///  🟦 PropertyPriceWidget — ويدجت السعر
 /// ---------------------------------------------------------------------------
@@ -237,16 +267,16 @@ class PropertySpecificationsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        PropertySpecItemWidget(
-          icon: Icons.bed_outlined,
-          text: '${property.bedrooms}',
-        ),
-        const SizedBox(width: 16),
-        PropertySpecItemWidget(
-          icon: Icons.bathroom_outlined,
-          text: '${property.bathrooms}',
-        ),
-        const SizedBox(width: 16),
+        // PropertySpecItemWidget(
+        //   icon: Icons.bed_outlined,
+        //   text: '${property.bedrooms}',
+        // ),
+        // const SizedBox(width: 16),
+        // PropertySpecItemWidget(
+        //   icon: Icons.bathroom_outlined,
+        //   text: '${property.bathrooms}',
+        // ),
+        // const SizedBox(width: 16),
         PropertySpecItemWidget(
           icon: Icons.square_foot_outlined,
           text: '${property.area.toInt()} م²',

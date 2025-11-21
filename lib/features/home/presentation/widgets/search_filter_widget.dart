@@ -104,19 +104,29 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: AlessamyColors.borderLight),
+                        borderSide: BorderSide(
+                          color: AlessamyColors.borderLight,
+                        ),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: AlessamyColors.borderLight),
+                        borderSide: BorderSide(
+                          color: AlessamyColors.borderLight,
+                        ),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: AlessamyColors.primaryGold, width: 2),
+                        borderSide: BorderSide(
+                          color: AlessamyColors.primaryGold,
+                          width: 2,
+                        ),
                       ),
                       filled: true,
                       fillColor: AlessamyColors.cardBackground,
-                      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      contentPadding: EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
                     ),
                     style: TextStyle(color: AlessamyColors.white),
                     onSubmitted: (value) => _performSearch(),
@@ -136,8 +146,11 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
           else
             Row(
               children: [
-                Icon(Icons.home_work,
-                    color: AlessamyColors.primaryGold, size: 24),
+                Icon(
+                  Icons.home_work,
+                  color: AlessamyColors.primaryGold,
+                  size: 24,
+                ),
                 SizedBox(width: 8),
                 Text(
                   'ابحث عن عقارك',
@@ -186,70 +199,110 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
   Widget _buildWebFilters(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        int columns = constraints.maxWidth > 900 ? 3 : 1;
+        int columns = constraints.maxWidth > 900 ? 4 : 1;
         return Wrap(
           spacing: 20,
           runSpacing: 20,
           children: [
-            _wrapField(_buildTextField('ابحث بكود العقار', _propertyCodeController, 'أدخل كود العقار'), columns, constraints.maxWidth),
+            _wrapField(
+              _buildTextField(
+                'ابحث بكود العقار',
+                _propertyCodeController,
+                'أدخل كود العقار',
+              ),
+              columns,
+              constraints.maxWidth,
+            ),
 
-            _wrapField(_dropdown(
-              label: 'المدينة',
-              value: selectedCity,
-              items: cities,
-              onChanged: (v) => setState(() => selectedCity = v),
-            ), columns, constraints.maxWidth),
+            _wrapField(
+              _dropdown(
+                label: 'المدينة',
+                value: selectedCity,
+                items: cities,
+                onChanged: (v) => setState(() => selectedCity = v),
+              ),
+              columns,
+              constraints.maxWidth,
+            ),
 
-            _wrapField(_dropdown(
-              label: 'المرحلة',
-              value: selectedPhase,
-              items: phases,
-              onChanged: (v) => setState(() => selectedPhase = v),
-            ), columns, constraints.maxWidth),
+            _wrapField(
+              _dropdown(
+                label: 'المرحلة',
+                value: selectedPhase,
+                items: phases,
+                onChanged: (v) => setState(() => selectedPhase = v),
+              ),
+              columns,
+              constraints.maxWidth,
+            ),
 
-            _wrapField(_dropdown(
-              label: 'النموذج',
-              value: selectedModel,
-              items: models,
-              onChanged: (v) => setState(() => selectedModel = v),
-            ), columns, constraints.maxWidth),
+            _wrapField(
+              _dropdown(
+                label: 'النموذج',
+                value: selectedModel,
+                items: models,
+                onChanged: (v) => setState(() => selectedModel = v),
+              ),
+              columns,
+              constraints.maxWidth,
+            ),
 
-            _wrapField(_dropdown(
-              label: 'نوع العقار',
-              value: selectedType,
-              items: PropertyType.values,
-              itemBuilder: (t) => t.arabicName,
-              onChanged: (v) => setState(() => selectedType = v),
-            ), columns, constraints.maxWidth),
+            _wrapField(
+              _dropdown(
+                label: 'نوع العقار',
+                value: selectedType,
+                items: PropertyType.values,
+                itemBuilder: (t) => t.arabicName,
+                onChanged: (v) => setState(() => selectedType = v),
+              ),
+              columns,
+              constraints.maxWidth,
+            ),
 
-            _wrapField(_dropdown(
-              label: 'الغرض',
-              value: selectedPurpose,
-              items: PropertyPurpose.values,
-              itemBuilder: (t) => t.arabicName,
-              onChanged: (v) => setState(() => selectedPurpose = v),
-            ), columns, constraints.maxWidth),
+            _wrapField(
+              _dropdown(
+                label: 'الغرض',
+                value: selectedPurpose,
+                items: PropertyPurpose.values,
+                itemBuilder: (t) => t.arabicName,
+                onChanged: (v) => setState(() => selectedPurpose = v),
+              ),
+              columns,
+              constraints.maxWidth,
+            ),
 
-            _wrapField(_dropdown(
-              label: 'نظام الدفع',
-              value: selectedPaymentSystem,
-              items: paymentSystems,
-              onChanged: (v) => setState(() => selectedPaymentSystem = v),
-            ), columns, constraints.maxWidth),
+            _wrapField(
+              _dropdown(
+                label: 'نظام الدفع',
+                value: selectedPaymentSystem,
+                items: paymentSystems,
+                onChanged: (v) => setState(() => selectedPaymentSystem = v),
+              ),
+              columns,
+              constraints.maxWidth,
+            ),
 
-            _wrapField(_dropdown(
-              label: 'نوع التشطيب',
-              value: selectedFinishingType,
-              items: finishingTypes,
-              onChanged: (v) => setState(() => selectedFinishingType = v),
-            ), columns, constraints.maxWidth),
+            _wrapField(
+              _dropdown(
+                label: 'نوع التشطيب',
+                value: selectedFinishingType,
+                items: finishingTypes,
+                onChanged: (v) => setState(() => selectedFinishingType = v),
+              ),
+              columns,
+              constraints.maxWidth,
+            ),
 
-            _wrapField(_dropdown(
-              label: 'عدد الغرف',
-              value: selectedRoomsCount,
-              items: roomsCounts,
-              onChanged: (v) => setState(() => selectedRoomsCount = v),
-            ), columns, constraints.maxWidth),
+            _wrapField(
+              _dropdown(
+                label: 'عدد الغرف',
+                value: selectedRoomsCount,
+                items: roomsCounts,
+                onChanged: (v) => setState(() => selectedRoomsCount = v),
+              ),
+              columns,
+              constraints.maxWidth,
+            ),
 
             /// المساحة
             _wrapField(
@@ -281,11 +334,14 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
                   children: [
                     Icon(Icons.search, color: AlessamyColors.black),
                     SizedBox(width: 8),
-                    Text('بحث',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: AlessamyColors.white)),
+                    Text(
+                      'بحث',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: AlessamyColors.white,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -369,7 +425,7 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
                           ),
                         ],
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -387,7 +443,11 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
   Widget _buildMobileFilters() {
     return Column(
       children: [
-        _buildTextField('ابحث بكود العقار', _propertyCodeController, 'أدخل كود العقار'),
+        _buildTextField(
+          'ابحث بكود العقار',
+          _propertyCodeController,
+          'أدخل كود العقار',
+        ),
         SizedBox(height: 15),
         _dropdown(
           label: 'المدينة',
@@ -474,16 +534,22 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
     );
   }
 
-  Widget _buildTextField(String label, TextEditingController controller, String hint) {
+  Widget _buildTextField(
+    String label,
+    TextEditingController controller,
+    String hint,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: AlessamyColors.textSecondary,
-            )),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            color: AlessamyColors.textSecondary,
+          ),
+        ),
         SizedBox(height: 8),
         TextField(
           controller: controller,
@@ -508,26 +574,28 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
     );
   }
 
-  Widget _rangeFields(String label, TextEditingController minCtrl, TextEditingController maxCtrl) {
+  Widget _rangeFields(
+    String label,
+    TextEditingController minCtrl,
+    TextEditingController maxCtrl,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: AlessamyColors.textSecondary,
-            )),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            color: AlessamyColors.textSecondary,
+          ),
+        ),
         SizedBox(height: 8),
         Row(
           children: [
-            Expanded(
-              child: _buildTextField('من', minCtrl, 'من'),
-            ),
+            Expanded(child: _buildTextField('من', minCtrl, 'من')),
             SizedBox(width: 12),
-            Expanded(
-              child: _buildTextField('إلى', maxCtrl, 'إلى'),
-            ),
+            Expanded(child: _buildTextField('إلى', maxCtrl, 'إلى')),
           ],
         ),
       ],

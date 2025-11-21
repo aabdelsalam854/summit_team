@@ -30,7 +30,7 @@ class _DetailedIncomeChartState extends State<DetailedIncomeChart> {
       valueListenable: activeIndexNotifier,
       builder: (context, activeIndex, _) {
         return AspectRatio(
-          aspectRatio: 1,
+          aspectRatio:.9,
           child: Stack(
             alignment: Alignment.center,
             children: [

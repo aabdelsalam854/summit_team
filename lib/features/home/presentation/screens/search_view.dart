@@ -1,24 +1,24 @@
+import 'package:go_router/go_router.dart';
+import 'package:summit_team/config/routes/routes.dart';
 import 'package:summit_team/core/adaptive_layout/adaptive_layout_widget.dart';
 import 'package:summit_team/core/utils/alessamy_colors.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/custom_app_bar_sliever.dart';
 
 import 'package:summit_team/features/home/presentation/widgets/footer_widget.dart';
 import 'package:summit_team/features/home/presentation/widgets/search.dart';
-import 'package:summit_team/features/home/presentation/widgets/section_header.dart';
+import 'package:summit_team/features/home/presentation/widgets/search_filter_widget.dart';
 
 import 'package:summit_team/features/properties/data/models/property_model.dart';
 import 'package:summit_team/features/properties/presentation/widgets/property_card_widget.dart';
 import 'package:flutter/material.dart';
 
-import 'package:summit_team/config/locale/app_localizations.dart';
-import 'package:summit_team/config/locale/keys_translate.dart';
 
 class DesktopHomes extends StatelessWidget {
   const DesktopHomes({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: AlessamyColors.backgroundColor,
 
@@ -45,16 +45,16 @@ class DesktopHomes extends StatelessWidget {
 
                     SliverToBoxAdapter(child: SizedBox(height: 48)),
 
-                    // أحدث العروض - Header
-                    SliverToBoxAdapter(
-                      child: SectionHeaderWidget(
-                        title: l10n.translate(KeysTranslate.sectionLatest),
-                        subtitle: l10n.translate(
-                          KeysTranslate.sectionLatestSubtitle,
-                        ),
-                        onViewAll: () {},
-                      ),
-                    ),
+                    // // أحدث العروض - Header
+                    // SliverToBoxAdapter(
+                    //   child: SectionHeaderWidget(
+                    //     title: l10n.translate(KeysTranslate.sectionLatest),
+                    //     subtitle: l10n.translate(
+                    //       KeysTranslate.sectionLatestSubtitle,
+                    //     ),
+                    //     onViewAll: () {},
+                    //   ),
+                    // ),
 
                     SliverToBoxAdapter(child: SizedBox(height: 24)),
 
@@ -85,24 +85,25 @@ class DesktopHomes extends StatelessWidget {
                   CustomAppBarSliever(),
                   SliverToBoxAdapter(child: SizedBox(height: 40)),
                   SliverToBoxAdapter(
-                    child: ModernSearchFilterWidget(
-                      onSearch: (filter) {
-                        debugPrint('Tablet Search: $filter');
-                      },
-                    ),
+                    child: SearchFilterWidget(onSearch: (filter) {}),
+                    //  ModernSearchFilterWidget(
+                    //   onSearch: (filter) {
+                    //     debugPrint('Tablet Search: $filter');
+                    //   },
+                    // ),
                   ),
                   SliverToBoxAdapter(child: SizedBox(height: 48)),
 
-                  // أحدث العروض - Header
-                  SliverToBoxAdapter(
-                    child: SectionHeaderWidget(
-                      title: l10n.translate(KeysTranslate.sectionLatest),
-                      subtitle: l10n.translate(
-                        KeysTranslate.sectionLatestSubtitle,
-                      ),
-                      onViewAll: () {},
-                    ),
-                  ),
+                  // // أحدث العروض - Header
+                  // SliverToBoxAdapter(
+                  //   child: SectionHeaderWidget(
+                  //     title: l10n.translate(KeysTranslate.sectionLatest),
+                  //     subtitle: l10n.translate(
+                  //       KeysTranslate.sectionLatestSubtitle,
+                  //     ),
+                  //     onViewAll: () {},
+                  //   ),
+                  // ),
 
                   SliverToBoxAdapter(child: SizedBox(height: 24)),
 
@@ -132,24 +133,26 @@ class DesktopHomes extends StatelessWidget {
                   CustomAppBarSliever(),
                   SliverToBoxAdapter(child: SizedBox(height: 40)),
                   SliverToBoxAdapter(
-                    child: ModernSearchFilterWidget(
-                      onSearch: (filter) {
-                        debugPrint('Tablet Search: $filter');
-                      },
-                    ),
+                    child: SearchFilterWidget(onSearch: (filter) {}),
+
+                    //  ModernSearchFilterWidget(
+                    //   onSearch: (filter) {
+                    //     debugPrint('Tablet Search: $filter');
+                    //   },
+                    // ),
                   ),
                   SliverToBoxAdapter(child: SizedBox(height: 48)),
 
                   // أحدث العروض - Header
-                  SliverToBoxAdapter(
-                    child: SectionHeaderWidget(
-                      title: l10n.translate(KeysTranslate.sectionLatest),
-                      subtitle: l10n.translate(
-                        KeysTranslate.sectionLatestSubtitle,
-                      ),
-                      onViewAll: () {},
-                    ),
-                  ),
+                  // SliverToBoxAdapter(
+                  //   child: SectionHeaderWidget(
+                  //     title: l10n.translate(KeysTranslate.sectionLatest),
+                  //     subtitle: l10n.translate(
+                  //       KeysTranslate.sectionLatestSubtitle,
+                  //     ),
+                  //     onViewAll: () {},
+                  //   ),
+                  // ),
 
                   SliverToBoxAdapter(child: SizedBox(height: 24)),
 
@@ -1005,21 +1008,21 @@ class LatestPropertiesGrid extends StatelessWidget {
     return 7; // maximum
   }
 
-// double _getCardHeight(double width) {
-//   if (width <= 600) {
-//     // موبايل
-//     return 300 + (width / 600) * 20; // 300 إلى 320 تدريجيًا
-//   } else if (width <= 900) {
-//     // تابلت صغير
-//     return 320 + ((width - 600) / 300) * 20; // 320 إلى 340 تدريجيًا
-//   } else if (width <= 1200) {
-//     // تابلت كبير / لابتوب
-//     return 340 + ((width - 900) / 300) * 20; // 340 إلى 360 تدريجيًا
-//   } else {
-//     // ديسكتوب
-//     return 360 + ((width - 1200) / 600) * 20; // 360 إلى 380 تدريجيًا
-//   }
-// }
+  // double _getCardHeight(double width) {
+  //   if (width <= 600) {
+  //     // موبايل
+  //     return 300 + (width / 600) * 20; // 300 إلى 320 تدريجيًا
+  //   } else if (width <= 900) {
+  //     // تابلت صغير
+  //     return 320 + ((width - 600) / 300) * 20; // 320 إلى 340 تدريجيًا
+  //   } else if (width <= 1200) {
+  //     // تابلت كبير / لابتوب
+  //     return 340 + ((width - 900) / 300) * 20; // 340 إلى 360 تدريجيًا
+  //   } else {
+  //     // ديسكتوب
+  //     return 360 + ((width - 1200) / 600) * 20; // 360 إلى 380 تدريجيًا
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -1047,7 +1050,12 @@ class LatestPropertiesGrid extends StatelessWidget {
             itemBuilder: (context, index) {
               return PropertyCardWidget(
                 property: featured[index],
-                onTap: () {},
+                onTap: () {
+                  context.push(
+                    '${Routes.kPropertyDetails}/${featured[index].id}',
+                    extra: featured[index],
+                  );
+                },
               );
             },
           ),

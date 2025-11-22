@@ -1,18 +1,21 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:summit_team/core/utils/alessamy_colors.dart';
+import 'package:summit_team/core/utils/app_colors.dart';
 import 'package:summit_team/features/properties/data/models/property_model.dart';
 
-class PropertyDetailsScreen extends StatefulWidget {
+class PropertyWepDetailsScreen extends StatefulWidget {
   final PropertyModel property;
 
-  const PropertyDetailsScreen({super.key, required this.property});
+  const PropertyWepDetailsScreen({super.key, required this.property});
 
   @override
-  State<PropertyDetailsScreen> createState() => _PropertyDetailsScreenState();
+  State<PropertyWepDetailsScreen> createState() =>
+      _PropertyWepDetailsScreenState();
 }
 
-class _PropertyDetailsScreenState extends State<PropertyDetailsScreen>
+class _PropertyWepDetailsScreenState extends State<PropertyWepDetailsScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   int _currentImageIndex = 0;
@@ -32,19 +35,46 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1A1A1A),
+      backgroundColor: AlessamyColors.backgroundColor,
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            expandedHeight: 300,
-            pinned: true,
-            backgroundColor: const Color(0xFF1A1A1A),
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.white),
-              onPressed: () => Navigator.pop(context),
-            ),
-            flexibleSpace: FlexibleSpaceBar(
-              background: PropertyImageSlider(
+          // SliverAppBar(
+          //   expandedHeight: 300,
+          //   pinned: true,
+          //   backgroundColor: const Color(0xFF1A1A1A),
+          //   leading: IconButton(
+          //     icon: const Icon(Icons.arrow_back, color: Colors.white),
+          //     onPressed: () => Navigator.pop(context),
+          //   ),
+          //   flexibleSpace: FlexibleSpaceBar(
+          //     background:
+          // PropertyImageSlider(
+          //       images: widget.property.images.isNotEmpty
+          //           ? widget.property.images
+          //           : [widget.property.imageUrl],
+          //       currentIndex: _currentImageIndex,
+          //       onPageChanged: (index) {
+          //         setState(() {
+          //           _currentImageIndex = index;
+          //         });
+          //       },
+          //     ),
+          //   ),
+          //   actions: [
+          //     IconButton(
+          //       icon: const Icon(Icons.share, color: Colors.white),
+          //       onPressed: () {},
+          //     ),
+          //     IconButton(
+          //       icon: const Icon(Icons.favorite_border, color: Colors.white),
+          //       onPressed: () {},
+          //     ),
+          //   ],
+          // ),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 300,
+              child: PropertyImageSlider(
                 images: widget.property.images.isNotEmpty
                     ? widget.property.images
                     : [widget.property.imageUrl],
@@ -56,40 +86,73 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen>
                 },
               ),
             ),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.share, color: Colors.white),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: const Icon(Icons.favorite_border, color: Colors.white),
-                onPressed: () {},
-              ),
-            ],
           ),
-          SliverList(
-            delegate: SliverChildListDelegate([
-              PropertyTabBar(tabController: _tabController),
-              // PropertyOverviewWidget(property: widget.property),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.6,
-                child: TabBarView(
-                  controller: _tabController,
-                  children: [
-                    OverviewTabWidget(property: widget.property),
-
-                    AmenitiesTabWidget(property: widget.property),
-                    MoreDetailsTabWidget(property: widget.property),
-                    LocationTabWidget(property: widget.property),
-                  ],
+          SliverToBoxAdapter(
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Card(
+                    color: AlessamyColors.cardBackground,
+                    child: PriceAndReservation(
+                      clientPhone: "01065656764",
+                      employeeCode: "123",
+                      ownerPhone: "213213230",
+                      property: widget.property,
+                    ),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 100),
-            ]),
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: PropertyTabBar(tabController: _tabController),
+                      ),
+                      const SizedBox(height: 16),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.6,
+                        child: TabBarView(
+                          controller: _tabController,
+                          children: [
+                            Card(
+                              color: AlessamyColors.cardBackground,
+
+                              child: OverviewTabWidget(
+                                property: widget.property,
+                              ),
+                            ),
+                            Card(
+                              color: AlessamyColors.cardBackground,
+                              child: PropertyFinanceTable(
+                                // property: widget.property,
+                              ),
+                            ),
+                            Card(
+                              color: AlessamyColors.cardBackground,
+                              child: MoreDetailsTabWidget(
+                                property: widget.property,
+                              ),
+                            ),
+                            Card(
+                              color: AlessamyColors.cardBackground,
+                              child: LocationTabWidget(
+                                property: widget.property,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                ],
+            ),
           ),
         ],
       ),
-      bottomNavigationBar: PropertyBottomBar(property: widget.property),
+      // bottomNavigationBar: PropertyBottomBar(property: widget.property),
     );
   }
 }
@@ -112,28 +175,29 @@ class PropertyImageSlider extends StatelessWidget {
     return Stack(
       fit: StackFit.expand,
       children: [
-    ScrollConfiguration(
-  behavior: ScrollConfiguration.of(context).copyWith(
-    dragDevices: {
-      PointerDeviceKind.touch,
-      PointerDeviceKind.mouse,
-    },
-  ),
-  child: PageView.builder(
-    itemCount: 4,
-    onPageChanged: onPageChanged,
-    itemBuilder: (context, index) {
-      return Image.network(
-        images[index],
-        fit: BoxFit.cover,
-        errorBuilder: (context, error, stackTrace) => Container(
-          color: Colors.grey[800],
-          child: const Icon(Icons.image, size: 50, color: Colors.white54),
+        ScrollConfiguration(
+          behavior: ScrollConfiguration.of(context).copyWith(
+            dragDevices: {PointerDeviceKind.touch, PointerDeviceKind.mouse},
+          ),
+          child: PageView.builder(
+            itemCount: 4,
+            onPageChanged: onPageChanged,
+            itemBuilder: (context, index) {
+              return Image.network(
+                images[index],
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) => Container(
+                  color: Colors.grey[800],
+                  child: const Icon(
+                    Icons.image,
+                    size: 50,
+                    color: Colors.white54,
+                  ),
+                ),
+              );
+            },
+          ),
         ),
-      );
-    },
-  ),
-),
 
         Container(
           decoration: BoxDecoration(
@@ -148,39 +212,39 @@ class PropertyImageSlider extends StatelessWidget {
             ),
           ),
         ),
-    Positioned(
-  bottom: 16,
-  right: 16,
-  child: Row(
-    children: List.generate(5, (i) {
-      int idx = 0; // الصورة الأولى من قائمة images
-      return Padding(
-        padding: const EdgeInsets.only(left: 4),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(8),
-          child: Container(
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: currentIndex == idx
-                    ? Colors.yellow
-                    : Colors.transparent,
-                width: 2,
-              ),
-            ),
-            child: Image.network(
-              images[idx],
-              fit: BoxFit.cover,
-              errorBuilder: (context, e, s) =>
-                  Container(color: Colors.grey[800]),
-            ),
+        Positioned(
+          bottom: 16,
+          right: 16,
+          child: Row(
+            children: List.generate(5, (i) {
+              int idx = 0; // الصورة الأولى من قائمة images
+              return Padding(
+                padding: const EdgeInsets.only(left: 4),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: currentIndex == idx
+                            ? Colors.yellow
+                            : Colors.transparent,
+                        width: 2,
+                      ),
+                    ),
+                    child: Image.network(
+                      images[idx],
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, e, s) =>
+                          Container(color: Colors.grey[800]),
+                    ),
+                  ),
+                ),
+              );
+            }),
           ),
         ),
-      );
-    }),
-  ),
-),
 
         if (images.length > 1)
           Positioned(
@@ -211,7 +275,13 @@ class PropertyTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color(0xFF1A1A1A),
+      height: 60,
+
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(60),
+        color: const Color(0xFF1A1A1A),
+      ),
+
       child: TabBar(
         controller: tabController,
         indicatorColor: Colors.yellow,
@@ -219,10 +289,264 @@ class PropertyTabBar extends StatelessWidget {
         unselectedLabelColor: Colors.grey,
         tabs: const [
           Tab(text: 'نظرة عامة'),
-          Tab(text: 'المرافق'),
+          Tab(text: 'البيانات المالية'),
           Tab(text: 'تفاصيل أكثر'),
           Tab(text: 'الموقع'),
         ],
+      ),
+    );
+  }
+}
+
+class PropertyFinanceTable extends StatelessWidget {
+  const PropertyFinanceTable({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: AlessamyColors.cardBackground,
+      margin: const EdgeInsets.all(16),
+
+      elevation: 3,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'تفاصيل التمويل',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            const SizedBox(height: 16),
+            Table(
+              columnWidths: const {
+                0: FlexColumnWidth(2),
+                1: FlexColumnWidth(2),
+                2: FlexColumnWidth(2),
+                3: FlexColumnWidth(2),
+              },
+              border: TableBorder.all(color: Colors.grey, width: 0.5),
+              children: const [
+                TableRow(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'قيمة المقدم',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text('0', style: TextStyle(color: Colors.white)),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'سنة الحجز',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        '13,690,110',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+                TableRow(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'سنوات السداد',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text('12', style: TextStyle(color: Colors.white)),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'اجمالى العقد',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        '13,690,110',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+                TableRow(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'المدفوع',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        '1,291,000',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'الباقى',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        '12,399,110',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+                TableRow(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'القسط الشهرى',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        '41,070',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'عدد الاقساط المتبقية',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text('0', style: TextStyle(color: Colors.white)),
+                    ),
+                  ],
+                ),
+                TableRow(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'نظام السداد',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'شهرى',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'القسط السنوى',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        '397,000',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+                TableRow(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'قيمة الوديعة',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        '662,625',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'مدفوع من الوديعة',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text('0', style: TextStyle(color: Colors.white)),
+                    ),
+                  ],
+                ),
+                TableRow(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'الباقى من الوديعة',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        '662,625',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'المطلوب',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        '1,141,000',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -723,16 +1047,26 @@ class LocationTabWidget extends StatelessWidget {
 }
 
 // =================== شريط السعر والحجز ===================
-class PropertyBottomBar extends StatelessWidget {
+class PriceAndReservation extends StatelessWidget {
   final PropertyModel property;
-  const PropertyBottomBar({super.key, required this.property});
+  final String clientPhone;
+  final String ownerPhone;
+  final String employeeCode;
+
+  const PriceAndReservation({
+    super.key,
+    required this.property,
+    required this.clientPhone,
+    required this.ownerPhone,
+    required this.employeeCode,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFF252525),
+        color: AlessamyColors.cardBackground,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.3),
@@ -742,30 +1076,60 @@ class PropertyBottomBar extends StatelessWidget {
         ],
       ),
       child: SafeArea(
-        child: Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'السعر الإجمالي',
-                    style: TextStyle(color: Colors.grey, fontSize: 12),
-                  ),
-                  Text(
-                    '${property.price.toStringAsFixed(0)}\$',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
+            // السعر الإجمالي
+            Text(
+              'السعر الإجمالي',
+              style: TextStyle(color: Colors.grey[400], fontSize: 12),
+            ),
+            Text(
+              '${property.price.toStringAsFixed(0)}\$',
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(width: 16),
-            Expanded(
+            const SizedBox(height: 16),
+
+            // رقم هاتف العميل
+            Text(
+              'رقم هاتف العميل',
+              style: TextStyle(color: Colors.grey[400], fontSize: 12),
+            ),
+            Text(
+              clientPhone,
+              style: const TextStyle(color: Colors.white, fontSize: 16),
+            ),
+            const SizedBox(height: 8),
+
+            // رقم هاتف صاحب العقار
+            Text(
+              'رقم هاتف صاحب العقار',
+              style: TextStyle(color: Colors.grey[400], fontSize: 12),
+            ),
+            Text(
+              ownerPhone,
+              style: const TextStyle(color: Colors.white, fontSize: 16),
+            ),
+            const SizedBox(height: 8),
+
+            // كود الموظف
+            Text(
+              'كود الموظف',
+              style: TextStyle(color: Colors.grey[400], fontSize: 12),
+            ),
+            Text(
+              employeeCode,
+              style: const TextStyle(color: Colors.white, fontSize: 16),
+            ),
+            const SizedBox(height: 16),
+
+            // زر الحجز
+            SizedBox(
+              width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
@@ -1112,6 +1476,38 @@ class PropertyDetailsExample extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: PropertyOverviewWidget(property: exampleProperty),
       ),
+    );
+  }
+}
+
+class WepImageDetails extends StatelessWidget {
+  const WepImageDetails({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(flex: 1, child: Container(color: AppColors.error)),
+        Expanded(
+          flex: 1,
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Container(color: AppColors.gold),
+                  Container(color: AppColors.softGrey),
+                ],
+              ),
+              Row(
+                children: [
+                  Container(color: AppColors.buttonPrimary),
+                  Container(color: AppColors.success),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

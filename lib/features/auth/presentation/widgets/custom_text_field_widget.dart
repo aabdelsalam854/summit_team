@@ -10,7 +10,7 @@ class CustomTextFieldWidget extends StatelessWidget {
     this.isPassword = false,
     this.keyboardType,
     this.validator,
-    this.isMobile = false,
+    this.isMobile = false, this.onChanged,
   });
 
   final TextEditingController controller;
@@ -20,6 +20,7 @@ class CustomTextFieldWidget extends StatelessWidget {
   final TextInputType? keyboardType;
   final String? Function(String?)? validator;
   final bool isMobile;
+  final Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +29,7 @@ class CustomTextFieldWidget extends StatelessWidget {
       obscureText: isPassword,
       keyboardType: keyboardType,
       validator: validator,
+      onChanged: onChanged,
       style: TextStyle(fontSize: 14, color: AppColors.white),
       decoration: InputDecoration(
         hintText: hintText,

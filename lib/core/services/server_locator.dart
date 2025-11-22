@@ -12,7 +12,7 @@ Future<void> setUpServerLocator() async {
   );
 
   // Register core services
-  sl.registerLazySingleton<DatabaseServices>(() => FirestoreServices());
+  // sl.registerLazySingleton<DatabaseServices>(() => FirestoreServices());
 
   await appInit(sl);
 }

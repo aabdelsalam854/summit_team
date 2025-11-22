@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:summit_team/core/utils/alessamy_colors.dart';
+import 'package:summit_team/core/utils/app_styles.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -27,7 +28,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       // backgroundColor: AlessamyColors.primaryGold,
       elevation: 0,
       // toolbarHeight: 80,
-        leading: IconButton(
+      leading: IconButton(
         icon: const Icon(Icons.menu, color: Colors.white), // 👈 غير اللون هنا
         onPressed: () => Scaffold.of(context).openDrawer(),
       ),
@@ -35,14 +36,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Row(
         children: [
           Expanded(
-            flex: 3,
+            flex: 2,
             child: Text(
               title,
-              style: const TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
+              style: AppStyles.styleBold18(
+                context,
+              ).copyWith(color: Colors.white),
               overflow: TextOverflow.ellipsis,
             ),
           ),
@@ -74,53 +73,61 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           const SizedBox(width: 16),
           Expanded(
             flex: 2,
-            child: Row(
-              children: [
-                CircleAvatar(
-                  radius: 20,
-                  backgroundColor: AlessamyColors.primaryGold,
-                  child: IconButton(
-                    onPressed: onProfileTap,
-                    icon: const Icon(
-                      Icons.person,
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          userName,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            color: Colors.white,
-                          ),
-                          overflow: TextOverflow.ellipsis,
+            child:
+                // UserInfoListTile(
+                //   userInfoModel: UserInfoModel(
+                //     image: 'assets/images/user_avatar.png',
+                //     title: userName,
+                //     subTitle: userRole,
+                //   ),
+                // ),
+                Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 20,
+                      backgroundColor: AlessamyColors.primaryGold,
+                      child: IconButton(
+                        onPressed: onProfileTap,
+                        icon: const Icon(
+                          Icons.person,
+                          color: Colors.white,
+                          size: 20,
                         ),
-                        Text(
-                          userRole,
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: Colors.white70,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              userName,
+                              style: AppStyles.styleRegular12(
+                                context,
+                              ).copyWith(color: Colors.white),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Text(
+                              userRole,
+                              style: AppStyles.styleRegular12(
+                                context,
+                              ).copyWith(color: Colors.white70),
+
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
           ),
         ],
       ),
+      actions: const [],
     );
   }
 

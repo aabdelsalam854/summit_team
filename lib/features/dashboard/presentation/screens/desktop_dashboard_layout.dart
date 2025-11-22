@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:summit_team/config/routes/routes.dart';
 import 'package:summit_team/core/utils/alessamy_colors.dart';
-import 'package:summit_team/core/widget/custom_text_button_with_icon.dart';
+import 'package:summit_team/features/Employees/presentation/widgets/role_distribution_card.dart';
 import 'package:summit_team/features/dashboard/presentation/screens/tablet_dashboard_layout.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/custom_app_bar_sliever.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/dashboard_stats_card.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/detailed_income_chart.dart';
-import 'package:summit_team/features/home/presentation/screens/desktop_home_layout.dart';
-import 'package:summit_team/features/home/presentation/screens/mobile_home_layout.dart';
 import 'package:summit_team/features/properties/data/models/property_model.dart';
 import 'dr.dart' as property_stats;
 
-/// ---------------------------------------------------------------------------
-/// 🖥️ DesktopDashboardLayout — تخطيط الداشبورد للديسكتوب
-/// ---------------------------------------------------------------------------
 class DesktopDashboardLayout extends StatefulWidget {
   const DesktopDashboardLayout({super.key});
 
@@ -24,6 +17,12 @@ class DesktopDashboardLayout extends StatefulWidget {
 
 class _DesktopDashboardLayoutState extends State<DesktopDashboardLayout> {
   final List<PropertyModel> _properties = [];
+  final int totalEmployees = 125;
+  final int admins = 8;
+  final int accountants = 22;
+  final int employees = 95;
+  final double growthRate = 12.5;
+  final int newThisMonth = 15;
 
   // بيانات إحصائيات العقارات
   final Map<property_stats.PropertyType, property_stats.PropertyStats>
@@ -64,62 +63,14 @@ class _DesktopDashboardLayoutState extends State<DesktopDashboardLayout> {
                   // Header
                   CustomAppBarSliever(),
 
-                  SliverToBoxAdapter(
-                    child:HederSiction(),
-                    //  Padding(
-                    //   padding: const EdgeInsets.all(14),
-                    //   child: Row(
-                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //     children: [
-                    //       Text(
-                    //         'مرحباً بك في لوحة التحكم',
-                    //         style: TextStyle(
-                    //           fontSize: 28,
-                    //           fontWeight: FontWeight.bold,
-                    //           color: AlessamyColors.white,
-                    //         ),
-                    //       ),
-                    //       Row(
-                    //         children: [
-                    //           CustomButtonWithIcon(
-                    //             textColor: Colors.white,
-                    //             height: 60,
-                    //             width: 180,
-                    //             text: "Export Excel",
-                    //             onPressed: () {},
-                    //             icon: Icons.table_chart_rounded,
-                    //             buttonType: ButtonType.outlined,
-                    //             arrowIconLeft: true,
-                    //             arrowIconRight: false,
-                    //           ),
-                    //           SizedBox(width: 16),
-                    //           CustomButtonWithIcon(
-                    //             textColor: Colors.white,
-                    //             height: 60,
-                    //             width: 180,
-                    //             text: "إضافة عقار جديد",
-                    //             onPressed: () {
-                    //               context.push(Routes.kPropertyForm);
-                    //             },
-                    //             icon: Icons.arrow_circle_down_rounded,
-                    //             buttonType: ButtonType.outlined,
-                    //             arrowIconLeft: true,
-                    //             arrowIconRight: false,
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
-                  ),
+                  SliverToBoxAdapter(child: HederSiction()),
 
                   // Stats Cards - الصف الأول
                   SliverToBoxAdapter(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 14),
                       child: Row(
-                        crossAxisAlignment:
-                            CrossAxisAlignment.start, // مهم جداً
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
                             child: Card(
@@ -184,56 +135,49 @@ class _DesktopDashboardLayoutState extends State<DesktopDashboardLayout> {
                           ),
 
                           const SizedBox(width: 16),
-                          // Featured Properties (الكارت الرابع)
+                        ],
+                      ),
+                    ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 14),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
                           Expanded(
                             child: Card(
+                              color: AlessamyColors.cardBackground,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12),
                               ),
-                              color: AlessamyColors.cardBackground,
                               child: Padding(
                                 padding: const EdgeInsets.all(16),
-                                child: SizedBox(
-                                  height: 480,
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            'العقارات المميزة',
-                                            style: TextStyle(
-                                              fontSize: 22,
-                                              fontWeight: FontWeight.bold,
-                                              color: AlessamyColors.white,
-                                            ),
-                                          ),
-                                          TextButton(
-                                            onPressed: () {},
-                                            child: Text(
-                                              'عرض المزيد',
-                                              style: TextStyle(
-                                                fontSize: 22,
-                                                fontWeight: FontWeight.bold,
-                                                color:
-                                                    AlessamyColors.primaryGold,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Expanded(
-                                        child: SizedBox(
-                                          height: 400,
-                                          width: 400,
-                                          child: FeaturedPropertiesList(
-                                            properties: getDemoProperties(),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                child: _buildEmployeesCards(
+                                  context,
+                                  totalEmployees,
+                                  admins,
+                                  accountants,
+                                  employees,
+                                ),
+                              ),
+                            ),
+                          ),
+
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: Card(
+                              color: AlessamyColors.cardBackground,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: RoleDistributionCard(
+                                  totalEmployees: totalEmployees,
+                                  admins: admins,
+                                  accountants: accountants,
+                                  employees: employees,
                                 ),
                               ),
                             ),
@@ -243,6 +187,11 @@ class _DesktopDashboardLayoutState extends State<DesktopDashboardLayout> {
                     ),
                   ),
 
+                  // SliverToBoxAdapter(
+                  //   child: Expanded(
+                  //     child:
+                  //   ),
+                  // ),
                   const SliverToBoxAdapter(child: SizedBox(height: 14)),
                 ],
               ),
@@ -254,6 +203,64 @@ class _DesktopDashboardLayoutState extends State<DesktopDashboardLayout> {
   }
 
   /// Header
+  Widget _buildEmployeesCards(
+    BuildContext context,
+    final int totalEmployees,
+    final int admins,
+    final int accountants,
+    final int employees,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: DashboardStatsCard(
+                  title: 'إجمالي الموظفين',
+                  value: totalEmployees.toString(),
+                  icon: Icons.people,
+                  color: const Color(0xFF3498DB),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: DashboardStatsCard(
+                  title: 'مدراء',
+                  value: admins.toString(),
+                  icon: Icons.admin_panel_settings,
+                  color: const Color(0xFF9B59B6),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Expanded(
+                child: DashboardStatsCard(
+                  title: 'موظفين',
+                  value: employees.toString(),
+                  icon: Icons.person,
+                  color: const Color(0xFF27AE60),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: DashboardStatsCard(
+                  title: 'محاسبين',
+                  value: accountants.toString(),
+                  icon: Icons.account_balance,
+                  color: const Color(0xFFF39C12),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
 
   /// Stats Cards
   Widget _buildStatsCards(BuildContext context) {

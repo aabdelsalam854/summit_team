@@ -25,16 +25,16 @@ class EmployeesDeskTop extends StatelessWidget {
     this.onSearchChanged,
   });
 
-  int get _totalEmployees => employees.length;
+  // int get _totalEmployees => employees.length;
 
-  int get _admins =>
-      employees.where((e) => e.role == EmployeeRole.admin).length;
+  // int get _admins =>
+  //     employees.where((e) => e.role == EmployeeRole.admin).length;
 
-  int get _accountants =>
-      employees.where((e) => e.role == EmployeeRole.accountant).length;
+  // int get _accountants =>
+  //     employees.where((e) => e.role == EmployeeRole.accountant).length;
 
-  int get _regularEmployees =>
-      employees.where((e) => e.role == EmployeeRole.employee).length;
+  // int get _regularEmployees =>
+  //     employees.where((e) => e.role == EmployeeRole.employee).length;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class EmployeesDeskTop extends StatelessWidget {
                     backgroundColor: AlessamyColors.cardBackground,
                     pinned: true,
                     expandedHeight: 100,
-                    toolbarHeight: 80, // ارتفاع عند التمرير إلى الأعلى
+                    toolbarHeight: 80,
 
                     flexibleSpace: FlexibleSpaceBar(
                       titlePadding: const EdgeInsets.symmetric(
@@ -166,53 +166,53 @@ class EmployeesDeskTop extends StatelessWidget {
                       ),
                     ),
                   ),
-   SliverToBoxAdapter(
-                    child: EmployeesStatesRowWidget(
-                                  totalEmployees: _totalEmployees,
-                                  admins: _admins,
-                                  accountants: _accountants,
-                                  employees: _regularEmployees,
-                                ),
-                  ),
+                  //  SliverToBoxAdapter(
+                  //                   child: EmployeesStatesRowWidget(
+                  //                                 totalEmployees: _totalEmployees,
+                  //                                 admins: _admins,
+                  //                                 accountants: _accountants,
+                  //                                 employees: _regularEmployees,
+                  //                               ),
+                  //                 ),
                   SliverPadding(
                     padding: const EdgeInsets.all(24),
                     sliver: SliverList(
                       delegate: SliverChildListDelegate([
                         // Row 1: Stats Cards
-                        const SizedBox(height: 24),
+                        // const SizedBox(height: 24),
 
                         // Row 2: Charts Row 1
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // Expanded(
-                            //   child: Padding(
-                            //     padding: const EdgeInsets.all(16),
-                            //     child: EmployeesStatesRowWidget(
-                            //       totalEmployees: _totalEmployees,
-                            //       admins: _admins,
-                            //       accountants: _accountants,
-                            //       employees: _regularEmployees,
-                            //     ),
-                            //   ),
-                            // ),
-                            const SizedBox(width: 40),
-                            // Pie Chart - توزيع الموظفين
-                            Expanded(
-                              child: RoleDistributionCard(
-                                totalEmployees: _totalEmployees,
-                                admins: _admins,
-                                accountants: _accountants,
-                                employees: _regularEmployees,
-                              ),
-                            ),
+                        // Row(
+                        //   crossAxisAlignment: CrossAxisAlignment.start,
+                        //   children: [
+                        //     // Expanded(
+                        //     //   child: Padding(
+                        //     //     padding: const EdgeInsets.all(16),
+                        //     //     child: EmployeesStatesRowWidget(
+                        //     //       totalEmployees: _totalEmployees,
+                        //     //       admins: _admins,
+                        //     //       accountants: _accountants,
+                        //     //       employees: _regularEmployees,
+                        //     //     ),
+                        //     //   ),
+                        //     // ),
+                        //     // const SizedBox(width: 40),
+                        //     // Pie Chart - توزيع الموظفين
+                        //     // Expanded(
+                        //     //   child: RoleDistributionCard(
+                        //     //     totalEmployees: _totalEmployees,
+                        //     //     admins: _admins,
+                        //     //     accountants: _accountants,
+                        //     //     employees: _regularEmployees,
+                        //     //   ),
+                        //     // ),
 
-                            // Bar Chart - نمو الموظفين شهرياً
-                            // Expanded(flex: 3, child: _buildMonthlyGrowthCard()),
-                          ],
-                        ),
+                        //     // Bar Chart - نمو الموظفين شهرياً
+                        //     // Expanded(flex: 3, child: _buildMonthlyGrowthCard()),
+                        //   ],
+                        // ),
 
-                        const SizedBox(height: 24),
+                        // const SizedBox(height: 24),
 
                         // // Row 3: Charts Row 2
                         // Row(
@@ -228,7 +228,7 @@ class EmployeesDeskTop extends StatelessWidget {
                         //     ),
                         //   ],
                         // ),
-                        const SizedBox(height: 32),
+                        // const SizedBox(height: 32),
 
                         // Filters Section
                         FiltersSection(

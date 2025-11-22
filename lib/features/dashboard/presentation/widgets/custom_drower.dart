@@ -17,7 +17,6 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      
       decoration: BoxDecoration(
         color: AlessamyColors.cardBackground,
         border: Border(
@@ -36,6 +35,16 @@ class CustomDrawer extends StatelessWidget {
       ),
       child: CustomScrollView(
         slivers: [
+          // SliverToBoxAdapter(
+          //   child: UserInfoListTile(
+          //               userInfoModel: UserInfoModel(
+          //                 image: 'assets/images/user.png',
+          //                 title: 'محمد علي',
+          //                 subTitle: 'مدير النظام',
+          //               ),
+          //             ),
+          // ),
+
           // Logo (يختفي في Compact Mode)
           if (!isCompact)
             SliverToBoxAdapter(
@@ -79,7 +88,7 @@ class CustomDrawer extends StatelessWidget {
           SliverToBoxAdapter(
             child: MenuItem(
               icon: Icons.home,
-              title: 'الرئيسية',
+              title: 'لوحه التحكم',
               isSelected: selectedIndex == 0,
               onTap: () => onPageSelected(0),
               isCompact: isCompact, // ⬅️ تمرير الحالة
@@ -88,7 +97,7 @@ class CustomDrawer extends StatelessWidget {
           SliverToBoxAdapter(
             child: MenuItem(
               icon: Icons.dashboard_customize,
-              title: 'الداشبورد',
+              title: 'العقارات',
               isSelected: selectedIndex == 1,
               onTap: () => onPageSelected(1),
               isCompact: isCompact,
@@ -106,13 +115,43 @@ class CustomDrawer extends StatelessWidget {
           SliverToBoxAdapter(
             child: MenuItem(
               icon: Icons.settings,
-              title: 'الإعدادات',
+              title: 'المدن',
               isSelected: selectedIndex == 3,
               onTap: () => onPageSelected(3),
               isCompact: isCompact,
             ),
           ),
 
+  SliverToBoxAdapter(
+            child: MenuItem(
+              icon: Icons.settings,
+              title: 'المناطق',
+              isSelected: selectedIndex == 4,
+              onTap: () => onPageSelected(4),
+              isCompact: isCompact,
+            ),
+          ),
+  SliverToBoxAdapter(
+            child: MenuItem(
+              icon: Icons.settings,
+              title: 'تصنيفات العقارات ',
+              isSelected: selectedIndex == 5,
+              onTap: () => onPageSelected(5),
+              isCompact: isCompact,
+            ),
+          ),
+  SliverToBoxAdapter(
+            child: MenuItem(
+              icon: Icons.settings,
+              title: 'ادارة العقارات ',
+              isSelected: selectedIndex == 6,
+              onTap: () => onPageSelected(6),
+              isCompact: isCompact,
+            ),
+          ),
+
+
+       
           // الجزء السفلي: Logout
           SliverFillRemaining(
             hasScrollBody: false,
@@ -255,8 +294,8 @@ class MenuItem extends StatelessWidget {
                         icon,
                         size: 22,
                         color: isSelected
-                    ? AlessamyColors.primaryGold
-                    : AlessamyColors.textLight,
+                            ? AlessamyColors.primaryGold
+                            : AlessamyColors.textLight,
                       ),
                       const SizedBox(width: 14),
                       Expanded(
@@ -278,9 +317,9 @@ class MenuItem extends StatelessWidget {
                           width: 4,
                           height: 20,
                           decoration: BoxDecoration(
-                                 color: isSelected
-                    ? AlessamyColors.primaryGold
-                    : Colors.transparent,
+                            color: isSelected
+                                ? AlessamyColors.primaryGold
+                                : Colors.transparent,
                             borderRadius: BorderRadius.circular(2),
                           ),
                         ),

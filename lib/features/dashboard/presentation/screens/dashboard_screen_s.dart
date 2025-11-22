@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:summit_team/core/adaptive_layout/adaptive_layout_widget.dart';
 import 'package:summit_team/core/utils/alessamy_colors.dart';
 import 'package:summit_team/features/Employees/presentation/pages/employees_layout.dart';
+import 'package:summit_team/features/city/ui/cities_screen.dart';
+import 'package:summit_team/features/city/ui/city_2.dart';
+import 'package:summit_team/features/city/ui/citys/test.dart';
+import 'package:summit_team/features/city/ui/citys/test2.dart';
+import 'package:summit_team/features/city/ui/citys/test3.dart';
 
 import 'package:summit_team/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:summit_team/features/dashboard/presentation/widgets/custom_app_bar.dart';
@@ -221,14 +226,17 @@ class _ContentArea extends StatelessWidget {
       sizing: StackFit.expand,
       children: [
         // Page 0: Home
-        visitedPages.contains(0)
-            ? const HomeScreen(key: ValueKey('home_screen'))
-            : const SizedBox.shrink(key: ValueKey('home_empty')),
+        // visitedPages.contains(0)
+        //     ? const HomeScreen(key: ValueKey('home_screen'))
+        //     : const SizedBox.shrink(key: ValueKey('home_empty')),
 
         // Page 1: Dashboard
-        visitedPages.contains(1)
+        visitedPages.contains(0)
             ? const DashboardScreen(key: ValueKey('dashboard_screen'))
             : const SizedBox.shrink(key: ValueKey('dashboard_empty')),
+        visitedPages.contains(1)
+            ? const HomeScreen(key: ValueKey('home_screen'))
+            : const SizedBox.shrink(key: ValueKey('home_empty')),
 
         // Page 2: Employees
         visitedPages.contains(2)
@@ -237,8 +245,19 @@ class _ContentArea extends StatelessWidget {
 
         // Page 3: Settings
         visitedPages.contains(3)
-            ? const DashboardScreen(key: ValueKey('settings_screen'))
+            ? const CitiesScreensss(key: ValueKey('settings_screen'))
             : const SizedBox.shrink(key: ValueKey('settings_empty')),
+                   visitedPages.contains(4)
+            ? const DistrictsScreen(key: ValueKey('cites'))
+            : const SizedBox.shrink(key: ValueKey('cites')),
+                               visitedPages.contains(5)
+            ? const CategoriesScreen(key: ValueKey('citses'))
+            : const SizedBox.shrink(key: ValueKey('citses')),
+                    visitedPages.contains(6)
+            ? const PropertiesScreen(key: ValueKey('properties'))
+            : const SizedBox.shrink(key: ValueKey('citses')),
+
+               
       ],
     );
   }

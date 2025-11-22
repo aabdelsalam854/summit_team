@@ -99,7 +99,7 @@ class ItemCardDetails extends StatelessWidget {
               Flexible(
                 fit: FlexFit.loose,
                 child: Text(
-                  '${property.location}',
+                  property.location,
                   style: AppStyles.styleRegular14(
                     context,
                   ).copyWith(color: AlessamyColors.textLight),

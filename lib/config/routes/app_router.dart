@@ -4,9 +4,10 @@ import 'package:summit_team/features/Employees/presentation/cubit/employees_cubi
 import 'package:summit_team/features/Employees/presentation/pages/employees_layout.dart';
 import 'package:summit_team/features/dashboard/presentation/screens/dashboard_screen_s.dart';
 import 'package:summit_team/features/dashboard/presentation/screens/property_form_screen.dart';
-import 'package:summit_team/features/home/presentation/screens/details.dart';
 
 import 'package:go_router/go_router.dart';
+import 'package:summit_team/features/home/presentation/screens/details.dart';
+import 'package:summit_team/features/home/presentation/screens/wep_details.dart';
 
 import 'package:summit_team/features/properties/data/models/property_model.dart';
 
@@ -54,7 +55,7 @@ abstract class AppRouts {
         builder: (context, state) {
           final property = state.extra as PropertyModel;
 
-          return PropertyDetailsScreen(property: property); // مؤقت
+          return PropertyDetailsScreen(property: property);
         },
       ),
       GoRoute(

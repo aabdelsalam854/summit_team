@@ -152,12 +152,20 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
                   size: 24,
                 ),
                 SizedBox(width: 8),
-                Text(
-                  'ابحث عن عقارك',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: AlessamyColors.white,
+                // Text(
+                //   'ابحث عن عقارك',
+                //   style: TextStyle(
+                //     fontSize: 20,
+                //     fontWeight: FontWeight.bold,
+                //     color: AlessamyColors.white,
+                //   ),
+                // ),
+                SizedBox(
+                  width: 200,
+                  child: _buildTextField(
+                    'ابحث بكود العقار',
+                    _propertyCodeController,
+                    'أدخل كود العقار',
                   ),
                 ),
                 Spacer(),

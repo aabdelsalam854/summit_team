@@ -2,6 +2,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:summit_team/config/routes/routes.dart';
 import 'package:summit_team/features/properties/data/models/property_model.dart';
 import 'package:summit_team/features/properties/presentation/widgets/property_card_widget.dart';
 
@@ -36,7 +38,12 @@ class FeaturedPropertiesWidget extends StatelessWidget {
               width: 340,
               child: PropertyCardWidget(
                 property: properties[index],
-                onTap: () {},
+                onTap: () {
+               context.push(
+                    '${Routes.kPropertyDetails}/${properties[index].id}',
+                    extra: properties[index],
+                  );
+                },
               ),
             );
           },

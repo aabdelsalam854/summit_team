@@ -72,29 +72,29 @@ class CustomAppBarSliever extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 16),
-        Flexible(
-          flex: 3,
-          child: SizedBox(
-            height: 40,
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'بحث...',
-                hintStyle: const TextStyle(fontSize: 14),
-                prefixIcon: const Icon(Icons.search, size: 20),
-                filled: true,
-                fillColor: Colors.white,
-                contentPadding: const EdgeInsets.symmetric(
-                  vertical: 0,
-                  horizontal: 12,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide.none,
-                ),
-              ),
-            ),
-          ),
-        ),
+        // Flexible(
+        //   flex: 3,
+        //   child: SizedBox(
+        //     height: 40,
+        //     child: TextField(
+        //       decoration: InputDecoration(
+        //         hintText: 'بحث...',
+        //         hintStyle: const TextStyle(fontSize: 14),
+        //         prefixIcon: const Icon(Icons.search, size: 20),
+        //         filled: true,
+        //         fillColor: Colors.white,
+        //         contentPadding: const EdgeInsets.symmetric(
+        //           vertical: 0,
+        //           horizontal: 12,
+        //         ),
+        //         border: OutlineInputBorder(
+        //           borderRadius: BorderRadius.circular(12),
+        //           borderSide: BorderSide.none,
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        // ),
         const SizedBox(width: 12),
         CircleAvatar(
           radius: 18,
